@@ -1,4 +1,17 @@
-.questions_header {
-  margin-top: 75px;
-  text-align: center;
+
+nav {
+    background-color: #fff;
+}
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.page-footer {
+    padding-top: 20px;
+    background-color: #fff;
+}
+main {
+  flex: 1 0 auto;
+
 }

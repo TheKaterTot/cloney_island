@@ -5,6 +5,7 @@
       <tr>
         <th>Title</th>
         <th>Creator</th>
+        <th>Category</th>
         <th>Updated_at</th>
       </tr>
      </thead>
@@ -13,7 +14,8 @@
        <% @questions.each do |question| %>
        <tr>
          <td><%=question.title%></td>
-         <td><%=question.find_user.name%></td>
+         <td><%=question.find_user%></td>
+         <td><%= question.find_category %></td>
          <td><%=question.updated_at%></td>
        </tr>
        <% end %>

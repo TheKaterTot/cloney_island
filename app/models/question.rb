@@ -10,6 +10,10 @@ class Question < ApplicationRecord
   end
 
   def find_user
-    user
+    user.name
+  end
+
+  def find_category
+    category.name
   end
 end

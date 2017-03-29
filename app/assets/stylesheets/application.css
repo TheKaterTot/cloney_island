@@ -13,9 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-
-.questions_header {
-  margin-top: 75px;
-  text-align: center;
-}

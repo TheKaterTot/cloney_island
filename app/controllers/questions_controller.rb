@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @question = User.find(1).questions.new
     @categories = Category.all
   end
 

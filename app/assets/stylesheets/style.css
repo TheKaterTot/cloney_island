@@ -9,9 +9,12 @@ body {
 }
 .page-footer {
   padding-top: 20px;
-  background-color: #fff;
+  background-color: #242729;
 }
 main {
   flex: 1 0 auto;
-
+}
+.collection
+a.collection-item {
+    color: #0095ff;
 }

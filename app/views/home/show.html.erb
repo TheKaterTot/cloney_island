@@ -1,1 +1,35 @@
-<h1>HOME</h1>
+<h1>HOME</h1><div class="row">
+
+  <div class="col s12 m4 l3">
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card white">
+          <div class="card-content black-text">
+            <span class="card-title">Categories</span>
+            <% @presenter.all_categories.each do |category| %>
+            <a class="waves-effect grey waves-light btn-large"><%= category.name %></a>
+            <br>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 m8 l9">
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card white">
+          <div class="card-content black-text">
+            <span class="card-title">Recent Activity</span>
+            <div class="collection">
+              <% @presenter.all_questions.each do |question| %>
+              <a href="#!" class="collection-item"><%= question.title %></a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

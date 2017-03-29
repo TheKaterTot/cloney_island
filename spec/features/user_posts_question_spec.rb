@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "user visits root and clicks 'Ask a question'" do
   scenario "they are directed to a form to create a question" do
+    Fabricate(:category, name: "Dogs")
     visit root_path
     within("#nav-mobile.left") do
       click_link("Ask Question")
@@ -10,6 +11,7 @@ feature "user visits root and clicks 'Ask a question'" do
 
     fill_in("Title", :with => "Why?")
     fill_in("Body", :with => "Why must I be a teenager in love?")
+    select("Dogs", :from => "Category")
 
     click_button("Submit")
 

@@ -5,12 +5,12 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = User.find(1).questions.new
+    @question = current_user.questions.new
     @categories = Category.all
   end
 
   def create
-    question = User.find(1).questions.new(question_params)
+    question = current_user.questions.new(question_params)
     if question.save
       flash[:success] = "Question successfully created!"
       redirect_to question_path(question)
@@ -31,5 +31,4 @@ class QuestionsController < ApplicationController
   end
 
 
->>>>>>> Deletes duplicate routes
 end

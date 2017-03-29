@@ -3,8 +3,10 @@ require "rails_helper"
 feature "user visits root and clicks 'Ask a question'" do
   scenario "they are directed to a form to create a question" do
     Fabricate(:category, name: "Dogs")
-    Fabricate(:user, id: 1)
+    user = Fabricate(:user, id: 1)
 
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    
     visit root_path
 
     within("#nav-mobile.left") do

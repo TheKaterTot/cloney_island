@@ -1,4 +1,4 @@
-class HomeController < ApplicationCotroller
+class HomeController < ApplicationController
 
   def show
 

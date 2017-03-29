@@ -2,14 +2,14 @@ class Seed
 
   def self.start
     seed = Seed.new
-    # seed.generate_roles
-    # seed.generate_users
-    # seed.generate_categories
-    # seed.generate_user_questions
-    # seed.generate_user_answers
+    seed.generate_roles
+    seed.generate_users
+    seed.generate_categories
+    seed.generate_user_questions
+    seed.generate_user_answers
     seed.generate_question_comments
     seed.generate_answer_comments
-    # seed.generate_admin
+    seed.generate_admin
   end
 
   def generate_roles

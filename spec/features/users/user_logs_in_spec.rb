@@ -15,6 +15,5 @@ feature 'user visits root' do
 
     click_button "Login"
     expect(current_path).to eq(user_path(user))
-    byebug
   end
 end

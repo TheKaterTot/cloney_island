@@ -1,0 +1,21 @@
+<h1 class="questions_header">All Questions</h1>
+
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Creator</th>
+        <th>Updated_at</th>
+      </tr>
+     </thead>
+
+     <tbody>
+       <% @questions.each do |question| %>
+       <tr>
+         <td><%=question.title%></td>
+         <td><%=question.find_user.name%></td>
+         <td><%=question.updated_at%></td>
+       </tr>
+       <% end %>
+     </tbody>
+   </table>

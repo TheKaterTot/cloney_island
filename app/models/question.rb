@@ -16,4 +16,8 @@ class Question < ApplicationRecord
   def find_category
     category.name
   end
+
+  def answer_count
+    answers.count
+  end
 end

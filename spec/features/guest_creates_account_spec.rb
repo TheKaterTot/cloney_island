@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 feature 'when a guest visits the root page' do
-  scenario 'they see login in navbar' do
+  scenario 'guest creates account' do
     visit root_path
 
-    within('.nav-wrapper') do
-      expect(page).to have_content('Login')
-    end
+    click_on "Sign Up"
+
+    expect(current_path).to eq(new_user_path)
+
+    fill_in "Name", with: "Smile Warbler"
+    fill_in "Email", with: "smile@warbler.com"
+    fill_in "Password", with: "seekrit"
+    fill_in "Password confirmation", with: "seekrit"
+
+    expect { click_on "Create Account"}.to change(User, :count).by(1)
   end
 end

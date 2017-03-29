@@ -1,5 +1,5 @@
 nav {
-    background-color: #fff;
+  background-color: #fff;
 }
 body {
   display: flex;
@@ -7,8 +7,8 @@ body {
   flex-direction: column;
 }
 .page-footer {
-    padding-top: 20px;
-    background-color: #fff;
+  padding-top: 20px;
+  background-color: #fff;
 }
 main {
   flex: 1 0 auto;

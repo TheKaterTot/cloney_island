@@ -19,7 +19,6 @@ feature 'when a guest visits the root page' do
 
     visit '/'
 
-save_and_open_page
     visit root_path
     within('.recent-activity') do
       expect(page).to have_content('Recent Activity')

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-resources :questions, only: [:index]
+  root to: 'home#show', as: 'root'
 
-root to: 'home#show', as: 'root'
+  resources :questions, only: [:index, :show]
+
 
 end

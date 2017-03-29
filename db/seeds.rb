@@ -42,7 +42,7 @@ class Seed
   def generate_user_questions
     User.all.each do |user|
       5.times do |i|
-        user.questions.create!(title:    Faker::Hipster.sentence,
+        user.questions.create!(title:   Faker::Hipster.sentence,
                               body:     Faker::Hipster.paragraph,
                               category: Category.find(Random.new.rand(1..20)))
         puts "Generated Question #{user.questions.count} for #{user.name}"
@@ -53,7 +53,7 @@ class Seed
   def generate_user_answers
     User.all.each do |user|
       5.times do |i|
-        user.answers.create!(body:     Faker::Hipster.paragraph,
+        user.answers.create!(body:    Faker::Hipster.paragraph,
                             question: Question.find(Random.new.rand(1..5000)))
         puts "Generated Answer #{user.answers.count} for #{user.name}"
       end

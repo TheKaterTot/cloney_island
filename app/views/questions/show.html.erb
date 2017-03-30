@@ -14,7 +14,7 @@
       </span>
       <div class="right col s12 m12">
         <div class="card-panel">
-          <span class="black-text">
+          <span class="blue-text">
             <% @question.comments.each do |comment| %>
               <%= comment.body %><br>
             <% end %>
@@ -38,7 +38,7 @@
             </span>
             <div class="right col s12 m12">
               <div class="card-panel">
-                <span class="black-text">
+                <span class="blue-text">
                   <% answer.comments.each do |comment| %>
                     <%= comment.body %><br><br><br>
                   <% end %>
@@ -50,10 +50,9 @@
       </div>
     <% end %>
   </div>
-</div>
-
-<%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
+  <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
   <%= f.hidden_field :question, :value => params[:id] %>
   <%= f.text_area :body, placeholder: "Enter text" %>
   <%= f.submit "Submit" %>
-<% end %>
+  <% end %>
+</div>

@@ -16,4 +16,14 @@ feature 'when a guest visits the root page' do
 
     expect { click_on "Create Account"}.to change(User, :count).by(1)
   end
+
+  scenario 'guest is on the login page and clicks on create account' do
+    visit login_path
+
+    within("#account_create_button") do
+        click_on "Create An Account"
+    end
+
+    expect(current_path).to eq(new_user_path)
+  end
 end

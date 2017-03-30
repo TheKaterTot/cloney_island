@@ -14,20 +14,22 @@
           <%= @question.body %><br>
         </div>
       </span>
-      <br>
-      <div class="card-action">
-        <%= @question.updated_at.strftime("%D at %r") %><br>
-        <%= @question.find_user %><br>
+      <div id="question-details" class="right card-action">
+        <p><%= @question.find_user %> <%= @question.updated_at.strftime("%D at %r") %></p><br>
       </div>
-      <div class="right col s12 m12">
-        <div class="card-panel">
-          <span class="blue-text">
-            <% @question.comments.each do |comment| %>
-              <%= comment.body %><br>
-            <% end %>
-          </span>
-        </div>
+        <br><br><br>
+        <div class="divider"></div>
+      <div id="question-comments" class="blue-text">
+        <% @question.comments.each do |comment| %>
+          <div id="question-body" class="card-action" style= padding-left:50px;>
+            <p><%= comment.body %></p>
+          </div>
+          <div id="question-details" class="right card-action">
+            <p><%= comment.find_user %> <%= comment.updated_at.strftime("%D at %r") %></p><br>
+          </div>
+        <% end %>
       </div>
+      <br><br>
     </div>
   </div>
 </div>
@@ -41,6 +43,9 @@
           <div class="card-panel white">
             <span class="black-text">
               <%= answer.body %><br>
+              <div class="card-action">
+                <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %><br>
+              </div>
             </span>
             <div class="right col s12 m12">
               <div class="card-panel">
@@ -58,7 +63,6 @@
   </div>
   <h5>Answer this question</h5>
   <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
-  >>>>>>> master
     <%= f.hidden_field :question, :value => params[:id] %>
     <%= f.text_area :body, placeholder: "Enter text" %>
     <%= f.submit "Submit" %>

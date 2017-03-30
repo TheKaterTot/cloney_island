@@ -33,13 +33,4 @@ feature 'user visits root' do
     expect(current_path).to eq(login_path)
     expect(page).to have_content("Invalid Credentials")
   end
-
-  scenario 'guest clicks on create account' do
-    visit login_path
-
-    within("#account_create_button") do
-        click_on "Create An Account"
-    end
-    expect(current_path).to eq(new_user_path)
-  end
 end

@@ -4,12 +4,13 @@ feature 'when a guest visits the root page' do
   scenario 'guest creates account' do
     visit root_path
 
-    click_on "Sign Up"
+    click_on "Create Account"
 
     expect(current_path).to eq(new_user_path)
 
     fill_in "Name", with: "Smile Warbler"
     fill_in "Email", with: "smile@warbler.com"
+    fill_in "Phone", with: "123-456-7890"
     fill_in "Password", with: "seekrit"
     fill_in "Password confirmation", with: "seekrit"
 

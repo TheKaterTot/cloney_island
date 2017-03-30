@@ -5,8 +5,12 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = current_user.questions.new
-    @categories = Category.all
+    if current_user
+      @question = current_user.questions.new
+      @categories = Category.all
+    else
+      redirect_to login_path
+    end
   end
 
   def create

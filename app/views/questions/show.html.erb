@@ -56,9 +56,11 @@
       </div>
     <% end %>
   </div>
+  <h5>Answer this question</h5>
   <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
-  <%= f.hidden_field :question, :value => params[:id] %>
-  <%= f.text_area :body, placeholder: "Enter text" %>
-  <%= f.submit "Submit" %>
-  <% end %>
+  >>>>>>> master
+    <%= f.hidden_field :question, :value => params[:id] %>
+    <%= f.text_area :body, placeholder: "Enter text" %>
+    <%= f.submit "Submit" %>
+    <% end %>
 </div>

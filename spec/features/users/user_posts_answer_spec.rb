@@ -5,6 +5,9 @@ feature "user answers question" do
     user = Fabricate(:user)
     question = Fabricate(:question, user: user)
 
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+
     visit question_path(question)
 
     fill_in "Enter text", with: "Dumb question"

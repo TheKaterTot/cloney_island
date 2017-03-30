@@ -4,8 +4,12 @@
   <div class="col s12 m12">
     <div class="card-panel white">
       <span class="black-text">
-        <h5><%= @question.title %><br></h5>
-        <%= @question.body %><br>
+        <div id="question-title" >
+          <h5><%= @question.title %><br></h5>
+        </div>
+        <div id="question-body" >
+          <%= @question.body %><br>
+        </div>
         <%= @question.updated_at %><br>
       </span>
       <div class="right col s12 m12">
@@ -48,7 +52,8 @@
   </div>
 </div>
 
-<%= form_for @answer do |f| %>
+<%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
+  <%= f.hidden_field :question, :value => params[:id] %>
   <%= f.text_area :body, placeholder: "Enter text" %>
   <%= f.submit "Submit" %>
 <% end %>

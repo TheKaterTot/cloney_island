@@ -1,0 +1,9 @@
+<div class="right col s12 m12">
+  <div class="card-panel" id='answer_comments'>
+    <span class="blue-text">
+      <% answer.comments.each do |comment| %>
+        <%= comment.body %><br><br><br>
+      <% end %>
+    </span>
+  </div>
+</div>

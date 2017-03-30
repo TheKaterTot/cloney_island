@@ -34,7 +34,7 @@ class Seed
   def generate_categories
     puts "Generating Categories"
     20.times do |i|
-      Category.create!(name: Faker::Hipster.word)
+      Category.create!(name: Faker::Hipster.unique.word)
       puts "Generated Category: #{Category.last.name}"
     end
   end

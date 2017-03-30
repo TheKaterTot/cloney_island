@@ -1,9 +1,10 @@
 <div class="row">
-  <div class="col s12 m12">
-    <div class="card-panel blue lighten-5">
+  <div class="col s12 m12" id='user-info'>
+    <div class="card-panel blue lighten-3">
       <span class="center black-text">
         <h4>Your Account Information</h4><br>
       </span>
+      <%= render 'users/user_info', locals: {current_user: current_user} %>
     </div>
   </div>
 </div>

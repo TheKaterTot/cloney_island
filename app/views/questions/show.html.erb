@@ -5,13 +5,20 @@
     <div class="card-panel white">
       <span class="black-text">
         <div id="question-title" >
+          <div class="divider"></div>
           <h5><%= @question.title %><br></h5>
+          <div class="divider"></div>
         </div>
+        <br>
         <div id="question-body" >
           <%= @question.body %><br>
         </div>
-        <%= @question.updated_at %><br>
       </span>
+      <br>
+      <div class="card-action">
+        <%= @question.updated_at.strftime("%D at %r") %><br>
+        <%= @question.find_user %><br>
+      </div>
       <div class="right col s12 m12">
         <div class="card-panel">
           <span class="blue-text">
@@ -33,7 +40,6 @@
         <div class="col s12 m12">
           <div class="card-panel white">
             <span class="black-text">
-              <h5>Answer</h5>
               <%= answer.body %><br>
             </span>
             <div class="right col s12 m12">

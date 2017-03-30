@@ -6,14 +6,33 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <%= render 'layouts/navbar' %>
     <main>
+    <% flash.each do |type, message| %>
+      <% if type == "success" %>
+        <%= content_tag :div, sanitize(message), class:"alert-success" %>
+      <% elsif type == "danger" %>
+        <%= content_tag :div, sanitize(message), class:"alert-danger" %>
+      <% else %>
+        <%= content_tag :div, sanitize(message), class:"type" %>
+      <% end %>
+  <% end %>
       <div class="container">
         <%= yield %>
       </div>
     </main>
     <%= render 'layouts/footer' %>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="/assets/materialize.js"></script>
+    <script src="/assets/init.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script>
+     $(document).ready(function() {
+        $('select').material_select();
+    });
+  </script>
   </body>
 </html>

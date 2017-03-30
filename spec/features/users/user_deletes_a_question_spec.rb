@@ -12,7 +12,9 @@ feature "user visits the question show page" do
 
     visit question_path(question)
 
-    click_on "Delete Question"
+    within("#delete-question") do
+      click_on "Delete Question"
+    end
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content("Your question was deleted successfully!")

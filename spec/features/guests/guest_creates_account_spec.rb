@@ -4,7 +4,7 @@ feature 'when a guest visits the root page' do
   scenario 'guest creates account' do
     visit root_path
 
-    click_on "Sign Up"
+    click_on "Create Account"
 
     expect(current_path).to eq(new_user_path)
 
@@ -15,6 +15,5 @@ feature 'when a guest visits the root page' do
     fill_in "Password confirmation", with: "seekrit"
 
     expect { click_on "Create Account"}.to change(User, :count).by(1)
-    byebug
   end
 end

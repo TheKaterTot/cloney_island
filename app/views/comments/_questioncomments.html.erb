@@ -1,0 +1,11 @@
+<div id="question-comments" class="blue-text">
+  <% @question.comments.each do |comment| %>
+    <div id="question-body" class="card-action" style= padding-left:50px;>
+      <p><%= comment.body %></p>
+    </div>
+    <div id="question-details" class="right card-action">
+      <p><%= comment.find_user %> <%= comment.updated_at.strftime("%D at %r") %></p><br>
+    </div>
+  <% end %>
+</div>
+<br><br>

@@ -10,7 +10,8 @@ feature "guests cannot submit answer" do
     click_button("Submit")
 
     expect(current_path).to eq(question_path(question))
-    within(".flash-danger") do
+    expect(page).to_not have_content("Dumb question")
+    within(".alert-danger") do
       expect(page).to have_content("You must be logged in to do that.")
     end
   end

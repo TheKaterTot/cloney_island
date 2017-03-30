@@ -13,10 +13,10 @@
      <tbody>
        <% @questions.each do |question| %>
        <tr>
-         <td><%=question.title%></td>
+         <td><a href=<%= question_path(question.id) %>><%=question.title%></a></td>
          <td><%=question.find_user%></td>
          <td><%= question.find_category %></td>
-         <td><%=question.updated_at%></td>
+         <td><%=question.updated_at.strftime("%D at %r")%></td>
        </tr>
        <% end %>
      </tbody>

@@ -1,12 +1,16 @@
 class QuestionsController < ApplicationController
 
   def index
-    @questions = Question.order_by_update
+    @questions = Question.order_by_update.page(params[:page]).per(25)
   end
 
   def new
-    @question = current_user.questions.new
-    @categories = Category.all
+    if current_user
+      @question = current_user.questions.new
+      @categories = Category.all
+    else
+      redirect_to login_path
+    end
   end
 
   def create

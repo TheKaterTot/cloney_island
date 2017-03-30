@@ -18,3 +18,17 @@ main {
 a.collection-item {
     color: #0095ff;
 }
+
+
+.alert-success {
+  border-style: solid;
+  border-width: 2px;
+  color: green;
+}
+
+
+.alert-danger {
+  border-style: solid;
+  border-width: 2px;
+  color: red;
+}

@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   belongs_to :category
   has_many :answers
   has_many :comments, as: :commentable
+  validates :title, :body, presence: true
 
 
   def self.order_by_update
@@ -15,5 +16,9 @@ class Question < ApplicationRecord
 
   def find_category
     category.name
+  end
+
+  def answer_count
+    answers.count
   end
 end

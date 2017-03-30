@@ -17,9 +17,8 @@ feature 'when a guest visits the root page' do
     first_question  = Fabricate(:question, user:user, category:category)
     second_question = Fabricate(:question, user:user, category:category)
 
-    visit '/'
-
     visit root_path
+
     within('.recent-activity') do
       expect(page).to have_content('Recent Activity')
       expect(page).to have_content('Why')

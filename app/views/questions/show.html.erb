@@ -15,7 +15,7 @@
         </div>
       </span>
       <div id="question-details" class="right card-action">
-        <p><%= @question.find_user %> <%= @question.updated_at.strftime("%D at %r") %></p><br>
+        <p>Author: <%= @question.find_user %> Updated: <%= @question.updated_at.strftime("%D at %r") %></p><br>
       </div>
         <br><br><br>
         <div class="divider"></div>
@@ -35,12 +35,17 @@
           <div class="card-panel white">
             <span class="black-text">
               <%= answer.body %><br>
-              <div class="card-action">
-                <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %><br>
+              <div id="answer-details" class="right card-action">
+                <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
+                <br>
               </div>
             </span>
+            <br><br><br>
+            <div class="divider"></div>
+            <br>
             <% if !answer.comments.empty? %>
-              <%= render partial: "comments/answercomments", locals: { answer: answer } %>            <% end %>
+              <%= render partial: "comments/answercomments", locals: { answer: answer } %>
+            <% end %>
           </div>
         </div>
       </div>

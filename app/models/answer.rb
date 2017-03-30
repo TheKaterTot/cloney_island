@@ -5,6 +5,6 @@ class Answer < ApplicationRecord
   validates :body, presence: true
 
   def find_user
-    user.name unless user.name.nil?
+    user.name unless user.nil?
   end
 end

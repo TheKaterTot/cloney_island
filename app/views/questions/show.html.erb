@@ -19,15 +19,9 @@
         <%= @question.updated_at.strftime("%D at %r") %><br>
         <%= @question.find_user %><br>
       </div>
-      <div class="right col s12 m12">
-        <div class="card-panel">
-          <span class="blue-text">
-            <% @question.comments.each do |comment| %>
-              <%= comment.body %><br>
-            <% end %>
-          </span>
-        </div>
-      </div>
+        <% if !@question.comments.empty? %>
+          <%= render 'comments/questioncomments' %>
+        <% end %>
     </div>
   </div>
 </div>
@@ -58,7 +52,6 @@
   </div>
   <h5>Answer this question</h5>
   <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
-  >>>>>>> master
     <%= f.hidden_field :question, :value => params[:id] %>
     <%= f.text_area :body, placeholder: "Enter text" %>
     <%= f.submit "Submit" %>

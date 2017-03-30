@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
       redirect_to question_path(question)
     else
       flash[:danger] = "Failed to create question"
-      render :new
+      redirect_to new_question_path
     end
   end
 

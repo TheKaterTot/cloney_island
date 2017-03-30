@@ -18,4 +18,21 @@ feature "user answers question" do
       expect(page).to have_content("Dumb question")
     end
   end
+
+  scenario "they fill out the fomr incorrectly on the question show page" do
+    user = Fabricate(:user)
+    question = Fabricate(:question, user: user)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+
+    visit question_path(question)
+
+    click_button("Submit")
+
+    expect(current_path).to eq(question_path(question))
+
+
+    expect(page).to have_content("Your comment was not successful.")
+  end
 end

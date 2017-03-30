@@ -11,6 +11,7 @@
   <body>
     <%= render 'layouts/navbar' %>
     <main>
+  <div class="flash-message" style='text-align:center'>
     <% flash.each do |type, message| %>
       <% if type == "success" %>
         <%= content_tag :div, sanitize(message), class:"alert-success" %>
@@ -20,6 +21,7 @@
         <%= content_tag :div, sanitize(message), class:"type" %>
       <% end %>
     <% end %>
+  </div>
       <div class="container">
         <%= yield %>
       </div>

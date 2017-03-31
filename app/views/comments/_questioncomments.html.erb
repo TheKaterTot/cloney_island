@@ -1,9 +1,11 @@
-<div class="right col s12 m12">
-  <div class="card-panel" id='question_comments'>
-    <span class="blue-text">
-      <% @question.comments.each do |comment| %>
-        <%= comment.body %><br>
-      <% end %>
-    </span>
-  </div>
+<div id="question-comments" class="blue-text">
+  <% @question.comments.each do |comment| %>
+    <div id="question-comment-body" class="card-action" style= padding-left:50px;>
+      <p><%= comment.body %></p>
+    </div>
+    <div id="question-comment-details" class="right card-action">
+      <p>Author: <%= comment.find_user %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
+    </div>
+  <% end %>
 </div>
+<br><br>

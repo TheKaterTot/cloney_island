@@ -19,7 +19,7 @@ feature "user answers question" do
     end
   end
 
-  scenario "they fill out the fomr incorrectly on the question show page" do
+  scenario "they fill out the form incorrectly on the question show page" do
     user = Fabricate(:user)
     question = Fabricate(:question, user: user)
 
@@ -30,9 +30,11 @@ feature "user answers question" do
 
     click_button("Submit")
 
-    expect(current_path).to eq(question_path(question))
-
+    expect(current_path).to eq(answers_path)
 
     expect(page).to have_content("Your comment was not successful.")
+    within(".error") do
+      expect(page).to have_content("Body can't be blank")
+    end
   end
 end

@@ -56,9 +56,12 @@ feature "user visits root and clicks 'Ask a question'" do
 
       click_button("Submit")
 
-      expect(current_path).to eq(new_question_path)
+      expect(current_path).to eq(questions_path)
 
       expect(page).to have_content("Failed to create question")
+      within(".error") do
+        expect(page).to have_content("Title can't be blank")
+      end
     end
   end
 end

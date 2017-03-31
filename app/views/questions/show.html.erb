@@ -14,13 +14,13 @@
           <%= @question.body %><br>
         </div>
       </span>
-      <br>
-      <div class="card-action">
-        <%= @question.updated_at.strftime("%D at %r") %><br>
-        <%= @question.find_user %><br>
+      <div id="question-details" class="right card-action">
+        <p>Author: <%= @question.find_user %> Updated: <%= @question.updated_at.strftime("%D at %r") %></p><br>
       </div>
+        <br><br><br>
+        <div class="divider"></div>
         <% if !@question.comments.empty? %>
-          <%= render 'comments/questioncomments' %>
+        <%= render 'comments/questioncomments' %>
         <% end %>
     </div>
   </div>
@@ -35,9 +35,17 @@
           <div class="card-panel white">
             <span class="black-text">
               <%= answer.body %><br>
+              <div id="answer-details" class="right card-action">
+                <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
+                <br>
+              </div>
             </span>
+            <br><br><br>
+            <div class="divider"></div>
+            <br>
             <% if !answer.comments.empty? %>
-              <%= render partial: "comments/answercomments", locals: { answer: answer } %>            <% end %>
+              <%= render partial: "comments/answercomments", locals: { answer: answer } %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -47,6 +55,7 @@
   <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
     <%= f.hidden_field :question, :value => params[:id] %>
     <%= f.text_area :body, placeholder: "Enter text" %>
+    <%= show_errors(@answer, :body) %>
     <%= f.submit "Submit" %>
     <% end %>
 </div>

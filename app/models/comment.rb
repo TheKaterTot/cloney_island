@@ -1,8 +1,8 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
-
   validates :body, presence: true
+
 
   def source_question
     if commentable_type == "Question"
@@ -17,5 +17,9 @@ class Comment < ApplicationRecord
     .joins("LEFT OUTER JOIN answers ON comments.commentable_id = answers.id AND comments.commentable_type = 'Answer'")
     .where("questions.user_id = #{user_id} OR answers.user_id = #{user_id}")
     .order(:updated_at)
+  end
+
+  def find_user
+    user.name unless user.name.nil?
   end
 end

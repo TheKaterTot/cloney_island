@@ -9,6 +9,6 @@ class User < ApplicationRecord
   validates :name, :email, :phone, presence: true
 
   def comments_to_recent_activity
-    Comment.comments_to_user_activity[0..4]
+    Comment.comments_to_user_activity(self.id)[0..4]
   end
 end

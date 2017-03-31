@@ -9,7 +9,7 @@
           </tr>
         </thead>
         <tbody>
-          <% current_user.comments.last(5).each do |comment|%>
+          <% current_user.comments_to_recent_activity.each do |comment|%>
             <tr>
               <td>
                 <%= link_to comment.source_question.title, question_path(comment.source_question) %>

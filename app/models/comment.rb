@@ -14,8 +14,8 @@ class Comment < ApplicationRecord
 
   def self.comments_to_user_activity(user_id)
     joins("LEFT OUTER JOIN questions ON comments.commentable_id = questions.id AND comments.commentable_type = 'Question'")
-    joins("LEFT OUTER JOIN answers ON comments.commentable_id = answers.id AND comments.commentable_type = 'Answer'")
-    .where("questions.user_id = user_id OR answers.user_id = user_id")
+    .joins("LEFT OUTER JOIN answers ON comments.commentable_id = answers.id AND comments.commentable_type = 'Answer'")
+    .where("questions.user_id = #{user_id} OR answers.user_id = #{user_id}")
     .order(:updated_at)
   end
 end

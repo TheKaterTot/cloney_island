@@ -1,8 +1,19 @@
+
 <div id="new-question-form">
-  <%= form_for @question do |f| %>
+<%= form_for @question do |f| %>
+  <span>
     <%= f.text_field :title, placeholder: "Title" %>
-    <%= f.text_area :body, placeholder: "Body" %>
-    <%= f.collection_select(:category_id, @categories, :id, :name, prompt: "Choose a Category", class: "browser-default",:selected => params[:category]) %>
-    <%= f.submit "Submit" %>
-  <% end %>
+    <%= show_errors(@question, :title) %>
+  </span>
+  <span>
+  <%= f.text_area :body, placeholder: "Body" %>
+  <%= show_errors(@question, :body) %>
+  </span>
+  <span>
+  <%= f.collection_select(:category_id, @categories, :id, :name, prompt: "Choose a Category", class: "browser-default") %>
+  <%= show_errors(@question, :category) %>
+  </span>
+  <%= f.submit "Submit" %>
+<% end %>
 </div>
+

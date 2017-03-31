@@ -51,4 +51,36 @@ feature 'user profile' do
       expect(page).to have_link(question2.title, href: question_path(question2))
     end
   end
+
+  scenario 'user sees their 5 most recent questions answered as links' do
+    user = Fabricate(:user)
+    question1 = Fabricate(:question, title: 'test')
+    question2 = Fabricate(:question)
+    question3 = Fabricate(:question)
+    question4 = Fabricate(:question)
+    question5 = Fabricate(:question)
+    question6 = Fabricate(:question)
+    answer1 = Fabricate(:answer, user: user, question: question1)
+    answer2 = Fabricate(:answer, user: user, question: question2)
+    answer3 = Fabricate(:answer, user: user, question: question3)
+    answer4 = Fabricate(:answer, user: user, question: question4)
+    answer5 = Fabricate(:answer, user: user, question: question5)
+    answer6 = Fabricate(:answer, user: user, question: question6)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit user_path(user)
+
+    expect(page).to have_css('#user-show-answers')
+
+    within('#user-show-answers') do
+      expect(page).to_not have_content(question1.title)
+
+      expect(page).to have_link(question6.title, href: question_path(question6))
+      expect(page).to have_link(question5.title, href: question_path(question5))
+      expect(page).to have_link(question4.title, href: question_path(question4))
+      expect(page).to have_link(question3.title, href: question_path(question3))
+      expect(page).to have_link(question2.title, href: question_path(question2))
+    end
+  end
 end

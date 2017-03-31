@@ -1,0 +1,23 @@
+
+  <div class="col s12 m6">
+    <div class="card-small blue lighten-3">
+      <table class='centered' id='user-show-answers'>
+        <thead>
+          <tr>
+              <th>Your Most Recent Answers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.answers.last(5).each do |answer|%>
+            <tr>
+              <td>
+                <%= link_to answer.question.title, question_path(answer.question) %>
+              </td>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -37,7 +37,11 @@
         <div class="card white">
           <div class="card-content black-text">
             <div class="recent-activity">
-            <span class="card-title">Recent Activity</span>
+              <% if params[:category].nil? %>
+                <span class="card-title">Recent Activity</span>
+              <% else %>
+                <span class="card-title">Recent Activity: <%=@presenter.category_name(params[:category]) %> </span>
+              <% end %>
               <table class="bordered">
                 <thead>
                   <tr>

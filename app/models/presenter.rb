@@ -11,4 +11,8 @@ class Presenter
       Question.order_by_update.first(25)
     end
   end
+
+  def category_name(id)
+    Category.find(id).name
+  end
 end

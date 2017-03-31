@@ -61,6 +61,11 @@ feature 'when a guest visits the root page' do
 
     expect(current_path).to eq(root_path)
 
+    within('.recent-activity') do
+      expect(page).to have_content("Software")
+      expect(page).to_not have_content("Physics")
+    end
+
     within('.root-questions') do
       expect(page).to have_content("What is?")
 

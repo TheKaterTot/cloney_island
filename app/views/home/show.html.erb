@@ -48,13 +48,15 @@
                 </thead>
 
                 <tbody>
-                  <% @presenter.show_questions(params[:category]).each do |question| %>
-                  <tr>
-                    <td>Answers: <%= question.answers.count %></td>
-                    <td><a href=<%= question_path(question) %> class="collection-item"><%= question.title %></a></td>
-                    <td><p>Updated: <%= question.updated_at.strftime("%D") %></p></td>
-                  </tr>
-                  <% end %>
+                  <div class="root-questions">
+                    <% @presenter.show_questions(params[:category]).each do |question| %>
+                      <tr>
+                        <td>Answers: <%= question.answers.count %></td>
+                        <td><a href=<%= question_path(question) %> class="collection-item"><%= question.title %></a></td>
+                        <td><p>Updated: <%= question.updated_at.strftime("%D") %></p></td>
+                      </tr>
+                    <% end %>
+                  </div>
                 </tbody>
               </table>
             </div>

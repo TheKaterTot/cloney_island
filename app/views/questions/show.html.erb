@@ -55,6 +55,7 @@
   <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
     <%= f.hidden_field :question, :value => params[:id] %>
     <%= f.text_area :body, placeholder: "Enter text" %>
+    <%= show_errors(@answer, :body) %>
     <%= f.submit "Submit" %>
     <% end %>
 </div>

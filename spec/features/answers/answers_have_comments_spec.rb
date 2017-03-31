@@ -27,7 +27,7 @@ feature 'user views a question' do
 
     visit question_path(question)
 
-    expect(page).to_not have_css('#answer_comments')
+    expect(page).to_not have_css('#answer-comments')
 
   end
 end

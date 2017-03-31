@@ -10,10 +10,9 @@
   <%= show_errors(@question, :body) %>
   </span>
   <span>
-  <%= f.collection_select(:category_id, @categories, :id, :name, prompt: "Choose a Category", class: "browser-default") %>
+  <%= f.collection_select(:category_id, @categories, :id, :name, prompt: "Choose a Category", class: "browser-default",:selected => params[:category]) %>
   <%= show_errors(@question, :category) %>
   </span>
   <%= f.submit "Submit" %>
 <% end %>
 </div>
-

@@ -83,4 +83,29 @@ feature 'user profile' do
       expect(page).to have_link(question2.title, href: question_path(question2))
     end
   end
+  scenario 'user sees the 5 most recent comments left on their work' do
+    user = Fabricate(:user)
+    user2 = Fabricate(:user)
+    question1 = Fabricate(:question, title: 'test', user: user)
+    answer1 = Fabricate(:answer, user: user, question: question1)
+    user2.comments.create(body: 'test', commentable: question1)
+    user2.comments.create(body: 'test', commentable: question1)
+    user2.comments.create(body: 'test', commentable: question1)
+    user2.comments.create(body: 'test', commentable: answer1)
+    user2.comments.create(body: 'test', commentable: answer1)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit user_path(user)
+
+    expect(page).to have_css('#user-show-comments')
+
+    within('#user-show-comments') do
+      expect(page).to have_link(question1.title, href: question_path(question1))
+      expect(page).to have_link(question1.title, href: question_path(question1))
+      expect(page).to have_link(question1.title, href: question_path(question1))
+      expect(page).to have_link(question1.title, href: question_path(question1))
+      expect(page).to have_link(question1.title, href: question_path(question1))
+    end
+  end
 end

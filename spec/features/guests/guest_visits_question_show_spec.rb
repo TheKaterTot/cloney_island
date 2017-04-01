@@ -1,8 +1,13 @@
 require "rails_helper"
 
 describe 'when guest visits questions show' do
+  attr_reader :user
+  before(:each) do
+    @user = Fabricate(:user, password: 'password')
+  end
   it 'they see questions, answers and comments' do
-    user            = Fabricate(:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
     category        = Fabricate(:category)
     first_question  = Fabricate(:question, user:user, category:category)
     answer1         = Fabricate(:answer, question:first_question, user:user)
@@ -20,7 +25,8 @@ describe 'when guest visits questions show' do
   end
 
   it 'they cant see comments or answers for other questions' do
-    user            = Fabricate(:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
     category        = Fabricate(:category)
     first_question  = Fabricate(:question, user:user, category:category)
     second_question = Question.create!(title: "Why not?", body: "Because I said so.", user_id: user.id, category_id: category.id)

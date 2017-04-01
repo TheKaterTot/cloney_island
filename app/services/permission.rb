@@ -36,7 +36,7 @@ private
     return true if controller == "sessions"
     return true if controller == "home"
     return true if controller == "users" && action.in?(%w(show))
-    return true if controller == "questions" && action.in?(%w(index show new create))
+    return true if controller == "questions" && action.in?(%w(index show new create destroy))
     return true if controller == "answers" && action.in?(%w(create))
   end
 

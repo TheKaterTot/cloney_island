@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "guests cannot submit answer" do
   scenario "they see a flash message telling them to sign in" do
+
     question = Fabricate(:question)
 
     visit question_path(question)

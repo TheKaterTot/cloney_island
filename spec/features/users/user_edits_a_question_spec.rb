@@ -1,7 +1,7 @@
 require "rails_helper"
 
-feature "user visits the question show page" do
-  scenario "they click edit question" do
+feature "logged in user visits the question show page" do
+  scenario "user owns question and they click edit question" do
     category = Fabricate(:category, name: "Space")
     user = Fabricate(:user, name: "Space Nerd")
     question = Fabricate(:question,
@@ -9,6 +9,8 @@ feature "user visits the question show page" do
                                       body: "So high.",
                                       user: user,
                                       category: category )
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit question_path(question)
 
@@ -30,6 +32,25 @@ feature "user visits the question show page" do
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content("Your question was edited successfully!")
   end
-  #scenario - doesn't edit answers
-  #scenario - doesn't edit comments
+
+  scenario "user does not own question and cannot edit a question" do
+    category = Fabricate(:category, name: "Space")
+    user_1 = Fabricate(:user, name: "Space Nerd")
+    user_2 = Fabricate(:user, name: "Just Not")
+    question = Fabricate(:question,
+                                      title: "How high is the ISS?",
+                                      body: "So high.",
+                                      user: user_1,
+                                      category: category )
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_2)
+
+    visit question_path(question)
+
+    within("#edit-question") do
+      expect(page).to_not have_content("Edit Question")
+    end
+
+    expect(current_path).to eq(question_path(question))
+  end
 end

@@ -1,0 +1,24 @@
+
+  <div class="col s12 m6">
+    <div class="card-small blue lighten-3">
+      <table class='centered' id='user-show-answers'>
+        <thead>
+          <tr>
+              <th>Your Most Recent Answers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.recent_answers.each do |answer|%>
+            <tr>
+              <td>
+                <%= link_to answer.question.title, question_path(answer.question) %></br>
+                Updated at: <%= answer.updated_date_and_time %>
+              </td>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

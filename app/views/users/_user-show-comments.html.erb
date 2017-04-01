@@ -1,0 +1,24 @@
+
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card-large blue lighten-3">
+      <table class='centered' id='user-show-comments'>
+        <thead>
+          <tr>
+              <th>Recent Comments to Your Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.comments_to_recent_activity.each do |comment|%>
+            <tr>
+              <td>
+                <%= link_to comment.source_question.title, question_path(comment.source_question) %></br>
+                  Updated at: <%= comment.updated_date_and_time %>
+              </td>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>

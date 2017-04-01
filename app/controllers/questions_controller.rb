@@ -14,13 +14,14 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = current_user.questions.new(question_params)
-    if question.save
+    @question = current_user.questions.new(question_params)
+    if @question.save
       flash[:success] = "Question successfully created!"
-      redirect_to question_path(question)
+      redirect_to question_path(@question)
     else
+      @categories = Category.all
       flash[:danger] = "Failed to create question"
-      redirect_to new_question_path
+      render :new
     end
   end
 

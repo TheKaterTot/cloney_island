@@ -12,14 +12,14 @@ feature 'user views a question' do
 
     visit question_path(question)
 
-    expect(page).to have_css('#answer_comments')
+    expect(page).to have_css('#answer-comments')
 
-    within all('#answer_comments').first do
+    within all('#answer-comments').first do
       expect(page).to have_content(comment1.body)
       expect(page).to have_content(comment2.body)
     end
   end
-  
+
   scenario 'answer has no comments' do
     question = Fabricate(:question)
     user     = Fabricate(:user)
@@ -27,7 +27,7 @@ feature 'user views a question' do
 
     visit question_path(question)
 
-    expect(page).to_not have_css('#answer_comments')
+    expect(page).to_not have_css('#answer-comments')
 
   end
 end

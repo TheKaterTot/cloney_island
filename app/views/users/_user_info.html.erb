@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card blue lighten-1">
+      <div class="card-content black-text">
+        <table class='centered' id='user-info-table'>
+          <thead>
+            <tr>
+                <th>            </th>
+                <th>            </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Name:
+              </td>
+              <td>
+                <%= current_user.name %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                E-Mail:
+              </td>
+              <td>
+                <%= current_user.email %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Phone:
+              </td>
+              <td>
+                <%= current_user.phone %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Reputation:
+              </td>
+              <td>
+                Placeholder
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m6">
+    <div class="card" id='user-avatar'>
+      <div class="card-image">
+        <img src="https://robohash.org/<%= current_user.name%>" height="412.75" width="287">
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'when a guest visits the root page' do
   scenario 'guest creates account' do
+    Role.create(id:1, name:"registered_user")
     visit root_path
 
     click_on "Create Account"
@@ -15,6 +16,10 @@ feature 'when a guest visits the root page' do
     fill_in "Password confirmation", with: "seekrit"
 
     expect { click_on "Create Account"}.to change(User, :count).by(1)
+
+    user = User.last
+    
+    expect(user.roles.first.name).to eq("registered_user")
   end
 
   scenario 'guest is on the login page and clicks on create account' do

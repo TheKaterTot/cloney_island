@@ -36,6 +36,9 @@
             <span class="black-text">
               <%= answer.body %><br>
               <div id="answer-details" class="right card-action">
+                <% if current_user.admin? %>
+                <%= button_to "Delete Answer",answer_path(answer)%>
+                <% end %>
                 <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
                 <br>
               </div>

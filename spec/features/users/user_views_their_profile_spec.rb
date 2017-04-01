@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 feature 'user profile' do
+  attr_reader :user
+  before(:each) do
+    @user = Fabricate(:user)
+    @user.roles.create(name: 'registered_user')
+  end
   scenario 'user sees their account information' do
-    user = Fabricate(:user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit user_path(user)
@@ -18,7 +22,6 @@ feature 'user profile' do
   end
 
   scenario 'user sees their avatar image' do
-    user = Fabricate(:user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit user_path(user)
@@ -27,7 +30,6 @@ feature 'user profile' do
   end
 
   scenario 'user sees their 5 most recent question titles as links' do
-    user = Fabricate(:user)
     question1 = Fabricate(:question, user: user, title: 'bad')
     question2 = Fabricate(:question, user: user, title: 'test2')
     question3 = Fabricate(:question, user: user, title: 'test3')
@@ -53,7 +55,6 @@ feature 'user profile' do
   end
 
   scenario 'user sees their 5 most recent questions answered as links' do
-    user = Fabricate(:user)
     question1 = Fabricate(:question, title: 'test')
     question2 = Fabricate(:question)
     question3 = Fabricate(:question)
@@ -84,7 +85,6 @@ feature 'user profile' do
     end
   end
   scenario 'user sees the 5 most recent comments left on their work' do
-    user = Fabricate(:user)
     user2 = Fabricate(:user)
     question1 = Fabricate(:question, title: 'test', user: user)
     answer1 = Fabricate(:answer, user: user, question: question1)

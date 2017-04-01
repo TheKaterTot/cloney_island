@@ -1,10 +1,16 @@
 require 'rails_helper'
 
 feature 'user views a question' do
+  attr_reader :user, :question, :answer
+  before(:each) do
+    @user = Fabricate(:user, password: 'password')
+    @user.roles.create(name: 'registered_user')
+    @question = Fabricate(:question)
+    @answer = Fabricate(:answer, question: question, user: user)
+  end
   scenario 'answers have comments' do
-    question = Fabricate(:question)
-    user     = Fabricate(:user)
-    answer   = Fabricate(:answer, question:question, user:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
     comment1 = answer.comments.create!(body: "Answer comment!",
                                       user_id: user.id)
     comment2 = answer.comments.create!(body: "Another comment!",
@@ -21,9 +27,7 @@ feature 'user views a question' do
   end
 
   scenario 'answer has no comments' do
-    question = Fabricate(:question)
-    user     = Fabricate(:user)
-    answer   = Fabricate(:answer, question:question, user:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit question_path(question)
 

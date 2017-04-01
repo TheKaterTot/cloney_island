@@ -11,6 +11,11 @@
         <br>
         <div id="question-body" >
           <%= @question.body %><br>
+          <div id="delete-question">
+              <% if !current_user.nil? && current_user.id == @question.user_id %>
+                  <%= button_to "Delete Question", question_path(@question), method: :delete, class: "waves-effect red darken-1 waves-light btn right" %>
+              <% end %>
+          </div>
         </div>
       </span>
       <div id="question-details" class="right card-action">
@@ -42,6 +47,9 @@
               <span class="black-text">
                 <%= answer.body %><br>
                 <div id="answer-details" class="right card-action">
+                  <% if current_user && current_user.admin? %>
+                    <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}%>
+                  <% end %>
                   <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
                   <br>
                 </div>
@@ -53,6 +61,7 @@
                 <%= render partial: "comments/answercomments", locals: { answer: answer } %>
               <% end %>
             </div>
+
           </div>
         </div>
       <% end %>

@@ -1,9 +1,13 @@
 require "rails_helper"
 
 feature "user answers question" do
+  attr_reader :user, :question
+  before(:each) do
+    @user = Fabricate(:user, password: 'password')
+    @user.roles.create(name: 'registered_user')
+    @question = Fabricate(:question, user: user)
+  end
   scenario "they fill out the form on the question show page" do
-    user = Fabricate(:user)
-    question = Fabricate(:question, user: user)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -20,8 +24,6 @@ feature "user answers question" do
   end
 
   scenario "they fill out the form incorrectly on the question show page" do
-    user = Fabricate(:user)
-    question = Fabricate(:question, user: user)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 

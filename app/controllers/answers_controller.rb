@@ -14,6 +14,11 @@ class AnswersController < ApplicationController
     end
   end
 
+  def destroy
+    Answer.destroy(params[:id])
+    redirect_to request.referrer
+  end
+
   private
 
   def answer_params

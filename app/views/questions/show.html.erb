@@ -42,7 +42,7 @@
               <%= answer.body %><br>
               <div id="answer-details" class="right card-action">
                 <% if current_user && current_user.admin? %>
-                <%= button_to "Delete Answer",answer_path(answer)%>
+                <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}%>
                 <% end %>
                 <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
                 <br>

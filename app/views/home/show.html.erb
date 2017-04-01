@@ -20,7 +20,8 @@
             <div class="categories">
               <span class="card-title">Categories</span>
               <% @presenter.all_categories.each do |category| %>
-              <a class="waves-effect blue darken-1 waves-light btn-large"><%= category.name %></a>
+              <!-- <a class="waves-effect blue darken-1 waves-light btn-large"><%= category.name %></a> -->
+              <%= link_to "#{category.name}", root_path(:category => category.id)%>
               <br>
               <% end %>
             </div>
@@ -36,7 +37,11 @@
         <div class="card white">
           <div class="card-content black-text">
             <div class="recent-activity">
-            <span class="card-title">Recent Activity</span>
+              <% if params[:category].nil? %>
+                <span class="card-title">Recent Activity</span>
+              <% else %>
+                <span class="card-title">Recent Activity: <%=@presenter.category_name(params[:category]) %> </span>
+              <% end %>
               <table class="bordered">
                 <thead>
                   <tr>
@@ -47,13 +52,15 @@
                 </thead>
 
                 <tbody>
-                  <% @presenter.recent_questions.each do |question| %>
-                  <tr>
-                    <td>Answers: <%= question.answers.count %></td>
-                    <td><a href=<%= question_path(question) %> class="collection-item"><%= question.title %></a></td>
-                    <td><p>Updated: <%= question.updated_at.strftime("%D") %></p></td>
-                  </tr>
-                  <% end %>
+                  <div class="root-questions">
+                    <% @presenter.show_questions(params[:category]).each do |question| %>
+                      <tr>
+                        <td>Answers: <%= question.answers.count %></td>
+                        <td><a href=<%= question_path(question) %> class="collection-item"><%= question.title %></a></td>
+                        <td><p>Updated: <%= question.updated_at.strftime("%D") %></p></td>
+                      </tr>
+                    <% end %>
+                  </div>
                 </tbody>
               </table>
             </div>

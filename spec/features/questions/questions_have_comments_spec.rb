@@ -11,9 +11,9 @@ feature 'user views a question' do
 
     visit question_path(question)
 
-    expect(page).to have_css('#question_comments')
+    expect(page).to have_css('#question-comments')
 
-    within('#question_comments') do
+    within('#question-comments') do
       expect(page).to have_content(comment.body)
       expect(page).to have_content(comment2.body)
     end
@@ -24,7 +24,7 @@ feature 'user views a question' do
 
     visit question_path(question)
 
-    expect(page).to_not have_css('#question_comments')
+    expect(page).to_not have_css('#question-comments')
 
   end
 end

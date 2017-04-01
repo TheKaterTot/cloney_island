@@ -40,5 +40,13 @@ RSpec.describe Vote, type: :model do
 
       expect(question.votes_value).to eq(4)
     end
+
+    it "from question returns 0 if a question has no votes" do
+      user = Fabricate(:user)
+
+      question = Fabricate(:question, user: user)
+
+      expect(question.votes_value).to eq(0)
+    end
   end
 end

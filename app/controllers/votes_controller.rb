@@ -3,7 +3,7 @@ class VotesController < ApplicationController
   def create
     @question = Question.find(params["question_id"])
     @vote = @question.votes.new(vote_params)
-    if @vote.save
+    if @vote.save 
       flash[:success] = "Thanks for the feedback!"
       redirect_to question_path(@question)
     else

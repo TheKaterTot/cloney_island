@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331021309) do
+ActiveRecord::Schema.define(version: 20170401190122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20170331021309) do
     t.text     "body"
     t.integer  "question_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
   end
@@ -42,13 +42,21 @@ ActiveRecord::Schema.define(version: 20170331021309) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
+  create_table "password_tokens", force: :cascade do |t|
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_password_tokens_on_user_id", using: :btree
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end

@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
+  get '/password/edit', to: "passwords#edit", as: :edit_password
+  post '/password/edit', to: "passwords#update"
 
-  resources :users, only: [:new, :create, :show]
   resources :questions
-  resources :answers, only: [:create]
+  resources :users
+  resources :answers, only: [:create, :destroy]
+  resources :comments, only: [:create]
 end

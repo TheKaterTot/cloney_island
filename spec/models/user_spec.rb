@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:phone) }
   end
 
-  describe '#comments_to_recent_activity' do
+  describe '.comments_to_recent_activity' do
     it 'returns 5 most recent comments to user activity' do
       user = Fabricate(:user)
       user2 = Fabricate(:user)
@@ -52,6 +52,35 @@ RSpec.describe User, type: :model do
       expect(comments[4].source_question.user).to eq(user)
 
       expect(comments.include?(old_comment)).to eq(false)
+    end
+  end
+
+  describe '.admin?' do
+    it 'returns true if the user has an admin role' do
+      user = Fabricate(:user)
+      user.roles.create(name: 'admin')
+
+      expect(user.admin?).to eq(true)
+    end
+
+    it 'returns false if a user does not have an admin role' do
+      user = Fabricate(:user)
+
+      expect(user.admin?).to eq(false)
+    end
+  end
+  describe '.registered_user?' do
+    it 'returns true if the user has an registered_user role' do
+      user = Fabricate(:user)
+      user.roles.create(name: 'registered_user')
+
+      expect(user.registered_user?).to eq(true)
+    end
+
+    it 'returns false if a user does not have an registered_user role' do
+      user = Fabricate(:user, roles: [])
+
+      expect(user.registered_user?).to eq(false)
     end
   end
 end

@@ -28,6 +28,18 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = @question.answers.new
+    @comment = @question.comments.new
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    if @question.delete
+      flash[:success] = "Your question was deleted successfully!"
+      redirect_to root_path
+    else
+      flash[:danger] = "Failed to delete the question"
+      redirect_to question_path(@question)
+    end
   end
 
   def edit
@@ -51,5 +63,4 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :body, :category_id)
   end
-
 end

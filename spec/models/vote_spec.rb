@@ -24,4 +24,21 @@ RSpec.describe Vote, type: :model do
       expect(vote.value).to eq(1)
     end
   end
+
+  describe "#votes_value returns the total vote value" do
+    it "from a question" do
+      user = Fabricate(:user)
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+
+      question = Fabricate(:question, user: user)
+      vote = question.votes.create(value: 1)
+      vote_1 = question.votes.create(value: 1, user_id: user_1.id)
+      vote_2 = question.votes.create(value: 1, user_id: user_2.id)
+      vote_3 = question.votes.create(value: 1, user_id: user_3.id)
+
+      expect(question.votes_value).to eq(4)
+    end
+  end
 end

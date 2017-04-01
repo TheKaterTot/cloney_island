@@ -13,11 +13,11 @@
         <div id="question-body" >
           <%= @question.body %><br>
           <div id="upvote-question">
-             <%= button_to("Upvote", :action => "create", :controller => "votes", params: {question_id: "#{@question.id}", value: "1"})  %>
+             <%= button_to("Upvote", :action => "create", :controller => "votes", params: {question_id: "#{@question.id}", user_id: "#{@question.user_id}", value: "1"})  %>
           </div>
           <div id="votes">
              <% if !@question.votes.nil? %>
-             <%= @question.votes.count %>
+             <%= @question.votes_value %>
              <% end %>
           </div>
           <div id="delete-question">

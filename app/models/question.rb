@@ -11,6 +11,14 @@ class Question < ApplicationRecord
     order(:updated_at)
   end
 
+  def votes_value
+    sum = 0
+    votes.each do |vote|
+      sum += (vote.value.to_i)
+    end
+    sum
+  end
+
   def find_user
     user.name
   end
@@ -22,4 +30,5 @@ class Question < ApplicationRecord
   def answer_count
     answers.count
   end
+
 end

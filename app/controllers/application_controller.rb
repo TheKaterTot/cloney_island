@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def authorize!
     unless authorized?
       flash[:danger] = "You are not authorized to visit this page"
-      redirect_to root_url
+      redirect_to root_path
     end
   end
 

@@ -40,5 +40,4 @@ feature "logged in user visits the question show page" do
 
     expect(page).to_not have_content("Delete Question")
   end
-
 end

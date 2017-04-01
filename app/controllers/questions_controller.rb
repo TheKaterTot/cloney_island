@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = @question.answers.new
+    @comment = @question.comments.new
   end
 
   def destroy
@@ -46,6 +47,4 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :body, :category_id)
   end
-
-
 end

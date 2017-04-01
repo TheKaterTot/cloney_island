@@ -1,11 +1,16 @@
 <div id="question-comments" class="blue-text">
   <% @question.comments.each do |comment| %>
-    <div id="question-comment-body" class="card-action" style= padding-left:50px;>
-      <p><%= comment.body %></p>
-    </div>
-    <div id="question-comment-details" class="right card-action">
-      <p>Author: <%= comment.find_user %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
-    </div>
+    <% unless comment.body.nil? %>
+      <div class="card-panel">
+        <div id="question-comment-body" class="card-action" style= padding-left:50px;>
+          <p><%= comment.body %></p>
+        </div>
+        <div id="question-comment-details" class="right card-action">
+          <p>Author: <%= comment.find_user %> Updated: <%= comment.update_date %></p><br>
+        </div>
+        <br><br>
+      </div>
+    <% end %>
   <% end %>
 </div>
 <br><br>

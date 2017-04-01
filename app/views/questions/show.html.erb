@@ -1,8 +1,7 @@
 <h2>Question</h2>
-
 <div class="row">
   <div class="col s12 m12">
-    <div class="card-panel white">
+    <div class="question card-panel white">
       <span class="black-text">
         <div id="question-title" >
           <div class="divider"></div>
@@ -25,7 +24,13 @@
         <br><br><br>
         <div class="divider"></div>
         <% if !@question.comments.empty? %>
-        <%= render 'comments/questioncomments' %>
+          <%= render 'comments/questioncomments' %>
+        <% end %>
+        <%= form_for [@question, @comment], url: { controller: "comments", action: "create" } do |f| %>
+          <%= f.hidden_field :question, value: params[:id] %>
+          <%= f.text_area :body, placeholder: "Add Comment" %>
+          <%= show_errors(@comment, :body) %>
+          <%= f.submit "Add Comment" %>
         <% end %>
     </div>
   </div>
@@ -35,35 +40,40 @@
 <div class="row">
   <div class="question-answers">
     <% @question.answers.each do |answer| %>
-      <div class="question-answer">
-        <div class="col s12 m12">
-          <div class="card-panel white">
-            <span class="black-text">
-              <%= answer.body %><br>
-              <div id="answer-details" class="right card-action">
-                <% if current_user && current_user.admin? %>
-                <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}%>
-                <% end %>
-                <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
-                <br>
-              </div>
-            </span>
-            <br><br><br>
-            <div class="divider"></div>
-            <br>
-            <% if !answer.comments.empty? %>
-              <%= render partial: "comments/answercomments", locals: { answer: answer } %>
-            <% end %>
+      <% unless answer.body.nil? %>
+        <div class="question-answer">
+          <div class="col s12 m12">
+            <div class="card-panel white">
+              <span class="black-text">
+                <%= answer.body %><br>
+                <div id="answer-details" class="right card-action">
+                  <% if current_user && current_user.admin? %>
+                    <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}%>
+                  <% end %>
+                  <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
+                  <br>
+                </div>
+              </span>
+              <br><br><br>
+              <div class="divider"></div>
+              <br>
+              <% if !answer.comments.empty? %>
+                <%= render partial: "comments/answercomments", locals: { answer: answer } %>
+              <% end %>
+            </div>
+
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
+  <div id="answer-question">
   <h5>Answer this question</h5>
-  <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
-    <%= f.hidden_field :question, :value => params[:id] %>
-    <%= f.text_area :body, placeholder: "Enter text" %>
-    <%= show_errors(@answer, :body) %>
-    <%= f.submit "Submit" %>
+    <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
+      <%= f.hidden_field :question, :value => params[:id] %>
+      <%= f.text_area :body, placeholder: "Enter text" %>
+      <%= show_errors(@answer, :body) %>
+      <%= f.submit "Submit" %>
     <% end %>
+  </div>
 </div>

@@ -30,7 +30,7 @@ feature 'user views a question' do
 
     visit question_path(question)
 
-    expect(page).to_not have_css('#question-comments')
+    expect(page).to_not have_css('#question-comment-body')
 
   end
 end

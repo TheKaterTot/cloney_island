@@ -12,6 +12,11 @@
         <br>
         <div id="question-body" >
           <%= @question.body %><br>
+          <div id="delete-question">
+              <% if !current_user.nil? && current_user.id == @question.user_id %>
+                  <%= button_to "Delete Question", question_path(@question), method: :delete, class: "waves-effect red darken-1 waves-light btn right" %>
+              <% end %>
+          </div>
         </div>
       </span>
       <div id="question-details" class="right card-action">

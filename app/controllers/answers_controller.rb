@@ -5,13 +5,19 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:answer][:question])
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
+    @comment = @question.comments.new
     if @answer.save
-      flash[:success] = "You commented!"
+      flash[:success] = "You answered the question!"
       redirect_to question_path(@question)
     else
       flash[:danger] = "Your comment was not successful."
       render "questions/show"
     end
+  end
+
+  def destroy
+    Answer.destroy(params[:id])
+    redirect_to request.referrer
   end
 
   private

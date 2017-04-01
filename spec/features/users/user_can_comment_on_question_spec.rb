@@ -34,7 +34,7 @@ describe 'when a user visits a question show page' do
     within(".question") do
       click_on "Add Comment"
     end
-save_and_open_page
+
     expect(page).to have_content("Comment failed. Please re-enter your comment.")
 
     within(".error") do

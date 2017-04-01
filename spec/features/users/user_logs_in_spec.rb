@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 feature 'user visits root' do
+  attr_reader :user
+  before(:each) do
+    @user = Fabricate(:user, password: 'password')
+    @user.roles.create(name: 'registered_user')
+  end
   scenario 'user logs in successfully' do
-    user = Fabricate(:user, password: 'password')
 
     visit '/'
 
@@ -18,7 +22,6 @@ feature 'user visits root' do
   end
 
   scenario 'user login fails' do
-    user = Fabricate(:user, password: 'password')
 
     visit '/'
 

@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   resources :questions
   resources :users, only: [:new, :create, :show, :edit, :update]
-  resources :answers, only: [:create]
+  resources :answers, only: [:create, :destroy]
 end

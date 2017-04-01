@@ -19,4 +19,13 @@ class User < ApplicationRecord
   def recent_answers
     answers.last(5).reverse!
   end
+
+  def admin?
+    roles.exists?(name: "admin")
+  end
+
+  def registered_user?
+    roles.exists?(name: "registered_user")
+  end
+
 end

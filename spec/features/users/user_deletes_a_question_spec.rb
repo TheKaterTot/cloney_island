@@ -5,6 +5,7 @@ feature "logged in user visits the question show page" do
 
     category = Fabricate(:category, name: "Space")
     user = Fabricate(:user, name: "Space Nerd")
+    user.roles.create(name: 'registered_user')
     question = Fabricate(:question,
                                       title: "How high is the ISS?",
                                       body: "So high.",
@@ -29,7 +30,10 @@ feature "logged in user visits the question show page" do
 
     category = Fabricate(:category, name: "Space")
     user_1 = Fabricate(:user, name: "Space Nerd")
+    user_1.roles.create(name: 'registered_user')
     user_2 = Fabricate(:user, name: "Just Not")
+    user_2.roles.create(name: 'registered_user')
+
     question = Fabricate(:question,
                                       title: "How high is the ISS?",
                                       body: "So high.",

@@ -78,7 +78,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'returns false if a user does not have an registered_user role' do
-      user = Fabricate(:user)
+      user = Fabricate(:user, roles: [])
 
       expect(user.registered_user?).to eq(false)
     end

@@ -6,4 +6,5 @@ Fabricator(:user) do
   phone '8675309'
   image 'bologna'
   reputation 0
+  roles { [Fabricate.build(:role, name: "registered_user")] }
 end

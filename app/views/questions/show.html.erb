@@ -12,6 +12,14 @@
         <br>
         <div id="question-body" >
           <%= @question.body %><br>
+          <div id="upvote-question">
+             <%= button_to("Upvote", :action => "create", :controller => "votes", params: {question_id: "#{@question.id}", value: "1"})  %>
+          </div>
+          <div id="votes">
+             <% if !@question.votes.nil? %>
+             <%= @question.votes.count %>
+             <% end %>
+          </div>
           <div id="delete-question">
               <% if !current_user.nil? && current_user.id == @question.user_id %>
                   <%= button_to "Delete Question", question_path(@question), method: :delete, class: "waves-effect red darken-1 waves-light btn right" %>

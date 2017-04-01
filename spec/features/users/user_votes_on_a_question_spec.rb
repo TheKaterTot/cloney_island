@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "logged in user votes on a question" do
-  scenario "user clicks upvote" do
+  scenario "user hasn't voted before and clicks upvote" do
     category = Fabricate(:category, name: "Space")
     user = Fabricate(:user, name: "Space Nerd")
     question = Fabricate(:question,
@@ -9,7 +9,7 @@ feature "logged in user votes on a question" do
                                       body: "In miles.",
                                       user: user,
                                       category: category )
-    question.votes.create(value: "1")
+    vote = question.votes.create(value: "1")
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 

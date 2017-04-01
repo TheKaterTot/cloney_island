@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show]
   resources :questions
   resources :answers, only: [:create]
+  resources :votes, only: [:create]
 end

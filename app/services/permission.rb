@@ -38,6 +38,7 @@ private
     return true if controller == "users" && action.in?(%w(show edit update))
     return true if controller == "questions" && action.in?(%w(index show new create destroy))
     return true if controller == "answers" && action.in?(%w(create))
+    return true if controller == "comments" && action.in?(%w(create))
   end
 
   def guest_permissions

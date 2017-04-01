@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'when a user visits a question show page' do
   it 'they can comment on a question' do
     user = Fabricate(:user, id: 1)
+    user.roles.create(name: 'registered_user')
     question = Fabricate(:question, user: user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -24,6 +25,7 @@ describe 'when a user visits a question show page' do
 
   it 'they cant submit empty comment on a question' do
     user = Fabricate(:user, id: 1)
+    user.roles.create(name: 'registered_user')
     question = Fabricate(:question, user: user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -32,7 +34,7 @@ describe 'when a user visits a question show page' do
     within(".question") do
       click_on "Add Comment"
     end
-    
+save_and_open_page
     expect(page).to have_content("Comment failed. Please re-enter your comment.")
 
     within(".error") do

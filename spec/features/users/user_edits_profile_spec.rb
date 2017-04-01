@@ -1,15 +1,6 @@
 require "rails_helper"
 
 feature "user edits profile info" do
-  def login(username)
-    visit login_path
-
-    fill_in "Name", with: username
-    fill_in "Password", with: "password"
-
-    click_button "Login"
-  end
-
   scenario "they visit their own profile" do
     user = Fabricate(:user)
     user.roles.create(name: 'registered_user')

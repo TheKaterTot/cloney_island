@@ -7,4 +7,5 @@ class Answer < ApplicationRecord
   def find_user
     user.name unless user.nil?
   end
+  
 end

@@ -12,7 +12,13 @@ describe 'when a user visits a question show page' do
       fill_in "Add Comment", with: "This is an awesome comment"
       click_on "Add Comment"
     end
-save_and_open_page
 
+    within("#question-comment-body") do
+      expect(page).to have_content("This is an awesome comment")
+    end
+
+    within("#question-comment-details") do
+      expect(page).to have_content(Comment.last.updated_at.strftime("%D at %r"))
+    end
   end
 end

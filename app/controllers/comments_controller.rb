@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
 
   def create
-    comment = Question.find(params[:comment][:question]).comments.new(comment_params)
-    comment.user = current_user
-    if comment.save
+    @question = Question.find(params[:comment][:question])
+    @comment = @question.comments.new(comment_params)
+    @comment.user = current_user
+    if @comment.save
       flash[:success] = "Comment successfully created"
       redirect_to request.referer
     else

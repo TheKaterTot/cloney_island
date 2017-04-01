@@ -28,7 +28,9 @@ feature "user answers question" do
 
     visit question_path(question)
 
-    click_button("Submit")
+    within("#answer-question") do
+      click_button("Submit")
+    end
 
     expect(current_path).to eq(answers_path)
 

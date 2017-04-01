@@ -21,6 +21,8 @@ feature "logged in user visits the question show page" do
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content("Your question was deleted successfully!")
+
+    expect{ visit question_path(question) }.to raise_error(ActiveRecord::RecordNotFound)
   end
 
   scenario "does not own question and does not see delete question" do

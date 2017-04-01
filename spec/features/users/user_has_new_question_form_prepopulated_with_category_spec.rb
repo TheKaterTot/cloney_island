@@ -6,7 +6,6 @@ feature "user visits root and clicks 'Ask a question'" do
     user = Fabricate(:user, id: 1)
     user.roles.create(name: 'registered_user')
 
-
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit root_path

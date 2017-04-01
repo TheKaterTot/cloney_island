@@ -8,10 +8,11 @@
           </tr>
         </thead>
         <tbody>
-          <% current_user.answers.last(5).each do |answer|%>
+          <% current_user.recent_answers.each do |answer|%>
             <tr>
               <td>
-                <%= link_to answer.question.title, question_path(answer.question) %>
+                <%= link_to answer.question.title, question_path(answer.question) %></br>
+                Updated at: <%= answer.updated_date_and_time %>
               </td>
             </tr>
           <% end %>

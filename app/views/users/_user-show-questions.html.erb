@@ -9,10 +9,11 @@
           </tr>
         </thead>
         <tbody>
-          <% current_user.questions.last(5).each do |question|%>
+          <% current_user.recent_questions.each do |question|%>
             <tr>
               <td>
-                <%= link_to question.title, question_path(question) %>
+                <%= link_to question.title, question_path(question) %> </br>
+                Updated at: <%= question.updated_date_and_time %>
               </td>
             </tr>
           <% end %>

@@ -12,7 +12,8 @@
           <% current_user.comments_to_recent_activity.each do |comment|%>
             <tr>
               <td>
-                <%= link_to comment.source_question.title, question_path(comment.source_question) %>
+                <%= link_to comment.source_question.title, question_path(comment.source_question) %></br>
+                  Updated at: <%= comment.updated_date_and_time %>
               </td>
             </tr>
           <% end %>

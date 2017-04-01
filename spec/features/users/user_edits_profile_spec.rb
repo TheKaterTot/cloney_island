@@ -12,7 +12,7 @@ feature "user edits profile info" do
 
   scenario "they visit their own profile" do
     user = Fabricate(:user)
-
+    user.roles.create(name: 'registered_user')
     login(user.name)
 
     visit user_path(user)
@@ -38,6 +38,7 @@ feature "user edits profile info" do
 
   scenario "they leave a field blank" do
     user = Fabricate(:user)
+    user.roles.create(name: 'registered_user')
 
     login(user.name)
 

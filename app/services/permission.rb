@@ -35,7 +35,7 @@ private
   def registered_user_permissions
     return true if controller == "sessions"
     return true if controller == "home"
-    return true if controller == "users" && action.in?(%w(show))
+    return true if controller == "users" && action.in?(%w(show edit update))
     return true if controller == "questions" && action.in?(%w(index show new create destroy))
     return true if controller == "answers" && action.in?(%w(create))
   end
@@ -43,7 +43,7 @@ private
   def guest_permissions
     return true if controller == "sessions"
     return true if controller == "home"
-    return true if controller == "users" && action.in?(%w(new create))
+    return true if controller == "users" && action.in?(%w(new create show))
     return true if controller == "questions" && action.in?(%w(index show))
   end
 

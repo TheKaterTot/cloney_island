@@ -22,7 +22,7 @@ feature 'admin can delete posts' do
 
       expect(current_path).to eq(question_path(question))
 
-      # expect(page).to_not have_css('.question-answer')
+      expect(page).to_not have_css('.question-answer')
       expect(question.answers.count).to eq(0)
       expect(Comment.count).to eq(1)
       expect(Comment.first.commentable_type).to eq('Question')

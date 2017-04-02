@@ -6,9 +6,11 @@ class UpvotesController < ApplicationController
       upvote = question.upvotes.new(upvote_params)
     elsif params[:upvote][:answer_id]
       answer = Answer.find(params[:upvote][:answer_id])
+      answer.current_user_downvote_correction(answer, upvote_params[:creator])
       upvote = answer.upvotes.new(upvote_params)
     elsif params[:upvote][:comment_id]
       comment = Comment.find(params[:upvote][:comment_id])
+      comment.current_user_downvote_correction(comment, upvote_params[:creator])
       upvote = comment.upvotes.new(upvote_params)
     end
     if upvote.save

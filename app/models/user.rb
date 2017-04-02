@@ -31,4 +31,15 @@ class User < ApplicationRecord
     roles.exists?(name: "registered_user")
   end
 
+  def upvote_count(user)
+    user.upvotes.count
+  end
+
+  def downvote_count(user)
+    user.downvotes.count
+  end
+
+  def reputation_count(user)
+    (upvote_count(user)-downvote_count(user))
+  end
 end

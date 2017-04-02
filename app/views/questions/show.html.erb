@@ -80,6 +80,7 @@
                 </div>
               </span>
 
+              <% if !answer.upvotes.where(creator: current_user.id).exists? %>
               <div id="answer-upvote" >
                 <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
                   <%= f.hidden_field :answer_id, value: answer.id %>
@@ -88,6 +89,9 @@
                   <%= f.submit 'Upvote', class: 'upvote-submit' %>
                 <% end %>
               </div>
+              <% end %>
+
+              <% if !answer.downvotes.where(creator: current_user.id).exists? %>
               <div id="answer-downvote" >
                 <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
                   <%= f.hidden_field :answer_id, value: answer.id %>
@@ -96,8 +100,7 @@
                   <%= f.submit 'Downvote', class: 'downvote-submit' %>
                 <% end %>
               </div>
-
-
+              <% end %>
 
               <br><br><br>
               <div class="divider"></div>

@@ -22,6 +22,6 @@ class DownvotesController < ApplicationController
 
 private
   def downvote_params
-    params.require(:downvote).permit(:user_id)
+    params.require(:downvote).permit(:user_id, :creator)
   end
 end

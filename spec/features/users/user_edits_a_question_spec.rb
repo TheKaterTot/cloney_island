@@ -4,6 +4,8 @@ feature "logged in user visits the question show page" do
   scenario "user owns question and they click edit question" do
     category = Fabricate(:category, name: "Space")
     user = Fabricate(:user, name: "Space Nerd")
+    user.roles.create(name: 'registered_user')
+
     question = Fabricate(:question,
                                       title: "How high is the ISS?",
                                       body: "So high.",

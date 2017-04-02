@@ -12,6 +12,8 @@ feature "logged in user visits the question show page" do
                                       user: user,
                                       category: category )
 
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
     visit question_path(question)
 
     within("#delete-question") do

@@ -9,7 +9,7 @@ class Answer < ApplicationRecord
   end
 
   def self.populate_answer(comment_params)
-    if comment_params.has_key?(:answer)
+    if comment_params[:answer]
       Answer.find(comment_params[:answer])
     else
       Answer.new(question_id: comment_params[:question])

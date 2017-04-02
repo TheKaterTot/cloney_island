@@ -6,6 +6,9 @@ class DownvotesController < ApplicationController
     elsif params[:downvote][:answer_id]
       answer = Answer.find(params[:downvote][:answer_id])
       downvote = answer.downvotes.new(downvote_params)
+    elsif params[:downvote][:comment_id]
+      comment = Comment.find(params[:downvote][:comment_id])
+      downvote = comment.downvotes.new(downvote_params)
     end
     if downvote.save
       redirect_to request.referer

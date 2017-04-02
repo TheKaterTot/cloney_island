@@ -27,11 +27,11 @@ private
   def admin_permissions
     return true if controller == "sessions"
     return true if controller == "home"
-    return true if controller == "users" && action.in?(%w(show))
+    return true if controller == "users" && action.in?(%w(show edit update))
     return true if controller == "questions" && action.in?(%w(index show new create destroy))
     return true if controller == "answers" && action.in?(%w(create destroy))
     return true if controller == "comments" && action.in?(%w(create destroy))
-
+    return true if controller == "user_permissions" && action.in?(%w(update))
   end
 
   def registered_user_permissions

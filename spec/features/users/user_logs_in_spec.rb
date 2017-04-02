@@ -10,6 +10,8 @@ feature 'user visits root' do
 
     visit '/'
 
+    expect(page).to have_css('#welcome_jumbotron')
+
     click_link 'Login'
 
     expect(current_path).to eq(login_path)
@@ -24,6 +26,8 @@ feature 'user visits root' do
       expect(page).to have_link("Logout")
       expect(page).to have_link("Profile")
     end
+
+    expect(page).to_not have_css('#welcome_jumbotron')
   end
 
   scenario 'logged in user can navigate to profile' do

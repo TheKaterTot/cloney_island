@@ -31,6 +31,17 @@
                 <%= button_to "Delete Question", question_path(@question), method: :delete, class: "right red darken-4 btn-small" %></br>
               <% end %>
           </div>
+
+          <div id="question-upvote" >
+            <%= form_for [@question, @upvote] do |f| %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.submit 'Upvote', class: 'upvote-submit' %>
+            <% end %>
+          </div>
+
+
+
+
         </div>
       </span>
       <div id="question-details" class="right card-action">

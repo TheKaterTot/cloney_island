@@ -4,6 +4,8 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   validates :title, :body, presence: true
+  has_many :upvotes, dependent: :destroy
+  has_many :downvotes, dependent: :destroy
 
 
   def self.order_by_update

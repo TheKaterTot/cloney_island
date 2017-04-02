@@ -5,7 +5,12 @@ class User < ApplicationRecord
   has_many :password_tokens
   has_many :questions
   has_many :user_roles
+<<<<<<< HEAD
   has_many :roles, through: :user_roles
+=======
+  has_many :upvotes, dependent: :destroy
+  has_many :downvotes, dependent: :destroy
+>>>>>>> have upvotes and downvotes working
 
   validates :name, :email, :phone, presence: true
 

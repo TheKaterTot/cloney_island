@@ -35,6 +35,7 @@
           <div id="question-upvote" >
             <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
+              <%= f.hidden_field :creator, value: current_user.id %>
               <%= f.hidden_field :user_id, value: @question.user_id %>
               <%= f.submit 'Upvote', class: 'upvote-submit' %>
             <% end %>
@@ -43,6 +44,7 @@
           <div id="question-downvote" >
             <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
+              <%= f.hidden_field :creator, value: current_user.id %>
               <%= f.hidden_field :user_id, value: @question.user_id %>
               <%= f.submit 'Downvote', class: 'downvote-submit' %>
             <% end %>
@@ -75,7 +77,6 @@
 <div class="row">
   <div class="question-answers">
     <% @question.answers.each do |answer| %>
-<<<<<<< HEAD
     <% unless answer.body.nil? %>
       <div class="question-answer">
         <div class="col s12 m12">

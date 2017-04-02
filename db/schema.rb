@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402041133) do
+ActiveRecord::Schema.define(version: 20170402214109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170402041133) do
     t.string   "downvoted_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "creator"
     t.index ["downvoted_id", "downvoted_type"], name: "index_downvotes_on_downvoted_id_and_downvoted_type", using: :btree
     t.index ["user_id"], name: "index_downvotes_on_user_id", using: :btree
   end
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170402041133) do
     t.string   "upvoted_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "creator"
     t.index ["upvoted_id", "upvoted_type"], name: "index_upvotes_on_upvoted_id_and_upvoted_type", using: :btree
     t.index ["user_id"], name: "index_upvotes_on_user_id", using: :btree
   end

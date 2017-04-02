@@ -97,26 +97,34 @@
                   <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "right red darken-4 btn-small" %></br>
               </div>
             </span>
-            <div id="answer-upvote" >
-              <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
-                <%= f.hidden_field :answer_id, value: answer.id %>
-                <%= f.hidden_field :user_id, value: current_user.id %>
-                <%= f.submit 'Upvote', class: 'upvote-submit' %>
+              <% if !answer.upvotes.where(creator: current_user.id).exists? %>
+              <div id="answer-upvote" >
+                <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
+                  <%= f.hidden_field :answer_id, value: answer.id %>
+                  <%= f.hidden_field :creator, value: current_user.id %>
+                  <%= f.hidden_field :user_id, value: answer.user_id %>
+                  <%= f.submit 'Upvote', class: 'upvote-submit' %>
+                <% end %>
+              </div>
               <% end %>
-            </div>
-            <div id="answer-downvote" >
-              <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
-                <%= f.hidden_field :answer_id, value: answer.id %>
-                <%= f.hidden_field :user_id, value: current_user.id %>
-                <%= f.submit 'Downvote', class: 'downvote-submit' %>
+
+              <% if !answer.downvotes.where(creator: current_user.id).exists? %>
+              <div id="answer-downvote" >
+                <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
+                  <%= f.hidden_field :answer_id, value: answer.id %>
+                  <%= f.hidden_field :creator, value: current_user.id %>
+                  <%= f.hidden_field :user_id, value: answer.user_id %>
+                  <%= f.submit 'Downvote', class: 'downvote-submit' %>
+                <% end %>
+              </div>
               <% end %>
-            </div>
-            <br><br><br>
-            <div class="divider"></div>
-            <br>
-            <% if !answer.comments.empty? %>
-              <%= render partial: "comments/answercomments", locals: { answer: answer } %>
-            <% end %>
+
+              <br><br><br>
+              <div class="divider"></div>
+              <br>
+              <% if !answer.comments.empty? %>
+                <%= render partial: "comments/answercomments", locals: { answer: answer } %>
+              <% end %>
             <div class="comment-on-answer">
               <%= form_for [@answer, @comment], url: { controller: "comments", action: "create" } do |f| %>
                 <%= f.hidden_field :answer, value: answer.id %>

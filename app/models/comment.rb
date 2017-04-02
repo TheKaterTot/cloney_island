@@ -44,4 +44,16 @@ class Comment < ApplicationRecord
       false
     end
   end
+
+  def current_user_upvote_correction(comment, creator_id)
+    if comment.upvotes.where(creator: creator_id).exists?
+      comment.upvotes.where(creator:creator_id).destroy_all
+    end
+  end
+
+  def current_user_downvote_correction(comment, creator_id)
+    if comment.downvotes.where(creator: creator_id).exists?
+      comment.downvotes.where(creator:creator_id).destroy_all
+    end
+  end
 end

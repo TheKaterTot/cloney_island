@@ -17,4 +17,16 @@ class Answer < ApplicationRecord
       Answer.new(question_id: comment_params[:question])
     end
   end
+
+  def current_user_upvote_correction(answer, creator_id)
+    if answer.upvotes.where(creator: creator_id).exists?
+      answer.upvotes.where(creator:creator_id).destroy_all
+    end
+  end
+
+  def current_user_downvote_correction(answer, creator_id)
+    if answer.downvotes.where(creator: creator_id).exists?
+      answer.downvotes.where(creator:creator_id).destroy_all
+    end
+  end
 end

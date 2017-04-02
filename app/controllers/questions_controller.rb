@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question = Question.find(params[:id])
-    if @question.delete
+    if @question.destroy
       flash[:success] = "Your question was deleted successfully!"
       redirect_to root_path
     else

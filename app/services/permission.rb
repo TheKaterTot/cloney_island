@@ -4,7 +4,8 @@ class Permission
   attr_reader :user, :controller, :action
 
   def_delegators :user, :registered_user?,
-                        :admin?
+                        :admin?,
+                        :blocked_user?
 
   def initialize(user)
     @user = user || User.new
@@ -17,6 +18,8 @@ class Permission
       admin_permissions
     elsif registered_user?
       registered_user_permissions
+    elsif blocked_user?
+      blocked_user_permissions
     else
       guest_permissions
     end
@@ -32,20 +35,29 @@ private
   end
 
   def registered_user_permissions
-    return true if controller == "sessions"
-    return true if controller == "home"
     return true if controller == "users" && action.in?(%w(show edit update))
     return true if controller == "questions" && action.in?(%w(index show new create destroy edit update))
     return true if controller == "answers" && action.in?(%w(create))
     return true if controller == "comments" && action.in?(%w(create))
     return true if controller == "passwords" && action.in?(%w(edit update))
+    basic_permissions
+  end
+
+  def blocked_user_permissions
+    return true if controller == "users" && action.in?(%w(show edit update))
+    return true if controller == "questions" && action.in?(%w(index show))
+    return true if controller == "passwords" && action.in?(%w(edit update))
+    basic_permissions
   end
 
   def guest_permissions
-    return true if controller == "sessions"
-    return true if controller == "home"
     return true if controller == "users" && action.in?(%w(new create show))
     return true if controller == "questions" && action.in?(%w(index show))
+    basic_permissions
   end
 
+  def basic_permissions
+    return true if controller == "sessions"
+    return true if controller == "home"
+  end
 end

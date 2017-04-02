@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
 
   def authorize!
     unless authorized?
-      flash[:danger] = "You are not authorized to do that. Please log in or create an account."
+      if current_user && current_user.blocked_user?
+        flash[:danger] = "Your account priveleges have been limited due to your activity"
+      else
+        flash[:danger] = "You are not authorized to do that. Please log in or create an account."
+      end
       redirect_to root_path
     end
   end

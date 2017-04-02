@@ -6,6 +6,9 @@ class UpvotesController < ApplicationController
     elsif params[:upvote][:answer_id]
       answer = Answer.find(params[:upvote][:answer_id])
       upvote = answer.upvotes.new(upvote_params)
+    elsif params[:upvote][:comment_id]
+      comment = Comment.find(params[:upvote][:comment_id])
+      upvote = comment.upvotes.new(upvote_params)
     end
     if upvote.save
       redirect_to request.referer

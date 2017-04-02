@@ -2,6 +2,8 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
   validates :body, presence: true
+  has_many :upvotes, as: :upvoted, dependent: :destroy
+  has_many :downvotes, as: :downvoted, dependent: :destroy
 
 
   def source_question

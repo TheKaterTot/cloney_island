@@ -10,6 +10,20 @@
         </div>
         <br><br>
       </div>
+      <div id="answer-comment-upvote" >
+        <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
+          <%= f.hidden_field :comment_id, value: comment.id %>
+          <%= f.hidden_field :user_id, value: comment.user_id %>
+          <%= f.submit 'Upvote', class: 'upvote-submit' %>
+        <% end %>
+      </div>
+      <div id="answer-comment-downvote" >
+        <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
+          <%= f.hidden_field :comment_id, value: comment.id %>
+          <%= f.hidden_field :user_id, value: comment.user_id %>
+          <%= f.submit 'Downvote', class: 'downvote-submit' %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>

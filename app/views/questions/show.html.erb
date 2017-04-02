@@ -16,7 +16,7 @@
                   <%= button_to "Delete Question", question_path(@question), method: :delete, class: "waves-effect red darken-1 waves-light btn right" %>
               <% end %>
           </div>
-
+          <% if !@question.upvotes.where(creator: current_user.id).exists? %>
           <div id="question-upvote" >
             <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
@@ -25,7 +25,9 @@
               <%= f.submit 'Upvote', class: 'upvote-submit' %>
             <% end %>
           </div>
+          <% end %>
 
+          <% if !@question.downvotes.where(creator: current_user.id).exists? %>
           <div id="question-downvote" >
             <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
@@ -34,6 +36,7 @@
               <%= f.submit 'Downvote', class: 'downvote-submit' %>
             <% end %>
           </div>
+          <% end %>
 
 
 

@@ -23,4 +23,17 @@ class Question < ApplicationRecord
   def answer_count
     answers.count
   end
+
+  def current_user_upvote_correction(question, creator_id)
+    if question.upvotes.where(creator: creator_id).exists?
+      question.upvotes.where(creator:creator_id).destroy_all
+    end
+  end
+
+  def current_user_downvote_correction(question, creator_id)
+    if question.downvotes.where(creator: creator_id).exists?
+      question.downvotes.where(creator:creator_id).destroy_all
+    end
+  end
+
 end

@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :questions
   resources :users
   resources :answers, only: [:create, :destroy]
-  resources :comments, only: [:create]
+  resources :comments, only: [:create, :destroy]
+  resources :user_permissions, only: [:update]
 end

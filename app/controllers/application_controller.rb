@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user,
-                :current_permission
+                :current_permission,
+                :current_admin?,
+                :current_users_question?
 
   before_action :authorize!
 
@@ -24,4 +26,13 @@ class ApplicationController < ActionController::Base
   def authorized?
     current_permission.allow?(params[:controller], params[:action])
   end
+
+  def current_admin?
+    current_user && current_user.admin?
+  end
+
+  def current_users_question?(question)
+    current_user && current_user.id == question.user_id
+  end
+
 end

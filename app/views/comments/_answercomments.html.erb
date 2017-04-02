@@ -2,6 +2,11 @@
   <% answer.comments.each do |comment| %>
     <div id="answer-comment-body" style= padding-left:50px;>
       <p><%= comment.body %></p>
+      <div id='delete-comment-button' class='left card-action'>
+        <% if current_admin? %>
+          <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "waves-effect red darken-4 waves-light btn-small" %>
+        <% end %>
+      </div>
     </div>
     <div id="answer-comment-details" class="right card-action">
       <p>Author: <%= comment.find_user %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>

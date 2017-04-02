@@ -15,4 +15,8 @@ class Presenter
   def category_name(id)
     Category.find(id).name
   end
+
+  def question
+    Question.find(comment_params[:question])
+  end
 end

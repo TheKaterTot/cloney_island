@@ -1,7 +1,11 @@
 <h2>Question</h2>
-<% if current_admin? %>
+<% if current_admin? && @question.user.registered_user? %>
   <div id='deactivate-user-button' class='right card-action'>
     <%= button_to "Deactivate User", user_permission_path(@question.user), method: :put, class: "waves-effect red darken-1 waves-light btn right" %>
+  </div>
+<% elsif current_admin? && @question.user.blocked_user? %>
+  <div id='reactivate-user-button' class='right card-action'>
+    <%= button_to "Reactivate User", user_permission_path(@question.user), method: :put, class: "waves-effect red darken-1 waves-light btn right" %>
   </div>
 <% end %>
 <div class="row">

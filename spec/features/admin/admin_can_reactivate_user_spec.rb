@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'admin deactivates a user' do
+feature 'admin reactivates a user' do
   attr_reader :admin, :question, :user
 
   before(:each) do
@@ -10,17 +10,17 @@ feature 'admin deactivates a user' do
                             email: 'test',
                             phone: '1',
                             password: 'test')
-    user.roles.create(name: 'registered_user')
+    user.roles.create(name: 'blocked_user')
     @question = Fabricate(:question, user: user)
-    Fabricate(:role, name: 'blocked_user')
+    Fabricate(:role, name: 'registered_user')
   end
-  scenario 'admin visits question page and deactivates user' do
+  scenario 'admin visits question page and reactivates user' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
     visit question_path(question)
 
-    click_button "Deactivate User"
+    click_button "Reactivate User"
     expect(user.roles.count).to eq(1)
-    expect(user.roles[0][:name]).to eq('blocked_user')
+    expect(user.roles[0][:name]).to eq('registered_user')
   end
 end

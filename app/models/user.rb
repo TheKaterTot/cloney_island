@@ -29,4 +29,9 @@ class User < ApplicationRecord
     roles.exists?(name: "registered_user")
   end
 
+  def deactivate
+    user_roles.destroy_all
+    user_roles.create(role: Role.find_by(name: 'blocked_user'))
+  end
+
 end

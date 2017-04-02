@@ -12,6 +12,7 @@ feature 'admin deactivates a user' do
                             password: 'test')
     user.roles.create(name: 'registered_user')
     @question = Fabricate(:question, user: user)
+    Fabricate(:role, name: 'blocked_user')
   end
   scenario 'admin visits question page and deactivates user' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)

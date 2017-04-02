@@ -15,6 +15,7 @@ class Seed
   def generate_roles
     Role.create(name: 'registered_user')
     Role.create(name: 'admin')
+    Role.create(name: 'blocked_user')
     puts "Generated registered_user and admin roles"
   end
 
@@ -42,7 +43,7 @@ class Seed
   def generate_user_questions
     User.all.each do |user|
       5.times do |i|
-        user.questions.create!(title:   Faker::Hipster.sentence,
+        user.questions.create!(title:   Faker::Hipster.sentence(5),
                               body:     Faker::Hipster.paragraph,
                               category: Category.find(Random.new.rand(1..20)))
         puts "Generated Question #{user.questions.count} for #{user.name}"
@@ -82,7 +83,7 @@ class Seed
                 password:  "password",
                 phone:     Faker::Base.numerify('###-###-####'),
                 image:     Faker::Avatar.image)
-    User.last.user_roles.create(role: Role.last)
+    User.last.user_roles.create(role: Role.find_by(name: 'admin'))
     puts "Generated #{User.last.name} as #{User.last.roles.first.name}"
   end
 end

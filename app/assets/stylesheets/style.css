@@ -35,3 +35,14 @@ a.collection-item {
 .error {
   color: red;
 }
+
+.user-pic {
+  padding: 10px;
+  margin:auto;
+  display: block;
+}
+
+.user-name {
+  padding: 10px;
+  text-align: center;
+}

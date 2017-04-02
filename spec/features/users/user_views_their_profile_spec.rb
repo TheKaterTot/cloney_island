@@ -14,10 +14,13 @@ feature 'user profile' do
     expect(page).to have_css('#user-info')
 
     within('#user-info-table') do
-      expect(page).to have_content(user.name)
       expect(page).to have_content(user.email)
       expect(page).to have_content(user.phone)
       expect(page).to have_content('Reputation')
+    end
+
+    within('#user-avatar') do
+      expect(page).to have_content(user.name)
     end
   end
 

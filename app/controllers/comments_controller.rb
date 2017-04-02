@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
 
   def create
-    @question = Question.find(params[:comment][:question])
-    @comment = @question.comments.new(comment_params)
+    @question = Question.find(comment_params[:question])
+    @answer = Answer.populate_answer(comment_params)
+    @comment = Comment.populate_comment(comment_params, @question, @answer)
     @comment.user = current_user
-    @answer = @question.answers.new
     if @comment.save
       flash[:success] = "Comment successfully created"
       redirect_to request.referer
@@ -18,10 +18,10 @@ class CommentsController < ApplicationController
     Comment.destroy(params[:id])
     redirect_to request.referrer
   end
-    
+
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :answer, :question)
   end
 end

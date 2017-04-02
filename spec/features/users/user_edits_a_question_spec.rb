@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "logged in user visits the question show page" do
-  scenario "user owns the question and sees and clicks delete question" do
+  scenario "user owns question and they click edit question" do
     category = Fabricate(:category, name: "Space")
     user = Fabricate(:user, name: "Space Nerd")
     user.roles.create(name: 'registered_user')
@@ -16,24 +16,33 @@ feature "logged in user visits the question show page" do
 
     visit question_path(question)
 
-    within("#delete-question") do
-      click_on "Delete Question"
+    within("#edit-question") do
+      click_on "Edit Question"
     end
 
-    expect(current_path).to eq(root_path)
-    expect(page).to have_content("Your question was deleted successfully!")
+    expect(current_path).to eq(edit_question_path(question))
 
-    expect{ visit question_path(question) }.to raise_error(ActiveRecord::RecordNotFound)
+    within("#question-title") do
+      fill_in "Title", with: "How many miles above Earth is the ISS?"
+    end
+
+    within("#question-body") do
+      fill_in "Body", with: "Is it getting farther away?"
+      click_on "Submit"
+    end
+
+    expect(current_path).to eq(question_path(question))
+    expect(page).to have_content("Your question was edited successfully!")
+
+    within("#question-body") do
+      expect(page).to have_content("Is it getting farther away?")
+    end
   end
 
-  scenario "does not own question and does not see delete question" do
-
+  scenario "user does not own question and cannot edit a question" do
     category = Fabricate(:category, name: "Space")
     user_1 = Fabricate(:user, name: "Space Nerd")
-    user_1.roles.create(name: 'registered_user')
     user_2 = Fabricate(:user, name: "Just Not")
-    user_2.roles.create(name: 'registered_user')
-
     question = Fabricate(:question,
                                       title: "How high is the ISS?",
                                       body: "So high.",
@@ -44,6 +53,10 @@ feature "logged in user visits the question show page" do
 
     visit question_path(question)
 
-    expect(page).to_not have_content("Delete Question")
+    within("#edit-question") do
+      expect(page).to_not have_content("Edit Question")
+    end
+
+    expect(current_path).to eq(question_path(question))
   end
 end

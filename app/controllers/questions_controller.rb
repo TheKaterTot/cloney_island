@@ -53,7 +53,7 @@ class QuestionsController < ApplicationController
       flash[:success] = "Your question was edited successfully!"
       redirect_to question_path(@question)
     else
-      flash[:danger] = "Failed to edit question. Please try again."
+      flash.now[:danger] = "Failed to edit question. Please try again."
       redirect_to edit_question_path(@question)
     end
   end

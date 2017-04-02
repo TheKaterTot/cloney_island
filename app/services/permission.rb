@@ -37,7 +37,7 @@ private
   def registered_user_permissions
     return true if controller == "users" && action.in?(%w(show edit update))
     return true if controller == "questions" && action.in?(%w(index show new create destroy edit update))
-    return true if controller == "answers" && action.in?(%w(create))
+    return true if controller == "answers" && action.in?(%w(create destroy))
     return true if controller == "comments" && action.in?(%w(create))
     return true if controller == "passwords" && action.in?(%w(edit update))
     basic_permissions

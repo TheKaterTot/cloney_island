@@ -178,4 +178,5 @@ feature 'user is deactivated' do
         expect(page).to have_content("Your account priveleges have been limited due to your activity")
       end
     end
+    
 end

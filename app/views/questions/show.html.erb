@@ -65,8 +65,10 @@
                 <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
                 <br>
               </div>
-              <div id='answer-delete-button-admin' class='left card-action'>
-                <% if current_admin? %>
+              <div id='answer-delete-button' class='left card-action'>
+                <% if current_users_question?(@question) %>
+                  <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "right red darken-4 btn-small" %></br>
+                <% elsif current_admin? %>
                   <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "right red darken-4 btn-small" %></br>
                 <% end %>
               </div>

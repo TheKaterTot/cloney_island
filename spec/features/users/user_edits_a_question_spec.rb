@@ -33,6 +33,10 @@ feature "logged in user visits the question show page" do
 
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content("Your question was edited successfully!")
+
+    within("#question-body") do
+      expect(page).to have_content("Is it getting farther away?")
+    end
   end
 
   scenario "user does not own question and cannot edit a question" do

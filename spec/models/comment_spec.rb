@@ -42,7 +42,7 @@ RSpec.describe Comment, type: :model do
 
 
       expect(comments.count).to eq(5)
-      
+
       expect(comments[0].source_question).to eq(question1)
       expect(comments[1].source_question).to eq(question1)
       expect(comments[2].source_question).to eq(question1)
@@ -54,6 +54,55 @@ RSpec.describe Comment, type: :model do
       expect(comments[2].commentable).to eq(question1)
       expect(comments[3].commentable).to eq(answer1)
       expect(comments[4].commentable).to eq(answer1)
+    end
+  end
+
+  describe '#find_user' do
+    it 'returns the owner of comment' do
+      user = Fabricate(:user)
+      user2 = Fabricate(:user)
+      question = Fabricate(:question, title: 'test', user: user)
+      comment = question.comments.create(body: 'test', user: user )
+
+      expect(comment.find_user).to eq(user.name)
+    end
+  end
+
+  describe '#update_date' do
+    it ' returns formatted date for view' do
+      user = Fabricate(:user)
+      user2 = Fabricate(:user)
+      question = Fabricate(:question, title: 'test', user: user)
+      comment = question.comments.create(body: 'test', user: user )
+      comment_updated_at_date = comment.updated_at
+
+      expect(comment.update_date).to eq(comment_updated_at_date.strftime("%D at %r"))
+    end
+  end
+
+  describe '#self.populate_comment' do
+    it 'populates answer comment basaed on params from request' do
+      user = Fabricate(:user)
+      question = Fabricate(:question)
+      answer = Fabricate(:answer, question: question)
+      comment_params = {:body=>"Wow wow wow!", :answer=>"1884", :question =>"3"}
+
+      comment = Comment.populate_comment(comment_params, question, answer)
+
+      expect(comment.body).to eq(comment_params[:body])
+      expect(comment.commentable_type).to eq("Answer")
+    end
+
+    it 'populates question comment basaed on params from request' do
+      user = Fabricate(:user)
+      question = Fabricate(:question)
+      answer = Fabricate(:answer, question: question)
+      comment_params = {:body=>"Wow wow wow!", :question =>"3"}
+
+      comment = Comment.populate_comment(comment_params, question, answer)
+
+      expect(comment.body).to eq(comment_params[:body])
+      expect(comment.commentable_type).to eq("Question")
     end
   end
 end

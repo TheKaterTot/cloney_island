@@ -28,7 +28,7 @@ class Comment < ApplicationRecord
   end
 
   def self.populate_comment(comment_params, question, answer)
-    if comment_params.has_key?(:answer)
+    if comment_params[:answer]
       answer.comments.create(body: comment_params[:body])
     else
       question.comments.create(body: comment_params[:body])

@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 
   def create
+    binding.pry
     @presenter = Presenter.new
     @question = Question.find(comment_params[:question])
     @answer = Answer.populate_answer(comment_params)

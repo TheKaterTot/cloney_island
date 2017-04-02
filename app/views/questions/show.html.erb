@@ -16,6 +16,10 @@
         <br>
         <div id="question-body" >
           <%= @question.body %><br>
+          <div id="edit-question">
+                <% if current_users_question?(@question) %>
+                    <%= button_to "Edit Question", edit_question_path(@question), method: :get, class: "waves-effect blue darken-1 waves-light btn right" %>
+                <% end %>
           <div id="delete-question" class='left card-action'>
               <% if current_users_question?(@question)%>
                   <%= button_to "Delete Question", question_path(@question), method: :delete, class: "waves-effect red darken-1 waves-light btn right" %>

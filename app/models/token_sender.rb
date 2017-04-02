@@ -1,7 +1,7 @@
 class TokenSender
   def initialize(user, options={})
     @user = user
-    @client = options[:client] || Twilio::REST::Client.new(ENV["twilio_key"], ENV["twilio_s_id"])
+    @client = options[:client] || Twilio::REST::Client.new(ENV["twilio_s_id"], ENV["twilio_key"])
   end
 
   def execute

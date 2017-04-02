@@ -19,7 +19,6 @@ feature 'admin deactivates a user' do
     visit question_path(question)
 
     click_button "Deactivate User"
-
     expect(user.roles.count).to eq(1)
     expect(user.roles[0][:name]).to eq('blocked_user')
   end

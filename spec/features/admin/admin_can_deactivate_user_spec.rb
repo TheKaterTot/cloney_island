@@ -17,9 +17,8 @@ feature 'admin deactivates a user' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
     visit question_path(question)
-
-    click_button "Deactivate User"
 byebug
+    click_button "Deactivate User"
     expect(user.roles.count).to eq(1)
     expect(user.roles[0][:name]).to eq('blocked_user')
   end

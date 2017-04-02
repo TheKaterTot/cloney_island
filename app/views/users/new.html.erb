@@ -6,7 +6,7 @@
         <%= form_for(@user) do |f| %>
             <%=  f.label :name %>
             <%=  f.text_field :name%>
-            <%=  f.label :email %>
+            <%=  f.label :email, "Email (will be used for Gravatar if applicable)" %>
             <%=  f.email_field :email %>
             <%=  f.label :phone %>
             <%=  f.telephone_field :phone %>

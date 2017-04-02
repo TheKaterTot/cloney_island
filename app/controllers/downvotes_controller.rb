@@ -2,6 +2,7 @@ class DownvotesController < ApplicationController
   def create
     if params[:downvote][:question_id]
       question = Question.find(params[:downvote][:question_id])
+      question.current_user_upvote_correction(question, downvote_params[:creator])
       downvote = question.downvotes.new(downvote_params)
     elsif params[:downvote][:answer_id]
       answer = Answer.find(params[:downvote][:answer_id])

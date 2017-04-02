@@ -12,14 +12,6 @@
           <tbody>
             <tr>
               <td>
-                Name:
-              </td>
-              <td>
-                <%= current_user.name %>
-              </td>
-            </tr>
-            <tr>
-              <td>
                 E-Mail:
               </td>
               <td>
@@ -57,9 +49,13 @@
     </div>
   </div>
   <div class="col s12 m6">
-    <div class="card" id='user-avatar'>
-      <div class="card-image">
-        <img src="https://robohash.org/<%= current_user.name%>" height="412.75" width="287">
+    <div class="card blue lighten-1" id='user-avatar'>
+      <div>
+      <%= gravatar_image_tag @user.email, alt: @user.name, gravatar: { size: 200, default: "http://www.ulyces.co/wp-content/plugins/tia-author-image/default_user_icon.jpg" }, class: "user-pic" %>
+      <hr>
+        <div class="user-name" >
+          Name: <%= current_user.name %>
+        </div>
       </div>
     </div>
   </div>

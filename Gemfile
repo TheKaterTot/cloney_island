@@ -34,6 +34,7 @@ gem 'kaminari'
 gem 'uuid'
 gem 'figaro'
 gem 'twilio-ruby'
+gem 'gravatar_image_tag'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

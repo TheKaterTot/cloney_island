@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :questions
   has_many :roles, through: :user_roles
   has_many :user_roles
+  has_many :upvotes, dependent: :destroy
+  has_many :downvotes, dependent: :destroy
 
   validates :name, :email, :phone, presence: true
 

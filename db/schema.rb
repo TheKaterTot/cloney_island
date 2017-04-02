@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401190122) do
+ActiveRecord::Schema.define(version: 20170402041133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20170401190122) do
     t.text     "body"
     t.integer  "question_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
   end
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20170401190122) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
+  create_table "downvotes", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_downvotes_on_question_id", using: :btree
+    t.index ["user_id"], name: "index_downvotes_on_user_id", using: :btree
+  end
+
   create_table "password_tokens", force: :cascade do |t|
     t.string   "token"
     t.integer  "user_id"
@@ -55,8 +64,8 @@ ActiveRecord::Schema.define(version: 20170401190122) do
     t.text     "body"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
@@ -65,6 +74,15 @@ ActiveRecord::Schema.define(version: 20170401190122) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "upvotes", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_upvotes_on_question_id", using: :btree
+    t.index ["user_id"], name: "index_upvotes_on_user_id", using: :btree
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -90,8 +108,12 @@ ActiveRecord::Schema.define(version: 20170401190122) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "downvotes", "questions"
+  add_foreign_key "downvotes", "users"
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
+  add_foreign_key "upvotes", "questions"
+  add_foreign_key "upvotes", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end

@@ -1,9 +1,16 @@
 class UpvotesController < ApplicationController
   def create
-    @upvote = Upvote.new(upvote_params)
-    @upvote.question = Question.find(params[:question_id])
-    if @upvote.save
-      redirect_to @upvote.question
+    if params[:upvote][:question_id]
+      question = Question.find(params[:upvote][:question_id])
+      upvote = question.upvotes.new(upvote_params)
+    elsif params[:upvote][:answer_id]
+      answer = Answer.find(params[:upvote][:answer_id])
+      upvote = answer.upvotes.new(upvote_params)
+    end
+    if upvote.save
+      redirect_to request.referer
+    else
+      redirect_to request.referer
     end
   end
 

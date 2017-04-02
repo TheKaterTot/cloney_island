@@ -1,6 +1,6 @@
 class Downvote < ApplicationRecord
-  belongs_to :question
   belongs_to :user
-  validates :user, uniqueness: {scope: :question}
-  validates :question, uniqueness: {scope: :user}
+  belongs_to :downvoted, :polymorphic => true
+  # validates :user, uniqueness: {scope: :question}
+  # validates :question, uniqueness: {scope: :user}
 end

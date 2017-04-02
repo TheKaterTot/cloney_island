@@ -30,6 +30,7 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.new
     @comment = @question.comments.new
     @upvote = Upvote.new
+    @downvote = Downvote.new
   end
 
   def destroy

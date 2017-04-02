@@ -43,11 +43,12 @@ ActiveRecord::Schema.define(version: 20170402041133) do
   end
 
   create_table "downvotes", force: :cascade do |t|
-    t.integer  "question_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_downvotes_on_question_id", using: :btree
+    t.integer  "downvoted_id"
+    t.string   "downvoted_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["downvoted_id", "downvoted_type"], name: "index_downvotes_on_downvoted_id_and_downvoted_type", using: :btree
     t.index ["user_id"], name: "index_downvotes_on_user_id", using: :btree
   end
 
@@ -77,11 +78,12 @@ ActiveRecord::Schema.define(version: 20170402041133) do
   end
 
   create_table "upvotes", force: :cascade do |t|
-    t.integer  "question_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_upvotes_on_question_id", using: :btree
+    t.integer  "upvoted_id"
+    t.string   "upvoted_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["upvoted_id", "upvoted_type"], name: "index_upvotes_on_upvoted_id_and_upvoted_type", using: :btree
     t.index ["user_id"], name: "index_upvotes_on_user_id", using: :btree
   end
 
@@ -108,11 +110,9 @@ ActiveRecord::Schema.define(version: 20170402041133) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "comments", "users"
-  add_foreign_key "downvotes", "questions"
   add_foreign_key "downvotes", "users"
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
-  add_foreign_key "upvotes", "questions"
   add_foreign_key "upvotes", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"

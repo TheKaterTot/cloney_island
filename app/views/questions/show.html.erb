@@ -19,8 +19,6 @@
           <div id="edit-question">
                 <% if current_users_question?(@question) %>
                     <%= button_to "Edit Question", edit_question_path(@question), method: :get, class: "waves-effect blue darken-1 waves-light btn right" %>
-                <% elsif current_admin? %>
-                    <%= button_to "Edit Question", edit_question_path(@question), method: :get, class: "waves-effect blue darken-1 waves-light btn right" %></br>
                 <% end %>
           <div id="delete-question" class='left card-action'>
               <% if current_users_question?(@question)%>

@@ -3,7 +3,4 @@ class Upvote < ApplicationRecord
   belongs_to :upvoted, :polymorphic => true
   validates :creator, presence: true
 
-  # validates :user, uniqueness: {scope: :question}
-  # validates :question_id, uniqueness: {:scope => :upvoted_id}
-
 end

@@ -18,15 +18,15 @@ class Answer < ApplicationRecord
     end
   end
 
-  def current_user_upvote_correction(answer, creator_id)
-    if answer.upvotes.where(creator: creator_id).exists?
-      answer.upvotes.where(creator:creator_id).destroy_all
+  def current_user_upvote_correction(creator_id)
+    if upvotes.where(creator: creator_id).exists?
+      upvotes.where(creator:creator_id).destroy_all
     end
   end
 
-  def current_user_downvote_correction(answer, creator_id)
-    if answer.downvotes.where(creator: creator_id).exists?
-      answer.downvotes.where(creator:creator_id).destroy_all
+  def current_user_downvote_correction(creator_id)
+    if downvotes.where(creator: creator_id).exists?
+      downvotes.where(creator:creator_id).destroy_all
     end
   end
 end

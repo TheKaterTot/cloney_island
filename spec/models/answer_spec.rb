@@ -31,7 +31,7 @@ RSpec.describe Answer, type: :model do
 
       expect(answer.upvotes.count).to be(3)
 
-      answer.current_user_upvote_correction(answer, user_2.id)
+      answer.current_user_upvote_correction(user_2.id)
 
       expect(answer.upvotes.count).to be(2)
     end
@@ -55,7 +55,7 @@ RSpec.describe Answer, type: :model do
 
       expect(answer.downvotes.count).to be(3)
 
-      answer.current_user_downvote_correction(answer, user_2.id)
+      answer.current_user_downvote_correction(user_2.id)
 
       expect(answer.downvotes.count).to be(2)
     end

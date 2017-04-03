@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:comments) }
     it { should have_many(:user_roles) }
     it { should have_many(:roles) }
+    it { should have_many(:upvotes) }
+    it { should have_many(:downvotes) }
   end
 
   context "validations" do
@@ -81,6 +83,61 @@ RSpec.describe User, type: :model do
       user = Fabricate(:user, roles: [])
 
       expect(user.registered_user?).to eq(false)
+    end
+  end
+
+  describe ".upvote_count" do
+    it "returns the count of the existing upvotes for a user from a question" do
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+      user_4 = Fabricate(:user)
+
+
+      question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
+
+      upvote_1 = question.upvotes.create(creator: user_2.id, user_id: user_1.id)
+      upvote_2 = question.upvotes.create(creator: user_3.id, user_id: user_1.id)
+      upvote_3 = question.upvotes.create(creator: user_4.id, user_id: user_1.id)
+
+      expect(user_1.upvote_count).to eq(3)
+    end
+  end
+
+  describe ".downvote_count" do
+    it "returns the count of the existing downvotes for a user from a question" do
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+      user_4 = Fabricate(:user)
+
+
+      question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
+
+      downvote_1 = question.downvotes.create(creator: user_2.id, user_id: user_1.id)
+      downvote_2 = question.downvotes.create(creator: user_3.id, user_id: user_1.id)
+      downvote_3 = question.downvotes.create(creator: user_4.id, user_id: user_1.id)
+
+      expect(user_1.downvote_count).to eq(3)
+    end
+  end
+
+  describe ".reputation_count" do
+    it "returns the reputation count for a user from a question" do
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+      user_4 = Fabricate(:user)
+
+      question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
+
+      upvote_1 = question.upvotes.create(creator: user_2.id, user_id: user_1.id)
+      upvote_2 = question.upvotes.create(creator: user_3.id, user_id: user_1.id)
+      upvote_3 = question.upvotes.create(creator: user_4.id, user_id: user_1.id)
+
+      downvote_1 = question.downvotes.create(creator: user_2.id, user_id: user_1.id)
+
+      expect(user_1.reputation_count).to eq(2)
     end
   end
 end

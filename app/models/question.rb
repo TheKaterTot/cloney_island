@@ -35,5 +35,4 @@ class Question < ApplicationRecord
       question.downvotes.where(creator:creator_id).destroy_all
     end
   end
-
 end

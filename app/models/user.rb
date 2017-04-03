@@ -45,15 +45,15 @@ class User < ApplicationRecord
     user_roles.create(role: Role.find_by(name: "registered_user"))
   end
 
-  def upvote_count(user)
-    user.upvotes.count
+  def upvote_count
+    upvotes.count
   end
 
-  def downvote_count(user)
-    user.downvotes.count
+  def downvote_count
+    downvotes.count
   end
 
-  def reputation_count(user)
-    (upvote_count(user)-downvote_count(user))
+  def reputation_count
+    upvote_count - downvote_count
   end
 end

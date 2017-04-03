@@ -4,6 +4,8 @@ RSpec.describe Comment, type: :model do
   context "relationships" do
     it { should belong_to(:commentable) }
     it { should belong_to(:user) }
+    it { should have_many(:downvotes) }
+    it { should have_many(:upvotes) }
   end
 
   context "validations" do
@@ -81,7 +83,7 @@ RSpec.describe Comment, type: :model do
   end
 
   describe '#self.populate_comment' do
-    it 'populates answer comment basaed on params from request' do
+    it 'populates answer comment based on params from request' do
       user = Fabricate(:user)
       question = Fabricate(:question)
       answer = Fabricate(:answer, question: question)
@@ -93,7 +95,7 @@ RSpec.describe Comment, type: :model do
       expect(comment.commentable_type).to eq("Answer")
     end
 
-    it 'populates question comment basaed on params from request' do
+    it 'populates question comment based on params from request' do
       user = Fabricate(:user)
       question = Fabricate(:question)
       answer = Fabricate(:answer, question: question)
@@ -103,6 +105,54 @@ RSpec.describe Comment, type: :model do
 
       expect(comment.body).to eq(comment_params[:body])
       expect(comment.commentable_type).to eq("Question")
+    end
+  end
+
+  describe ".current_user_upvote_correction" do
+    it "checks if a user's upvote exists on a comment and deletes it" do
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+      user_4 = Fabricate(:user)
+      category = Fabricate(:category, name: "DJ Khaled")
+
+      question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1, category: category)
+
+      comment = question.comments.create(body: "Bless Up", user: user_1)
+
+      upvote_1 = comment.upvotes.create(creator: user_2.id, user_id: user_1.id)
+      upvote_2 = comment.upvotes.create(creator: user_3.id, user_id: user_1.id)
+      upvote_3 = comment.upvotes.create(creator: user_4.id, user_id: user_1.id)
+
+      expect(comment.upvotes.count).to be(3)
+
+      comment.current_user_upvote_correction(comment, user_2.id)
+
+      expect(comment.upvotes.count).to be(2)
+    end
+  end
+
+  describe ".current_user_downvote_correction" do
+    it "checks if a user's downvote exists on an answer and deletes it" do
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+      user_4 = Fabricate(:user)
+      category = Fabricate(:category, name: "DJ Khaled")
+
+      question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1, category: category)
+
+      comment = question.comments.create(body: "Bless Up", user: user_1)
+
+      downvote_1 = comment.downvotes.create(creator: user_2.id, user_id: user_1.id)
+      downvote_2 = comment.downvotes.create(creator: user_3.id, user_id: user_1.id)
+      downvote_3 = comment.downvotes.create(creator: user_4.id, user_id: user_1.id)
+
+      expect(comment.downvotes.count).to be(3)
+
+      comment.current_user_downvote_correction(comment, user_2.id)
+
+      expect(comment.downvotes.count).to be(2)
     end
   end
 end

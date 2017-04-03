@@ -29,7 +29,7 @@ feature 'user views a question' do
 
     expect(current_path).to eq(question_path(question))
 
-    expect(user.reputation_count(user)).to eq(1)
+    expect(user.reputation_count).to eq(1)
 
     expect(page).to_not have_css("#answer-comment-upvote")
 
@@ -42,6 +42,6 @@ feature 'user views a question' do
 
     expect(page).to_not have_css("#answer-comment-downvote")
 
-    expect(user.reputation_count(user)).to eq(-1)
+    expect(user.reputation_count).to eq(-1)
   end
 end

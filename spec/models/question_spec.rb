@@ -46,8 +46,44 @@ RSpec.describe Question, type: :model do
   end
 
   describe ".current_user_upvote_correction" do
-    it "returns the question's answer count" do
+    it "checks if a user's upvote exists on a question and deletes it" do
+      user_1 = Fabricate(:user)
+      user_2 = Fabricate(:user)
+      user_3 = Fabricate(:user)
+      user_4 = Fabricate(:user)
 
+      question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
+
+      upvote_1 = question.upvotes.create(creator: user_2.id, user_id: user_1.id)
+      upvote_2 = question.upvotes.create(creator: user_3.id, user_id: user_1.id)
+      upvote_3 = question.upvotes.create(creator: user_4.id, user_id: user_1.id)
+
+      expect(question.upvotes.count).to be(3)
+
+      question.current_user_upvote_correction(question, user_2.id)
+
+      expect(question.upvotes.count).to be(2)
     end
   end
+
+    describe ".current_user_upvote_correction" do
+      it "checks if a user's upvote exists on a question and deletes it" do
+        user_1 = Fabricate(:user)
+        user_2 = Fabricate(:user)
+        user_3 = Fabricate(:user)
+        user_4 = Fabricate(:user)
+
+        question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
+
+        downvote_1 = question.downvotes.create(creator: user_2.id, user_id: user_1.id)
+        downvote_2 = question.downvotes.create(creator: user_3.id, user_id: user_1.id)
+        downvote_3 = question.downvotes.create(creator: user_4.id, user_id: user_1.id)
+
+        expect(question.downvotes.count).to be(3)
+
+        question.current_user_downvote_correction(question, user_2.id)
+
+        expect(question.downvotes.count).to be(2)
+      end
+    end
 end

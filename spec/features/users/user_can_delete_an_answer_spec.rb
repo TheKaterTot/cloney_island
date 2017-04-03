@@ -34,7 +34,7 @@ feature 'user can delete an answer' do
     scenario 'user does not own an answer and cannot see "Delete Answer"' do
     user_1 = Fabricate(:user, id: 1, name: "we_the_best")
     user_1.roles.create(name: 'registered_user')
-    
+
     user_2 = Fabricate(:user, id: 2, name: "we_the_best")
     user_2.roles.create(name: 'registered_user')
 

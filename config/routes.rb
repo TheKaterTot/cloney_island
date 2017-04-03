@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: 'home#show', as: 'root'
 
   get '/login', to: "sessions#new"
@@ -9,6 +8,10 @@ Rails.application.routes.draw do
   post '/password/edit', to: "passwords#update"
 
   resources :questions
+
+  resources :upvotes, only: [:create, :destroy]
+  resources :downvotes, only: [:create, :destroy]
+
   resources :users
   resources :answers, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]

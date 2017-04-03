@@ -6,6 +6,8 @@ class CommentsController < ApplicationController
     @answer = Answer.populate_answer(comment_params)
     @comment = Comment.populate_comment(comment_params, @question, @answer)
     @comment.user = current_user
+    @downvote = Downvote.new
+    @upvote = Upvote.new
     if @comment.save
       flash[:success] = "Comment successfully created"
       redirect_to request.referer

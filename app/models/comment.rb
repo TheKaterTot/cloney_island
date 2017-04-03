@@ -2,6 +2,8 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
   validates :body, presence: true
+  has_many :upvotes, as: :upvoted, dependent: :destroy
+  has_many :downvotes, as: :downvoted, dependent: :destroy
 
   def source_question
     if commentable_type == "Question"
@@ -39,6 +41,18 @@ class Comment < ApplicationRecord
       true
     else
       false
+    end
+  end
+
+  def current_user_upvote_correction(comment, creator_id)
+    if comment.upvotes.where(creator: creator_id).exists?
+      comment.upvotes.where(creator:creator_id).destroy_all
+    end
+  end
+
+  def current_user_downvote_correction(comment, creator_id)
+    if comment.downvotes.where(creator: creator_id).exists?
+      comment.downvotes.where(creator:creator_id).destroy_all
     end
   end
 end

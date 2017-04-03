@@ -29,6 +29,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = @question.answers.new
     @comment = @question.comments.new
+    @upvote = Upvote.new
+    @downvote = Downvote.new
   end
 
   def destroy

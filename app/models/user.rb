@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :questions
   has_many :user_roles
   has_many :roles, through: :user_roles
+  has_many :upvotes, dependent: :destroy
+  has_many :downvotes, dependent: :destroy
 
   validates :name, :email, :phone, presence: true
 
@@ -43,4 +45,15 @@ class User < ApplicationRecord
     user_roles.create(role: Role.find_by(name: "registered_user"))
   end
 
+  def upvote_count(user)
+    user.upvotes.count
+  end
+
+  def downvote_count(user)
+    user.downvotes.count
+  end
+
+  def reputation_count(user)
+    (upvote_count(user)-downvote_count(user))
+  end
 end

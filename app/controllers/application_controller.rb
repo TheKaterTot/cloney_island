@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
                 :current_admin?,
                 :current_users_question?,
                 :current_users_comment?,
-                :current_users_answer?
+                :current_users_answer?,
+                :display_block_button?,
+                :display_unblock_button?
 
   before_action :authorize!
 
@@ -47,5 +49,15 @@ class ApplicationController < ActionController::Base
 
   def current_users_answer?(answer)
     current_user && current_user.id == answer.user_id
+  end
+
+  def display_block_button?(question)
+    current_admin? && !question.user.blocked_user? &&
+     !current_users_question?(@question)
+  end
+
+  def display_unblock_button?(question)
+    current_admin? && question.user.blocked_user? &&
+     !current_users_question?(@question)
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'user views a question' do
   attr_reader :user, :question
 
-  scenario 'user can upvote and downvote the question' do
+  scenario 'user can upvote and downvote the comments on a question' do
     @user = Fabricate(:user, password: 'password', id:2)
     @user.roles.create(name: 'registered_user')
     category = Fabricate(:category)

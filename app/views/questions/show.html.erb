@@ -38,7 +38,7 @@
       </div>
         <br><br><br>
         <div class="divider"></div>
-        <% if !@question.comments.empty? %>
+        <% if @question.comments.check_comments %>
           <%= render 'comments/questioncomments' %>
         <% end %>
         <%= form_for [@question, @comment], url: { controller: "comments", action: "create" } do |f| %>

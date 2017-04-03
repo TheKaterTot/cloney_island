@@ -6,6 +6,8 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     @comment = @question.comments.new
+    @upvote = Upvote.new
+    @downvote = Downvote.new
     if @answer.save
       flash[:success] = "You answered the question!"
       redirect_to question_path(@question)

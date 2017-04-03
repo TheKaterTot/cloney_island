@@ -16,7 +16,7 @@
         <br><br>
       </div>
       <% if current_user && !comment.upvotes.where(creator: current_user.id).exists? %>
-          <div id="answer-comment-upvote" >
+          <div id="question-comment-upvote" >
             <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
               <%= f.hidden_field :comment_id, value: comment.id %>
               <%= f.hidden_field :creator, value: current_user.id %>
@@ -26,7 +26,7 @@
           </div>
       <% end %>
       <% if current_user && !comment.downvotes.where(creator: current_user.id).exists? %>
-        <div id="answer-comment-downvote" >
+        <div id="question-comment-downvote" >
           <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
             <%= f.hidden_field :comment_id, value: comment.id %>
             <%= f.hidden_field :creator, value: current_user.id %>

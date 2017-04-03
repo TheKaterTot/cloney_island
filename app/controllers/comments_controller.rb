@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @upvote = Upvote.new
     if @comment.save
       flash[:success] = "Comment successfully created"
-      redirect_to request.referer
+      redirect_to question_path(@question)
     else
       flash[:danger] = "Comment failed. Please re-enter your comment."
       render 'questions/show'

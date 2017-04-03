@@ -11,7 +11,7 @@
     <div id="answer-comment-details" class="right card-action">
       <p>Author: <%= comment.find_user %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
     </div>
-    <% if !comment.upvotes.where(creator: current_user.id).exists? %>
+    <% if current_user && !comment.upvotes.where(creator: current_user.id).exists? %>
         <div id="answer-comment-upvote" >
           <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
             <%= f.hidden_field :comment_id, value: comment.id %>
@@ -21,7 +21,7 @@
           <% end %>
         </div>
     <% end %>
-    <% if !comment.downvotes.where(creator: current_user.id).exists? %>
+    <% if current_user && !comment.downvotes.where(creator: current_user.id).exists? %>
       <div id="answer-comment-downvote" >
         <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
           <%= f.hidden_field :comment_id, value: comment.id %>

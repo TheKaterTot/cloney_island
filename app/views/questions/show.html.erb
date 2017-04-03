@@ -31,7 +31,7 @@
                 <%= button_to "Delete Question", question_path(@question), method: :delete, class: "right red darken-4 btn-small" %></br>
               <% end %>
           </div>
-          <% if !@question.upvotes.where(creator: current_user.id).exists? %>
+          <% if current_user && !@question.upvotes.where(creator: current_user.id).exists? %>
           <div id="question-upvote" >
             <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
@@ -42,7 +42,7 @@
           </div>
           <% end %>
 
-          <% if !@question.downvotes.where(creator: current_user.id).exists? %>
+          <% if current_user && !@question.downvotes.where(creator: current_user.id).exists? %>
           <div id="question-downvote" >
             <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
@@ -98,7 +98,7 @@
                 <% end %>
               </div>
             </span>
-              <% if !answer.upvotes.where(creator: current_user.id).exists? %>
+              <% if current_user && !answer.upvotes.where(creator: current_user.id).exists? %>
               <div id="answer-upvote" >
                 <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
                   <%= f.hidden_field :answer_id, value: answer.id %>
@@ -109,7 +109,7 @@
               </div>
               <% end %>
 
-              <% if !answer.downvotes.where(creator: current_user.id).exists? %>
+              <% if current_user && !answer.downvotes.where(creator: current_user.id).exists? %>
               <div id="answer-downvote" >
                 <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
                   <%= f.hidden_field :answer_id, value: answer.id %>

@@ -5,7 +5,7 @@
         <div id="question-comment-body" class="card-action" style= padding-left:50px;>
           <p><%= comment.body %></p>
           <div id='delete-comment-button' class='left card-action'>
-            <% if current_admin? %>
+            <% if current_admin? || current_users_comment?(comment)%>
               <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "waves-effect red darken-4 waves-light btn-small" %>
             <% end %>
           </div>

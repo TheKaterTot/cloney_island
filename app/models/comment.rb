@@ -34,4 +34,12 @@ class Comment < ApplicationRecord
       question.comments.create(body: comment_params[:body])
     end
   end
+
+  def self.check_comments
+    if count >= 1 && first.body != nil
+      true
+    else
+      false
+    end
+  end
 end

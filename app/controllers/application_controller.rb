@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user,
                 :current_permission,
                 :current_admin?,
-                :current_users_question?
+                :current_users_question?,
+                :current_users_comment?
 
   before_action :authorize!
 
@@ -37,6 +38,10 @@ class ApplicationController < ActionController::Base
 
   def current_users_question?(question)
     current_user && current_user.id == question.user_id
+  end
+
+  def current_users_comment?(comment)
+    current_user && current_user.id == comment.user_id
   end
 
 end

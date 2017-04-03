@@ -15,24 +15,6 @@ RSpec.describe Question, type: :model do
     it { should validate_presence_of(:body) }
   end
 
-  describe ".find_user" do
-    it "returns the question user's name" do
-      user = Fabricate(:user, name: "we the best")
-      question = Fabricate(:question, user: user)
-
-      expect(question.find_user).to eq("we the best")
-    end
-  end
-
-  describe ".find_category" do
-    it "returns the question category's name" do
-      category = Fabricate(:category, name: "DJ Khaled")
-      question = Fabricate(:question, title: "Why do they try to stop us?", category: category)
-
-      expect(question.find_category).to eq("DJ Khaled")
-    end
-  end
-
   describe ".answer_count" do
     it "returns the question's answer count" do
       user = Fabricate(:user, name: "we the best")

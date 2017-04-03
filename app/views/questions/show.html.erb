@@ -76,7 +76,7 @@
 <div class="row">
   <div class="question-answers">
     <% @question.answers.each do |answer| %>
-    <% unless answer.body.nil? %>
+    <% unless answer.body.nil? || !answer.persisted? %>
       <div class="question-answer">
         <div class="col s12 m12">
           <div class="card-panel white">
@@ -139,7 +139,7 @@
   <div id="answer-question">
   <h5>Answer this question</h5>
     <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
-      <%= f.hidden_field :question, :value => params[:id] %>
+      <%= f.hidden_field :question, :value => @question.id %>
       <%= f.text_area :body, placeholder: "Enter text" %>
       <%= show_errors(@answer, :body) %>
       <%= f.submit "Submit", class: "white-text waves-effect blue btn-small" %>

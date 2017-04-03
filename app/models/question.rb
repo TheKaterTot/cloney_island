@@ -9,7 +9,7 @@ class Question < ApplicationRecord
 
 
   def self.order_by_update
-    order(:updated_at)
+    order(:updated_at).reverse_order
   end
 
   def find_user

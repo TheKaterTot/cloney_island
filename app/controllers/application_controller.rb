@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
                 :current_users_comment?,
                 :current_users_answer?
 
-
   before_action :authorize!
 
   def current_user

@@ -10,7 +10,7 @@ describe 'questions' do
 
       questions = Question.order_by_update
 
-      expect(questions.first).to eq(first_question)
+      expect(questions.last).to eq(first_question)
     end
   end
 

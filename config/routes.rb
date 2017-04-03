@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-
-  # get 'downvotes/create'
-  #
-  # get 'downvotes/destroy'
-  #
-  # get 'upvote/create'
-  #
-  # get 'upvote/destroy'
-
   root to: 'home#show', as: 'root'
 
   get '/login', to: "sessions#new"

@@ -1,6 +1,6 @@
 <div id="question-comments" class="blue-text">
   <% @question.comments.each do |comment| %>
-    <% unless comment.body.nil? %>
+    <% unless comment.body.nil? || !comment.persisted? %>
       <div class="card-panel">
         <div id="question-comment-body" class="card-action" style= padding-left:50px;>
           <p><%= comment.body %></p>

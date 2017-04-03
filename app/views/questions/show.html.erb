@@ -41,7 +41,7 @@
           <%= render 'comments/questioncomments' %>
         <% end %>
         <%= form_for [@question, @comment], url: { controller: "comments", action: "create" } do |f| %>
-          <%= f.hidden_field :question, value: params[:id] %>
+          <%= f.hidden_field :question, value: @question.id %>
           <%= f.text_area :body, placeholder: "Add Comment" %>
           <%= show_errors(@comment, :body) %>
           <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>

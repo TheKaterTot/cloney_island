@@ -3,7 +3,6 @@ class Comment < ApplicationRecord
   belongs_to :commentable, :polymorphic => true
   validates :body, presence: true
 
-
   def source_question
     if commentable_type == "Question"
       commentable
@@ -29,9 +28,9 @@ class Comment < ApplicationRecord
 
   def self.populate_comment(comment_params, question, answer)
     if comment_params[:answer]
-      answer.comments.create(body: comment_params[:body])
+      answer.comments.build(body: comment_params[:body])
     else
-      question.comments.create(body: comment_params[:body])
+      question.comments.build(body: comment_params[:body])
     end
   end
 

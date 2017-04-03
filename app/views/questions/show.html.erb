@@ -45,7 +45,7 @@
           <%= f.hidden_field :question, value: params[:id] %>
           <%= f.text_area :body, placeholder: "Add Comment" %>
           <%= show_errors(@comment, :body) %>
-          <%= f.submit "Add Comment" %>
+          <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>
         <% end %>
     </div>
   </div>
@@ -85,7 +85,7 @@
                 <%= f.hidden_field :question, value: params[:id] %>
                 <%= f.text_area :body, placeholder: "Add Comment" %>
                 <%= show_errors(@comment, :body) %>
-                <%= f.submit "Add Comment" %>
+                <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>
               <% end %>
             </div>
           </div>
@@ -99,7 +99,7 @@
       <%= f.hidden_field :question, :value => params[:id] %>
       <%= f.text_area :body, placeholder: "Enter text" %>
       <%= show_errors(@answer, :body) %>
-      <%= f.submit "Submit" %>
+      <%= f.submit "Submit", class: "white-text waves-effect blue btn-small" %>
     <% end %>
   </div>
 </div>

@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:comments) }
     it { should have_many(:user_roles) }
     it { should have_many(:roles) }
+    it { should have_many(:upvotes) }
+    it { should have_many(:downvotes) }
   end
 
   context "validations" do

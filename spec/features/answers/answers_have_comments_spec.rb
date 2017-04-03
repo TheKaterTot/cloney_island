@@ -20,7 +20,7 @@ feature 'user views a question' do
 
     expect(page).to have_css('#answer-comments')
 
-    within all('#answer-comments').first do
+    within find('#answer-comments') do
       expect(page).to have_content(comment1.body)
       expect(page).to have_content(comment2.body)
     end

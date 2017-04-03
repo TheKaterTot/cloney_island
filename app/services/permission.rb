@@ -40,6 +40,8 @@ private
     return true if controller == "answers" && action.in?(%w(create destroy))
     return true if controller == "comments" && action.in?(%w(create destroy))
     return true if controller == "passwords" && action.in?(%w(edit update))
+    return true if controller == "upvotes" && action.in?(%w(create destroy))
+    return true if controller == "downvotes" && action.in?(%w(create destroy))
     basic_permissions
   end
 
@@ -47,8 +49,6 @@ private
     return true if controller == "users" && action.in?(%w(show edit update))
     return true if controller == "questions" && action.in?(%w(index show))
     return true if controller == "passwords" && action.in?(%w(edit update))
-    return true if controller == "upvotes" && action.in?(%w(create destroy))
-    return true if controller == "downvotes" && action.in?(%w(create destroy))
     basic_permissions
   end
 

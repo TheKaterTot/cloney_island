@@ -18,6 +18,24 @@ describe 'when a user visits a question show page' do
     expect(page).to_not have_content("Nice comment")
   end
 
+  it 'they can delete answer comments owned by them' do
+    user = Fabricate(:user, id: 1)
+    question = Fabricate(:question, user: user)
+    answer = Fabricate(:answer, user: user, question: question)
+    comment = answer.comments.create!(body: "Nice answer comment", user_id: user.id)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit question_path(question)
+
+    expect(page).to have_content("Nice answer comment")
+
+    within('#answer-comments') do
+      click_on "Delete Comment"
+    end
+    expect(answer.comments.count).to eq(0)
+    expect(page).to_not have_content("Nice answer comment")
+  end
+
   it 'non owner cannot delete comment' do
     user1 = Fabricate(:user, id: 1)
     user2 = Fabricate(:user, id: 2)

@@ -11,11 +11,11 @@
     </ul>
     <ul id="nav-mobile" class="right">
       <% if current_user.nil? %>
-        <li><a href="/login" class="black-text">Login</a></li>
         <li><a href="/users/new" class="waves-effect blue darken-1 waves-light btn">Sign Up</a></li>
+        <li><a href="/login" class="black-text">Login</a></li>
       <% else %>
-        <li><a href="/logout" data-method='delete' class="black-text">Logout</a></li>
         <li><a href="/users/<%= current_user.id %>" class="waves-effect blue darken-1 waves-light btn">Profile</a></li>
+        <li><a href="/logout" data-method='delete' class="black-text">Logout</a></li>
       <% end %>
     </ul>
   </div>

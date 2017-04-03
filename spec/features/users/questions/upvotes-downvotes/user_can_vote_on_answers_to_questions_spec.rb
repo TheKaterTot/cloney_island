@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'user views a question' do
   attr_reader :user, :question
 
-  scenario 'user can upvote and downvote the question' do
+  scenario 'user can upvote and downvote the answer to a question' do
     @user = Fabricate(:user, password: 'password', id:2)
     @user.roles.create(name: 'registered_user')
     category = Fabricate(:category)
@@ -28,7 +28,7 @@ feature 'user views a question' do
 
     expect(current_path).to eq(question_path(question))
 
-    expect(user.reputation_count(user)).to eq(1)
+    expect(user.reputation_count).to eq(1)
 
     expect(page).to_not have_css("#answer-upvote")
 
@@ -41,6 +41,6 @@ feature 'user views a question' do
 
     expect(page).to_not have_css("#answer-downvote")
 
-    expect(user.reputation_count(user)).to eq(-1)
+    expect(user.reputation_count).to eq(-1)
   end
 end

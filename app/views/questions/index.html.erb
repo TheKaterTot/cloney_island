@@ -3,6 +3,8 @@
   <table class="striped">
     <thead>
       <tr>
+        <th>Votes</th>
+        <th>Answers</th>
         <th>Title</th>
         <th>Creator</th>
         <th>Category</th>
@@ -13,6 +15,8 @@
      <tbody>
        <% @questions.each do |question| %>
        <tr>
+         <td></td>
+         <td><p class="center"><%= question.answers.count %></p></td>
          <td><a href=<%= question_path(question.id) %>><%=question.title%></a></td>
          <td><%=question.find_user%></td>
          <td><%= question.find_category %></td>

@@ -1,10 +1,11 @@
 <div id="answer-comments" class="blue-text">
   <% answer.comments.each do |comment| %>
+  <div class="card-panel">
     <div id="answer-comment-body" style= padding-left:50px;>
       <p><%= comment.body %></p>
       <div id='delete-comment-button' class='left card-action'>
-        <% if current_admin? %>
-          <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "waves-effect red darken-4 waves-light btn-small" %>
+        <% if current_admin? || current_users_comment?(comment)%>
+        <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
         <% end %>
       </div>
     </div>
@@ -31,6 +32,7 @@
         <% end %>
       </div>
     <% end %>
+    <br><br>
+  </div>
   <% end %>
 </div>
-<br><br>

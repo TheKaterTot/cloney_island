@@ -1,40 +1,14 @@
-<div id="answer-comments" class="blue-text">
-  <% answer.comments.each do |comment| %>
-    <% unless comment.body.nil? || !comment.persisted? %>
-    <div class="card-panel">
-      <div id="answer-comment-body" style= padding-left:50px;>
-        <p><%= comment.body %></p>
-        <div id='delete-comment-button' class='left card-action'>
-          <% if current_admin? || current_users_comment?(comment)%>
-          <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
-          <% end %>
-        </div>
+  <div class="card-panel">
+    <div id="answer-comment-body" style= padding-left:50px;>
+      <h5><%= comment.body %></h5>
+      <div id='delete-comment-button' class='left card-action'>
+        <% if current_admin? || current_users_comment?(comment)%>
+        <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
+        <% end %>
       </div>
+    </div>
     <div id="answer-comment-details" class="right card-action">
       <p>Author: <%= comment.find_user %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
     </div>
-    <% if current_user && !comment.upvotes.where(creator: current_user.id).exists? %>
-        <div id="answer-comment-upvote" >
-          <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
-            <%= f.hidden_field :comment_id, value: comment.id %>
-            <%= f.hidden_field :creator, value: current_user.id %>
-            <%= f.hidden_field :user_id, value: comment.user_id %>
-            <%= f.submit 'Upvote', class: 'upvote-submit' %>
-          <% end %>
-        </div>
-    <% end %>
-    <% if current_user && !comment.downvotes.where(creator: current_user.id).exists? %>
-      <div id="answer-comment-downvote" >
-        <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
-          <%= f.hidden_field :comment_id, value: comment.id %>
-          <%= f.hidden_field :creator, value: current_user.id %>
-          <%= f.hidden_field :user_id, value: comment.user_id %>
-          <%= f.submit 'Downvote', class: 'downvote-submit' %>
-        <% end %>
-      </div>
-    <% end %>
     <br><br>
   </div>
-    <% end %>
-  <% end %>
-</div>

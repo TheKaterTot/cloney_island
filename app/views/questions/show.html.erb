@@ -87,22 +87,26 @@
           <%= render 'votes/answer_vote_buttons', answer: answer %>
         </div>
 
-        <div class="answer-comments col s12 m10 right">
-          <% if !answer.comments.empty? %>
-            <%= render partial: "comments/answercomments", locals: { answer: answer } %>
-          <% end %>
+        <div class="row">
+          <div id="answer-comments" class="blue-text">
+            <% answer.comments.each do |comment| %>
+              <% unless comment.body.nil? || !comment.persisted? %>
+                  <div class="col s12 m10 right">
+                    <%= render 'comments/answercomments', comment: comment %>
+                  </div>
+                  <div class="col s12 m1 right">
+                    <%= render 'votes/answer_comments_vote_buttons', comment: comment %>
+                  </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-
-        <div class="col s12 m10 right">
-          <%= render 'comments/comment_on_answer', answer: answer %>
-        </div>
-
       <% end %>
     <% end %>
   </div>
 </div>
 
-<div id="answer-question" class="row right">
+<div id="answer-question" class="row">
   <h5>Answer this question</h5>
   <%= form_for [@question, @answer], url: { controller: "answers", action: "create" } do |f| %>
   <%= f.hidden_field :question, :value => @question.id %>

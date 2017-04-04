@@ -44,3 +44,8 @@ a.collection-item {
   padding: 10px;
   text-align: center;
 }
+
+.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
+    font-size: 3rem;
+    line-height: inherit;
+}

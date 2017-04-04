@@ -1,63 +1,21 @@
-<div class="row">
-  <div class="col s12 m11 right">
-    <% @question.comments.each do |comment| %>
-      <% unless comment.body.nil? || !comment.persisted? %>
-          <div class="card white">
-            <div class="card-content black-text">
-              <div class="blue-text" id="question-comment-body"  style= padding-left:50px;>
-                <h4><%= comment.body %></h4>
-              </div>
-              <br>
-              <div id="question-comment-details" class="right card-action">
-                <p>Author: <%= comment.find_user %> Updated: <%= comment.update_date %></p><br>
-              </div>
-              <br><br>
-            </div>
-            <div class="card-action">
-              <div style="display:inline-block; vertical-align: middle;">
-                <div id='delete-comment-button' class='left'>
-                  <% if current_admin? || current_users_comment?(comment)%>
-                    <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-
-  <div class="col s12 m1 left">
+  <div class="card white">
     <div class="card-content black-text">
-      <% if current_user && !@question.upvotes.where(creator: current_user.id).exists? %>
-      <div id="question-upvote" >
-        <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
-          <%= f.hidden_field :question_id, value: @question.id %>
-          <%= f.hidden_field :creator, value: current_user.id %>
-          <%= f.hidden_field :user_id, value: @question.user_id %>
-          <%= button_tag( class: "left black-text waves-effect btn-flat") do %>
-              <i class="material-icons center">keyboard_arrow_up</i>
-          <% end %>
-        <% end %>
+      <div class="blue-text" id="question-comment-body"  style= padding-left:50px;>
+        <h4><%= comment.body %></h4>
       </div>
-      <% else %>
-        <button class="btn-flat waves-effect grey disabled center" ><i class="material-icons">keyboard_arrow_up</i></button>
-      <% end %>
-        <h4 class="center">0</h4>
-      <% if current_user && !@question.downvotes.where(creator: current_user.id).exists? %>
-      <div id="question-downvote" >
-        <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
-          <%= f.hidden_field :question_id, value: @question.id %>
-          <%= f.hidden_field :creator, value: current_user.id %>
-          <%= f.hidden_field :user_id, value: @question.user_id %>
-          <%= button_tag( class: "black-text btn-flat") do %>
-              <i class="large material-icons center">keyboard_arrow_down</i>
-          <% end %>
-        <% end %>
+      <br>
+      <div id="question-comment-details" class="right card-action">
+        <p>Author: <%= comment.find_user %> Updated: <%= comment.update_date %></p><br>
       </div>
-      <% else %>
-        <button class="btn-flat black disabled center" ><i class="material-icons">keyboard_arrow_down</i></button>
-      <% end %>
+      <br><br>
+    </div>
+    <div class="card-action">
+      <div style="display:inline-block; vertical-align: middle;">
+        <div id='delete-comment-button' class='left'>
+          <% if current_admin? || current_users_comment?(comment)%>
+            <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>

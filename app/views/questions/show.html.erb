@@ -45,59 +45,34 @@
     </div>
   </div>
   <div class="col s12 m1 left">
-      <div class="card-content black-text">
-        <% if current_user && !@question.upvotes.where(creator: current_user.id).exists? %>
-        <div id="question-upvote" >
-          <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
-            <%= f.hidden_field :question_id, value: @question.id %>
-            <%= f.hidden_field :creator, value: current_user.id %>
-            <%= f.hidden_field :user_id, value: @question.user_id %>
-            <%= button_tag( class: "left black-text waves-effect btn-flat") do %>
-                <i class="material-icons center">keyboard_arrow_up</i>
-            <% end %>
-          <% end %>
-        </div>
-        <% else %>
-          <button class="btn-flat waves-effect grey disabled center" ><i class="material-icons">keyboard_arrow_up</i></button>
-        <% end %>
-          <h4 class="center">0</h4>
-        <% if current_user && !@question.downvotes.where(creator: current_user.id).exists? %>
-        <div id="question-downvote" >
-          <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
-            <%= f.hidden_field :question_id, value: @question.id %>
-            <%= f.hidden_field :creator, value: current_user.id %>
-            <%= f.hidden_field :user_id, value: @question.user_id %>
-            <%= button_tag( class: "black-text btn-flat") do %>
-                <i class="large material-icons center">keyboard_arrow_down</i>
-            <% end %>
-          <% end %>
-        </div>
-        <% else %>
-          <button class="btn-flat black disabled center" ><i class="material-icons">keyboard_arrow_down</i></button>
-        <% end %>
-      </div>
+    <%= render 'votes/question_vote_buttons' %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col s12 m11 right">
+  <div class="question-comments">
     <% if @question.comments.check_comments %>
-      <%= render 'comments/questioncomments' %>
-    <% end %>
-    <div class="row">
-      <div class="col s12 m11 right">
-        <%= form_for [@question, @comment], url: { controller: "comments", action: "create" } do |f| %>
-          <%= f.hidden_field :question, value: @question.id %>
-          <%= f.text_area :body, placeholder: "Add Comment" %>
-          <%= show_errors(@comment, :body) %>
-          <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>
-        <% end %>
+      <div class="col s12 m10 right">
+        <% @question.comments.each do |comment| %>
+          <% unless comment.body.nil? || !comment.persisted? %>
+
+            <%= render 'comments/questioncomments', comment: comment %>
       </div>
-    </div>
+            <div class="col s12 m1 left">
+              <%= render 'votes/question_comment_vote_buttons', comment: comment %>
+            </div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
+<div class="row">
+  <%= render 'comments/comment_on_question' %>
+</div>
+
 <h4><%= @question.answer_count %> Answers</h4>
+
 <div class="row">
   <div class="question-answers">
     <% @question.answers.each do |answer| %>
@@ -141,21 +116,11 @@
                 <% end %>
               </div>
               <% end %>
-
-            <br><br><br><br>
+            <br><br>
             <% if !answer.comments.empty? %>
               <%= render partial: "comments/answercomments", locals: { answer: answer } %>
             <% end %>
-
-            <div class="comment-on-answer">
-              <%= form_for [@answer, @comment], url: { controller: "comments", action: "create" } do |f| %>
-                <%= f.hidden_field :answer, value: answer.id %>
-                <%= f.hidden_field :question, value: params[:id] %>
-                <%= f.text_area :body, placeholder: "Add Comment" %>
-                <%= show_errors(@comment, :body) %>
-                <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>
-              <% end %>
-            </div>
+            <%= render 'comments/comment_on_answer', answer: answer %>
           </div>
         </div>
       <% end %>

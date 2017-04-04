@@ -1,28 +1,65 @@
 <h1 class="questions_header">All Questions</h1>
 
-  <table class="striped">
-    <thead>
-      <tr>
-        <th>Votes</th>
-        <th>Answers</th>
-        <th>Title</th>
-        <th>Creator</th>
-        <th>Category</th>
-        <th>Updated_at</th>
-      </tr>
-     </thead>
+<div class="row">
+  <div class="col s12 m4 l3">
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card white">
+          <div class="card-content black-text">
+            <div class="categories">
+              <span class="card-title">Categories</span>
+              <% @presenter.all_categories.each do |category| %>
+              <%= link_to "#{category.name}", questions_path(:category => category.id)%>
+              <br>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-     <tbody>
-       <% @questions.each do |question| %>
-       <tr>
-         <td></td>
-         <td><p class="center"><%= question.answers.count %></p></td>
-         <td><a href=<%= question_path(question.id) %>><%=question.title%></a></td>
-         <td><%=question.find_user%></td>
-         <td><%= question.find_category %></td>
-         <td><%=question.updated_at.strftime("%D at %r")%></td>
-       </tr>
-       <% end %>
-     </tbody>
-   </table>
+  <div class="col s12 m8 l9">
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card white">
+          <div class="card-content black-text">
+            <div class="recent-activity">
+              <% if params[:category].nil? %>
+              <% else %>
+                <span class="card-title">Questions by Category: <%=@presenter.category_name(params[:category]) %> </span>
+              <% end %>
+              <table class="striped">
+                <thead>
+                  <tr>
+                    <th>Votes</th>
+                    <th>Answers</th>
+                    <th>Title</th>
+                    <th>Creator</th>
+                    <th>Category</th>
+                    <th>Updated_at</th>
+                  </tr>
+                 </thead>
+
+                 <tbody>
+                   <% @presenter.show_all_questions(params[:category]).each do |question| %>
+                   <tr>
+                     <td></td>
+                     <td><p class="center"><%= question.answers.count %></p></td>
+                     <td><a href=<%= question_path(question.id) %>><%=question.title%></a></td>
+                     <td><%=question.find_user%></td>
+                     <td><%= question.find_category %></td>
+                     <td><%=question.updated_at.strftime("%D at %r")%></td>
+                   </tr>
+                   <% end %>
+                 </tbody>
+               </table>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
    <div class="center"><%= paginate @questions %></div>

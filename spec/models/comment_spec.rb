@@ -126,7 +126,7 @@ RSpec.describe Comment, type: :model do
 
       expect(comment.upvotes.count).to be(3)
 
-      comment.current_user_upvote_correction(comment, user_2.id)
+      comment.current_user_upvote_correction(user_2.id)
 
       expect(comment.upvotes.count).to be(2)
     end
@@ -150,7 +150,7 @@ RSpec.describe Comment, type: :model do
 
       expect(comment.downvotes.count).to be(3)
 
-      comment.current_user_downvote_correction(comment, user_2.id)
+      comment.current_user_downvote_correction(user_2.id)
 
       expect(comment.downvotes.count).to be(2)
     end

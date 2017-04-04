@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :user
   belongs_to :category
+  belongs_to :best_answer, class_name: 'Answer', required: false
   has_many :answers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   validates :title, :body, presence: true
@@ -24,15 +25,23 @@ class Question < ApplicationRecord
     answers.count
   end
 
-  def current_user_upvote_correction(question, creator_id)
-    if question.upvotes.where(creator: creator_id).exists?
-      question.upvotes.where(creator:creator_id).destroy_all
+  def current_user_upvote_correction(creator_id)
+    if upvotes.where(creator: creator_id).exists?
+      upvotes.where(creator:creator_id).destroy_all
     end
   end
 
-  def current_user_downvote_correction(question, creator_id)
-    if question.downvotes.where(creator: creator_id).exists?
-      question.downvotes.where(creator:creator_id).destroy_all
+  def current_user_downvote_correction(creator_id)
+    if downvotes.where(creator: creator_id).exists?
+      downvotes.where(creator:creator_id).destroy_all
+    end
+  end
+
+  def sort_by_best_answer
+    if best_answer
+      [best_answer] + answers.where.not(id: best_answer.id).to_a
+    else
+      answers
     end
   end
 end

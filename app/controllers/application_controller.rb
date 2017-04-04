@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
                 :current_users_comment?,
                 :current_users_answer?,
                 :update_user_reputation
+                :display_block_button?,
+                :display_unblock_button?
 
   before_action :authorize!
 
@@ -53,5 +55,14 @@ class ApplicationController < ActionController::Base
   def update_user_reputation(user_id)
     user = User.find(user_id)
     user.update_attributes!(reputation: user.reputation_count)
+
+  def display_block_button?(question)
+    current_admin? && !question.user.blocked_user? &&
+     !current_users_question?(@question)
+  end
+
+  def display_unblock_button?(question)
+    current_admin? && question.user.blocked_user? &&
+     !current_users_question?(@question)
   end
 end

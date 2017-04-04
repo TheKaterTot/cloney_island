@@ -24,6 +24,7 @@
                 <% if current_users_question?(@question) %>
                     <%= button_to "Edit Question", edit_question_path(@question), method: :get, class: "white-text waves-effect blue btn-small left" %>
                 <% end %>
+          </div>
           <div id="delete-question" class='left card-action'>
               <% if current_users_question?(@question)%>
                 <%= button_to "Delete Question", question_path(@question), method: :delete, class: "white-text waves-effect red darken-4 btn-small left" %>
@@ -37,23 +38,30 @@
               <%= f.hidden_field :question_id, value: @question.id %>
               <%= f.hidden_field :creator, value: current_user.id %>
               <%= f.hidden_field :user_id, value: @question.user_id %>
-              <%= f.submit 'Upvote', class: 'upvote-submit' %>
+              <%= button_tag( class: "black-text waves-effect btn-flat") do %>
+                  <i class="material-icons left">keyboard_arrow_up</i>
+              <% end %>
             <% end %>
           </div>
+          <% else %>
+            <button class="btn-flat waves-effect grey disabled left" ><i class="material-icons">keyboard_arrow_up</i></button>
           <% end %>
-
+            <h4>0</h4>
           <% if current_user && !@question.downvotes.where(creator: current_user.id).exists? %>
           <div id="question-downvote" >
             <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
               <%= f.hidden_field :question_id, value: @question.id %>
               <%= f.hidden_field :creator, value: current_user.id %>
               <%= f.hidden_field :user_id, value: @question.user_id %>
-              <%= f.submit 'Downvote', class: 'downvote-submit' %>
+              <%= button_tag( class: "black-text waves-effect btn-flat") do %>
+                  <i class="material-icons left">keyboard_arrow_down</i>
+              <% end %>
             <% end %>
           </div>
+          <% else %>
+            <button class="btn-flat waves-effect grey disabled left" ><i class="material-icons">keyboard_arrow_down</i></button>
           <% end %>
 
-        </div>
       </span>
       <div id="question-details" class="right card-action">
         <p>Author: <%= @question.find_user %> Updated: <%= @question.updated_at.strftime("%D at %r") %></p><br>
@@ -143,6 +151,91 @@
       <%= f.text_area :body, placeholder: "Enter text" %>
       <%= show_errors(@answer, :body) %>
       <%= f.submit "Submit", class: "white-text waves-effect blue btn-small" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m11 right">
+    <div class="card white">
+      <div class="card-content black-text">
+        <div class="card-title" id="question-title">
+          <div class="divider"></div>
+          <h3><%= @question.title %><br></h3>
+          <div class="divider"></div>
+        </div>
+        <div id="question-body" >
+          <%= @question.body %>
+          <br><br>
+          <div id="question-details" class="right card-action">
+            <p>Author: <%= @question.find_user %> Updated: <%= @question.updated_at.strftime("%D at %r") %></p><br>
+          </div>
+          <br><br>
+        </div>
+      </div>
+      <div class="card-action">
+        <div style="display:inline-block; vertical-align: middle;">
+          <div class="left" id="edit-question">
+            <% if current_users_question?(@question) %>
+                <%= button_to "Edit Question", edit_question_path(@question), method: :get, class: "white-text waves-effect blue btn-small" %>
+            <% end %>
+          </div>
+          <div class="right" id="delete-question">
+              <% if current_users_question?(@question)%>
+                <%= button_to "Delete Question", question_path(@question), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
+              <% elsif current_admin? %>
+                <%= button_to "Delete Question", question_path(@question), method: :delete, class: "right red darken-4 btn-small" %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m1 left">
+      <div class="card-content black-text">
+        <% if current_user && !@question.upvotes.where(creator: current_user.id).exists? %>
+        <div id="question-upvote" >
+          <%= form_for [@upvote], url: {controller: "upvotes", action: "create"} do |f| %>
+            <%= f.hidden_field :question_id, value: @question.id %>
+            <%= f.hidden_field :creator, value: current_user.id %>
+            <%= f.hidden_field :user_id, value: @question.user_id %>
+            <%= button_tag( class: "left black-text waves-effect btn-flat") do %>
+                <i class="material-icons center">keyboard_arrow_up</i>
+            <% end %>
+          <% end %>
+        </div>
+        <% else %>
+          <button class="btn-flat waves-effect grey disabled center" ><i class="material-icons">keyboard_arrow_up</i></button>
+        <% end %>
+          <h4 class="center">0</h4>
+        <% if current_user && !@question.downvotes.where(creator: current_user.id).exists? %>
+        <div id="question-downvote" >
+          <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
+            <%= f.hidden_field :question_id, value: @question.id %>
+            <%= f.hidden_field :creator, value: current_user.id %>
+            <%= f.hidden_field :user_id, value: @question.user_id %>
+            <%= button_tag( class: "black-text btn-flat") do %>
+                <i class="large material-icons center">keyboard_arrow_down</i>
+            <% end %>
+          <% end %>
+        </div>
+        <% else %>
+          <button class="btn-flat black disabled center" ><i class="material-icons">keyboard_arrow_down</i></button>
+        <% end %>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m11 right">
+    <% if @question.comments.check_comments %>
+      <%= render 'comments/questioncomments' %>
+    <% end %>
+    <%= form_for [@question, @comment], url: { controller: "comments", action: "create" } do |f| %>
+      <%= f.hidden_field :question, value: @question.id %>
+      <%= f.text_area :body, placeholder: "Add Comment" %>
+      <%= show_errors(@comment, :body) %>
+      <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>
     <% end %>
   </div>
 </div>

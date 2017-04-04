@@ -42,12 +42,12 @@
                  </thead>
 
                  <tbody>
-                   <% @presenter.show_all_questions(params[:category]).each do |question| %>
+                   <% @questions.show_all_questions(params[:category]).each do |question| %>
                    <tr>
-                     <td></td>
+                     <td><p class="center"><%= question.net_votes %></p></td>
                      <td><p class="center"><%= question.answers.count %></p></td>
                      <td><a href=<%= question_path(question.id) %>><%=question.title%></a></td>
-                     <td><%=question.find_user%></td>
+                     <td><%= link_to question.find_user, user_path(question.find_user_object)%></td>
                      <td><%= question.find_category %></td>
                      <td><%=question.updated_at.strftime("%D at %r")%></td>
                    </tr>
@@ -62,4 +62,4 @@
   </div>
 </div>
 
-   <div class="center"><%= paginate @questions %></div>
+   <div class="center"><%= paginate @questions.show_all_questions(params[:category]) %></div>

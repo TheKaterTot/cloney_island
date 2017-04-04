@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :users do
         get "/by_reputation", to: "users_by_reputation#index"
+        get "/banned", to: "users_banned#index"
       end
 
       resources :users, only: [:show, :index] do

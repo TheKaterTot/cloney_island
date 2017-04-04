@@ -1,4 +1,7 @@
 class DownvotesController < ApplicationController
+  after_action only: [:create] do
+    update_user_reputation(params[:downvote][:user_id])
+  end
   def create
     if params[:downvote][:question_id]
       question = Question.find(params[:downvote][:question_id])

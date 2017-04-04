@@ -46,3 +46,9 @@ a.collection-item {
   padding: 10px;
   text-align: center;
 }
+
+#best-answer img {
+  height: 48px;
+  width:  48px;
+  display: inline;
+}

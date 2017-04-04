@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:phone) }
   end
 
-  describe '.comments_to_recent_activity' do
+  describe '#comments_to_recent_activity' do
     it 'returns 5 most recent comments to user activity' do
       user = Fabricate(:user)
       user2 = Fabricate(:user)
@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.admin?' do
+  describe '#admin?' do
     it 'returns true if the user has an admin role' do
       user = Fabricate(:user)
       user.roles.create(name: 'admin')
@@ -71,7 +71,7 @@ RSpec.describe User, type: :model do
       expect(user.admin?).to eq(false)
     end
   end
-  describe '.registered_user?' do
+  describe '#registered_user?' do
     it 'returns true if the user has an registered_user role' do
       user = Fabricate(:user)
       user.roles.create(name: 'registered_user')
@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".upvote_count" do
+  describe "#upvote_count" do
     it "returns the count of the existing upvotes for a user from a question" do
       user_1 = Fabricate(:user)
       user_2 = Fabricate(:user)
@@ -96,15 +96,15 @@ RSpec.describe User, type: :model do
 
       question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
 
-      upvote_1 = question.upvotes.create(creator: user_2.id, user_id: user_1.id)
-      upvote_2 = question.upvotes.create(creator: user_3.id, user_id: user_1.id)
-      upvote_3 = question.upvotes.create(creator: user_4.id, user_id: user_1.id)
+      question.upvotes.create(creator: user_2.id, user_id: user_1.id)
+      question.upvotes.create(creator: user_3.id, user_id: user_1.id)
+      question.upvotes.create(creator: user_4.id, user_id: user_1.id)
 
       expect(user_1.upvote_count).to eq(3)
     end
   end
 
-  describe ".downvote_count" do
+  describe "#downvote_count" do
     it "returns the count of the existing downvotes for a user from a question" do
       user_1 = Fabricate(:user)
       user_2 = Fabricate(:user)
@@ -114,30 +114,48 @@ RSpec.describe User, type: :model do
 
       question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
 
-      downvote_1 = question.downvotes.create(creator: user_2.id, user_id: user_1.id)
-      downvote_2 = question.downvotes.create(creator: user_3.id, user_id: user_1.id)
-      downvote_3 = question.downvotes.create(creator: user_4.id, user_id: user_1.id)
+      question.downvotes.create(creator: user_2.id, user_id: user_1.id)
+      question.downvotes.create(creator: user_3.id, user_id: user_1.id)
+      question.downvotes.create(creator: user_4.id, user_id: user_1.id)
 
       expect(user_1.downvote_count).to eq(3)
     end
   end
 
-  describe ".reputation_count" do
+  describe "#reputation_count" do
     it "returns the reputation count for a user from a question" do
       user_1 = Fabricate(:user)
       user_2 = Fabricate(:user)
       user_3 = Fabricate(:user)
       user_4 = Fabricate(:user)
+      answer_1 = Fabricate.build(:answer, user: user_1)
+      Fabricate(:question, answers: [answer_1], best_answer: answer_1)
 
       question = Fabricate(:question, title: "Why are we the best?", body: "Bless Up", user: user_1)
 
-      upvote_1 = question.upvotes.create(creator: user_2.id, user_id: user_1.id)
-      upvote_2 = question.upvotes.create(creator: user_3.id, user_id: user_1.id)
-      upvote_3 = question.upvotes.create(creator: user_4.id, user_id: user_1.id)
+      question.upvotes.create(creator: user_2.id, user_id: user_1.id)
+      question.upvotes.create(creator: user_3.id, user_id: user_1.id)
+      question.upvotes.create(creator: user_4.id, user_id: user_1.id)
 
-      downvote_1 = question.downvotes.create(creator: user_2.id, user_id: user_1.id)
+      question.downvotes.create(creator: user_2.id, user_id: user_1.id)
 
-      expect(user_1.reputation_count).to eq(2)
+      expect(user_1.reputation_count).to eq(3)
+    end
+  end
+
+  describe "#best_answer_count" do
+    let(:user) { Fabricate(:user) }
+
+    it "returns the number of best answers for a user" do
+      answer_1 = Fabricate.build(:answer, user: user)
+      answer_2 = Fabricate.build(:answer, user: user)
+      answer_3 = Fabricate.build(:answer, user: user)
+      Fabricate(:question, answers: [answer_1], best_answer: answer_1)
+      Fabricate(:question, answers: [answer_2], best_answer: answer_2)
+      Fabricate(:question, answers: [answer_3])
+
+
+      expect(user.best_answer_count).to eq(2)
     end
   end
 end

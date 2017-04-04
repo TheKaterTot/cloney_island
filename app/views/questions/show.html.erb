@@ -78,23 +78,29 @@
   <div class="question-answers">
     <% @question.answers.each do |answer| %>
       <% unless answer.body.nil? || !answer.persisted? %>
+
         <div class="col s12 m11 right">
           <%= render 'answers/question_answers', answer: answer %>
         </div>
+
         <div class="col s12 m1 left">
           <%= render 'votes/answer_vote_buttons', answer: answer %>
         </div>
-        <% if !answer.comments.empty? %>
-        <%= render partial: "comments/answercomments", locals: { answer: answer } %>
-        <%= render 'comments/comment_on_answer', answer: answer %>
-        <% end %>
+
+        <div class="answer-comments col s12 m10 right">
+          <% if !answer.comments.empty? %>
+            <%= render partial: "comments/answercomments", locals: { answer: answer } %>
+          <% end %>
+        </div>
+
+        <div class="col s12 m10 right">
+          <%= render 'comments/comment_on_answer', answer: answer %>
+        </div>
+
       <% end %>
     <% end %>
   </div>
 </div>
-
-
-
 
 <div id="answer-question" class="row right">
   <h5>Answer this question</h5>

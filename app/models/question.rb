@@ -36,4 +36,12 @@ class Question < ApplicationRecord
       downvotes.where(creator:creator_id).destroy_all
     end
   end
+
+  def sort_by_best_answer
+    if best_answer
+      [best_answer] + answers.where.not(id: best_answer.id).to_a
+    else
+      answers
+    end
+  end
 end

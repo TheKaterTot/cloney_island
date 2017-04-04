@@ -75,7 +75,7 @@
 <h4><%= @question.answer_count %> Answers</h4>
 <div class="row">
   <div class="question-answers">
-    <% @question.answers.each do |answer| %>
+    <% @question.sort_by_best_answer.each do |answer| %>
     <% unless answer.body.nil? || !answer.persisted? %>
       <div class="question-answer">
         <div class="col s12 m12">

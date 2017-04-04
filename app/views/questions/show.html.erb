@@ -87,6 +87,10 @@
           <%= render 'votes/answer_vote_buttons', answer: answer %>
         </div>
 
+        <div class="row comment-on-answer col s12 m10 right">
+          <%= render 'comments/comment_on_answer', answer: answer %>
+        </div>
+
         <div class="row">
           <div id="answer-comments" class="blue-text">
             <% answer.comments.each do |comment| %>

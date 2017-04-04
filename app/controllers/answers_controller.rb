@@ -17,6 +17,10 @@ class AnswersController < ApplicationController
     end
   end
 
+  def edit
+    @answer = Answer.find(params[:id])
+  end
+
   def destroy
     Answer.destroy(params[:id])
     redirect_to request.referrer

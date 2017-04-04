@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :downvotes, only: [:create, :destroy]
 
   resources :users
-  resources :answers, only: [:create, :destroy]
+  resources :answers, only: [:create, :destroy, :edit]
   resources :comments, only: [:create, :destroy]
   resources :user_permissions, only: [:update]
 end

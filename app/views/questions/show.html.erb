@@ -86,6 +86,11 @@
                 <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
                 <br>
               </div>
+               <div id='answer-edit-button' class='left card-action'>
+                <% if current_users_answer?(answer) %>
+                  <%= button_to "Edit Answer","/answers/#{answer.id}/edit", method: :get, params: { id: answer.id}, class: "white-text waves-effect blue darken-4 btn-small left"%></br>
+                <% end %>
+              </div>
               <div id='answer-delete-button' class='left card-action'>
                 <% if current_users_answer?(answer) %>
                   <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "white-text waves-effect red darken-4 btn-small left"%></br>

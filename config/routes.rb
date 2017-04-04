@@ -18,4 +18,12 @@ Rails.application.routes.draw do
   resources :answers, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]
   resources :user_permissions, only: [:update]
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:show] do
+      end
+    end
+  end
+
 end

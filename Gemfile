@@ -35,6 +35,7 @@ gem 'uuid'
 gem 'figaro'
 gem 'twilio-ruby'
 gem 'gravatar_image_tag'
+gem 'active_model_serializers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

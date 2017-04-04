@@ -6,6 +6,7 @@ feature 'admin show page' do
               :thing3,
               :good,
               :admin
+
   before(:each) do
     @thing1 = Fabricate(:user, reputation: -50, name: 'thing1')
     thing1.user_roles.delete_all
@@ -17,15 +18,17 @@ feature 'admin show page' do
       thing3.roles.create(name: 'blocked_user')
     @good   = Fabricate(:user, reputation: 200)
       good.roles.create(name: 'registered_user')
-    @admin = Fabricate(:user)
+    @admin = Fabricate(:user, name: "BigBob")
+      admin.user_roles.delete_all
       admin.roles.create(name: 'admin')
   end
+
   scenario 'admin has users to deactivate listed on the show page' do
     login(admin.name)
     visit user_path(admin)
 
     expect(page).to have_css('#users-to-deactivate')
- 
+
     within('#users-to-deactivate') do
       expect(page).to have_content('thing1')
       expect(page).to have_content('thing2')

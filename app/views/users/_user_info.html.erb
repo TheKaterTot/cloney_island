@@ -15,32 +15,36 @@
                 E-Mail:
               </td>
               <td>
-                <%= current_user.email %>
+                <%= @user.email %>
               </td>
             </tr>
             <tr>
-              <td>
-                Phone:
-              </td>
-              <td>
-                <%= current_user.phone %>
-              </td>
+              <% if current_user == @user %>
+                <td>
+                  Phone:
+                </td>
+                <td>
+                  <%= @user.phone %>
+                </td>
+              <% end %>
             </tr>
             <tr>
               <td>
                 Reputation:
               </td>
               <td id='user-street-rep'>
-                <%= current_user.reputation %>
+                <%= @user.reputation %>
               </td>
             </tr>
             <tr>
-              <td>
-                <%= link_to "Edit User Profile", edit_user_path(current_user), style: "color: white" %>
-              </td>
-              <td>
-                <%= link_to "Change Password", edit_password_path, style: "color: white" %>
-              </td>
+              <% if current_user == @user %>
+                <td>
+                  <%= link_to "Edit User Profile", edit_user_path(current_user), style: "color: white" %>
+                </td>
+                <td>
+                  <%= link_to "Change Password", edit_password_path, style: "color: white" %>
+                </td>
+              <% end %>
             </tr>
           </tbody>
         </table>
@@ -54,7 +58,7 @@
       <%= gravatar_image_tag @user.email, alt: @user.name, gravatar: { size: 200, default: "http://www.ulyces.co/wp-content/plugins/tia-author-image/default_user_icon.jpg" }, class: "user-pic" %>
       <hr>
         <div class="user-name" >
-          Name: <%= current_user.name %>
+          Name: <%= @user.name %>
         </div>
       </div>
     </div>

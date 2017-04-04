@@ -1,4 +1,7 @@
 class UpvotesController < ApplicationController
+  after_action only: [:create] do
+    update_user_reputation(params[:upvote][:user_id])
+  end
   def create
     if params[:upvote][:question_id]
       question = Question.find(params[:upvote][:question_id])

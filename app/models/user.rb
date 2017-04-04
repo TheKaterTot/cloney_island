@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :upvotes, dependent: :destroy
   has_many :downvotes, dependent: :destroy
 
-  validates :name, :email, :phone, presence: true
+  validates :name, :email, :phone, :reputation, presence: true
 
   def comments_to_recent_activity
     Comment.comments_to_user_activity(self.id)[0..4]
@@ -61,7 +61,13 @@ class User < ApplicationRecord
     answers.joins(:best_question).count
   end
 
+
   def self.by_reputation
     order(:reputation).reverse_order[0..9]
+  end
+  
+  def self.need_to_block
+    joins(:roles).where("roles.name != 'blocked_user'")
+    .where("users.reputation <= -10")
   end
 end

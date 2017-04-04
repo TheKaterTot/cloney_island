@@ -17,6 +17,10 @@ class Question < ApplicationRecord
     user.name
   end
 
+  def find_user_object
+    user
+  end
+
   def find_category
     category.name
   end
@@ -35,6 +39,26 @@ class Question < ApplicationRecord
     if downvotes.where(creator: creator_id).exists?
       downvotes.where(creator:creator_id).destroy_all
     end
+  end
+
+  def self.show_all_questions(category)
+    if category
+      where(category: Category.find(category))
+    else
+      order_by_update
+    end
+  end
+
+  def question_upvotes
+    upvotes.count
+  end
+
+  def question_downvotes
+    downvotes.count
+  end
+
+  def net_votes
+    question_upvotes - question_downvotes
   end
 
   def sort_by_best_answer

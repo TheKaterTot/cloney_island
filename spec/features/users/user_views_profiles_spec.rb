@@ -4,9 +4,9 @@ feature 'user profile' do
   attr_reader :user
   before(:each) do
     @user = Fabricate(:user)
-    @user.roles.create(name: 'registered_user')
   end
-  scenario 'user sees their account information' do
+
+  scenario 'user sees their own account information' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit user_path(user)
@@ -64,12 +64,13 @@ feature 'user profile' do
     question4 = Fabricate(:question)
     question5 = Fabricate(:question)
     question6 = Fabricate(:question)
-    answer1 = Fabricate(:answer, user: user, question: question1)
-    answer2 = Fabricate(:answer, user: user, question: question2)
-    answer3 = Fabricate(:answer, user: user, question: question3)
-    answer4 = Fabricate(:answer, user: user, question: question4)
-    answer5 = Fabricate(:answer, user: user, question: question5)
-    answer6 = Fabricate(:answer, user: user, question: question6)
+
+    Fabricate(:answer, user: user, question: question1)
+    Fabricate(:answer, user: user, question: question2)
+    Fabricate(:answer, user: user, question: question3)
+    Fabricate(:answer, user: user, question: question4)
+    Fabricate(:answer, user: user, question: question5)
+    Fabricate(:answer, user: user, question: question6)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -87,6 +88,7 @@ feature 'user profile' do
       expect(page).to have_link(question2.title, href: question_path(question2))
     end
   end
+
   scenario 'user sees the 5 most recent comments left on their work' do
     user2 = Fabricate(:user)
     question1 = Fabricate(:question, title: 'test', user: user)
@@ -110,5 +112,24 @@ feature 'user profile' do
       expect(page).to have_link(question1.title, href: question_path(question1))
       expect(page).to have_link(question1.title, href: question_path(question1))
     end
+  end
+
+  scenario "user visits another user's profile" do
+    user = Fabricate(:user)
+    user_2 = Fabricate(:user)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user)
+      .and_return(user)
+
+    visit user_path(user_2)
+
+    within('#user-info-table') do
+      expect(page).to have_content(user.email)
+      expect(page).to_not have_content(user.phone)
+      expect(page).to have_content('Reputation')
+      expect(page).to_not have_link("Edit Profile")
+    end
+
+
   end
 end

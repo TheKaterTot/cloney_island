@@ -27,7 +27,7 @@ feature 'users reputation' do
     end
     visit root_path
     visit user_path(user)
-byebug
+
     within('#user-street-rep') do
       expect(page).to have_content('1')
     end

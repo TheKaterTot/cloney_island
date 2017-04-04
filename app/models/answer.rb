@@ -1,6 +1,7 @@
 class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
+  has_one :best_question, class_name: "Question", inverse_of: :best_answer, foreign_key: :best_answer_id
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :upvotes, as: :upvoted, dependent: :destroy
   has_many :downvotes, as: :downvoted, dependent: :destroy

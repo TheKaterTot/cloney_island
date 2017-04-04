@@ -54,6 +54,10 @@ class User < ApplicationRecord
   end
 
   def reputation_count
-    upvote_count - downvote_count
+    upvote_count - downvote_count + best_answer_count
+  end
+
+  def best_answer_count
+    answers.joins(:best_question).count
   end
 end

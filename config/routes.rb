@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get '/password/edit', to: "passwords#edit", as: :edit_password
   post '/password/edit', to: "passwords#update"
 
-  resources :questions
+  resources :questions do
+    resources :best_answers, only: [:create]
+  end
 
   resources :upvotes, only: [:create, :destroy]
   resources :downvotes, only: [:create, :destroy]

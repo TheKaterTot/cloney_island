@@ -13,7 +13,7 @@ describe 'when a guest visits the questions page' do
     @second_question = Fabricate(:question, user:user, category:category, title:"Bohagon")
   end
 
-  it 'it should see a list of questions' do
+  it 'should see a list of questions' do
     visit questions_path
 
     within(".questions_header") do

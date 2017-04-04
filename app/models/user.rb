@@ -65,15 +65,13 @@ class User < ApplicationRecord
   def self.by_reputation
     order(:reputation).reverse_order[0..9]
   end
-  
+
   def self.need_to_block
     joins(:roles).where("roles.name != 'blocked_user'")
     .where("users.reputation <= -10")
   end
 
   def self.banned
-    # joins(:roles)
-    # .where("roles.name = 'blocked_user'")
     find_by_sql([
       "select u.id, u.name, u.email, u.reputation, r.name AS status
       from users u

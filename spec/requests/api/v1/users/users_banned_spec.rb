@@ -7,12 +7,14 @@ describe "banned_users API" do
     user_3 = User.create(name: "Bellatrix", email: 'bella@trix.com', phone: '2', password: 'bella', reputation: -100)
     user_4 = User.create(name: "Dolores Umbridge", email: 'dolores@umbridge.com', phone: '2', password: 'pureblood', reputation: -50)
     user_5 = User.create(name: "Scorpious Malfoy", email: 'scorpio@malfoy.com', phone: '2', password: 'malfoy', reputation: -10)
+    user_6 = User.create(name: "Harry Potter", email: 'harry@thechosenone.com', phone: '7', password: 'chosen', reputation: 1000)
 
     user_1.roles.create(name: 'blocked_user')
     user_2.roles.create(name: 'blocked_user')
     user_3.roles.create(name: 'blocked_user')
     user_4.roles.create(name: 'blocked_user')
     user_5.roles.create(name: 'blocked_user')
+    user_6.roles.create(name: 'registered_user')
 
     get '/api/v1/users/banned'
 
@@ -24,6 +26,7 @@ describe "banned_users API" do
     last_user   = users.last
 
     expect(users.count).to eq(5)
+    expect(users.count).to_not eq(6)
 
     expect(user).to have_key "name"
     expect(user).to have_key "email"
@@ -47,5 +50,7 @@ describe "banned_users API" do
     expect(last_user["reputation"]).to eq(-10)
     expect(last_user["reputation"]).to_not eq(3)
     expect(user["status"]).to eq("blocked_user")
+
+    expect(last_user["name"]).to_not eq("Harry Potter")
   end
 end

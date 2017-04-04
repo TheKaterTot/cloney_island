@@ -60,4 +60,8 @@ class User < ApplicationRecord
   def best_answer_count
     answers.joins(:best_question).count
   end
+
+  def self.by_reputation
+    order(:reputation).reverse_order[0..9]
+  end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "user API" do
   it "sends a single user" do
-    user = Fabricate(:user, name:"Jabrony", email: "Jabron@jabron.com", phone:"333-333-3333",reputation:3)
+    user = Fabricate(:user, id:1, name:"Jabrony", email: "Jabron@jabron.com", phone:"333-333-3333",reputation:3)
 
     get '/api/v1/users/1'
 

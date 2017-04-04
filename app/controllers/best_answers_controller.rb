@@ -5,8 +5,13 @@ class BestAnswersController < ApplicationController
   end
 
   def create
-    question.update_attributes(best_answer_params)
-    redirect_to question_path(question)
+    if question.update_attributes(best_answer_params)
+      flash[:success] = "You have a best answer!"
+      redirect_to question_path(question)
+    else
+      flash[:danger] = "Unsuccessful. Please try again."
+      redirect_to question_path(question)
+    end
   end
 
   private

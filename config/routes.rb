@@ -21,8 +21,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:show] do
+      namespace :users do
+        get "/by_reputation", to: "users_by_reputation#index"
       end
+
+      resources :users, only: [:show, :index] do
+      end
+
     end
   end
 

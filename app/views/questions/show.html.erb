@@ -80,12 +80,20 @@
       <div class="question-answer">
         <div class="col s12 m12">
           <div class="card-panel white">
+
+            <% if best_answer?(@question, answer) %>
+              <div id="best-answer">
+                <%= image_tag "check-icon.png" %>
+              </div>
+            <% end %>
+
             <span class="black-text">
               <%= answer.body %><br>
               <div id="answer-details" class="right card-action">
                 <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
                 <br>
               </div>
+
               <div id='answer-delete-button' class='left card-action'>
                 <% if current_users_answer?(answer) %>
                   <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "white-text waves-effect red darken-4 btn-small left"%></br>
@@ -94,6 +102,14 @@
                 <% end %>
               </div>
             </span>
+              <% if current_users_question?(@question) && !best_answer?(@question, answer) %>
+                <div class="best-answer-button">
+                  <%= form_tag question_best_answers_path(@question), method: :post do %>
+                    <%= hidden_field_tag :best_answer_id, answer.id %>
+                    <%= submit_tag "Select As Best Answer" %>
+                  <% end %>
+                </div>
+              <% end %>
 
               <% if current_user && !answer.upvotes.where(creator: current_user.id).exists? %>
               <div id="answer-upvote" >

@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :user
   belongs_to :category
+  belongs_to :best_answer, class_name: 'Answer', required: false
   has_many :answers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   validates :title, :body, presence: true

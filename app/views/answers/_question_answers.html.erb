@@ -1,0 +1,23 @@
+<div class="card white black-text">
+  <div class="card-content">
+    <div class="answer-body">
+      <h4><%= answer.body %><br></h4>
+    </div>
+    <br>
+    <div id="answer-details" class="right card-action">
+      <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
+    </div>
+      <br><br>
+  </div>
+  <div class="card-action">
+    <div style="display:inline-block; vertical-align: middle;">
+      <div id='answer-delete-button' class='left'>
+        <% if current_users_answer?(answer) %>
+        <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "white-text waves-effect red darken-4 btn-small left"%></br>
+        <% elsif current_admin? %>
+        <%= button_to "Delete Answer","/answers/#{answer.id}", method: :delete, params: { id: answer.id}, class: "white-text waves-effect red darken-4 btn-small left"%></br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

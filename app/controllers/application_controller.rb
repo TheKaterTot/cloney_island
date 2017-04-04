@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
                 :current_users_question?,
                 :current_users_comment?,
                 :current_users_answer?,
+                :update_user_reputation,
                 :display_block_button?,
                 :display_unblock_button?
 
@@ -49,6 +50,11 @@ class ApplicationController < ActionController::Base
 
   def current_users_answer?(answer)
     current_user && current_user.id == answer.user_id
+  end
+
+  def update_user_reputation(user_id)
+    user = User.find(user_id)
+    user.update_attributes(reputation: user.reputation_count)
   end
 
   def display_block_button?(question)

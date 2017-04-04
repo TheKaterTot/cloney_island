@@ -1,5 +1,8 @@
 class BestAnswersController < ApplicationController
   before_action :require_owner
+  after_action only: [:create] do
+    update_user_reputation(question.user_id)
+  end
 
   def create
     question.update_attributes(best_answer_params)

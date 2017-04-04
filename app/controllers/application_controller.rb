@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
 
   def update_user_reputation(user_id)
     user = User.find(user_id)
-    user.update_attributes!(reputation: user.reputation_count)
+    user.update_attributes(reputation: user.reputation_count)
   end
 
   def display_block_button?(question)

@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def self.need_to_block
-    joins(:roles).where("roles.name = 'registered_user'")
+    joins(:roles).where("roles.name != 'blocked_user'")
     .where("users.reputation <= -10")
   end
 end

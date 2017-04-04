@@ -24,7 +24,7 @@
       <div class="col s12 m12">
         <div class="card white">
           <div class="card-content black-text">
-            <div class="recent-activity">
+            <div class="questions-by-category">
               <% if params[:category].nil? %>
               <% else %>
                 <span class="card-title">Questions by Category: <%=@presenter.category_name(params[:category]) %> </span>
@@ -62,4 +62,4 @@
   </div>
 </div>
 
-   <div class="center"><%= paginate @questions.show_all_questions(params[:category]) %></div>
+<div class="center"><%= paginate @questions.show_all_questions(params[:category]) %></div>

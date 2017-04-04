@@ -62,5 +62,6 @@ private
   def basic_permissions
     return true if controller == "sessions"
     return true if controller == "home"
+    return true if controller == "api/v1/users" && action.in?(%w(show))
   end
 end

@@ -21,8 +21,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#question-upvote") do
-      expect(page).to have_button("Upvote")
-      click_on "Upvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -42,8 +41,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#answer-upvote") do
-      expect(page).to have_button("Upvote")
-      click_on "Upvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -64,8 +62,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#question-comment-upvote") do
-      expect(page).to have_button("Upvote")
-      click_on "Upvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -85,8 +82,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#answer-comment-upvote") do
-      expect(page).to have_button("Upvote")
-      click_on "Upvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -127,8 +123,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#question-downvote") do
-      expect(page).to have_button("Downvote")
-      click_on "Downvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -148,8 +143,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#answer-downvote") do
-      expect(page).to have_button("Downvote")
-      click_on "Downvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -170,8 +164,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#question-comment-downvote") do
-      expect(page).to have_button("Downvote")
-      click_on "Downvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)
@@ -191,8 +184,7 @@ feature 'users reputation' do
     expect(user.reputation).to eq(0)
 
     within("#answer-comment-downvote") do
-      expect(page).to have_button("Downvote")
-      click_on "Downvote"
+      find("[name=button]").click
     end
 
     visit user_path(user)

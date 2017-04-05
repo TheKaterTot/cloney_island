@@ -26,7 +26,7 @@ feature 'user is deactivated' do
       expect(page).to have_content(question.body)
     end
     expect(current_path).to eq(question_path(question))
-    within(".question-answers .question-answer:nth-child(1)") do
+    within(".question-answers") do
       expect(page).to have_content(answer.body)
     end
   end
@@ -130,7 +130,7 @@ feature 'user is deactivated' do
 
     visit question_path(question)
 
-    within(".question") do
+    within(".comment-on-question") do
       fill_in "Add Comment", with: "This is an awesome comment"
       click_on "Add Comment"
     end
@@ -178,5 +178,5 @@ feature 'user is deactivated' do
         expect(page).to have_content("Your account priveleges have been limited due to your activity")
       end
     end
-    
+
 end

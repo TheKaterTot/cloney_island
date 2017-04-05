@@ -20,10 +20,6 @@ feature "user can choose an answer as the best answer" do
 
     expect(current_path).to eq(question_path(question))
 
-    within("#best-answer") do
-      expect(page).to have_css("img")
-    end
-
     expect(all("#best-answer").count).to eq(1)
   end
 end

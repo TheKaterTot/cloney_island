@@ -1,21 +1,21 @@
-  <div class="card white">
-    <div class="card-content black-text">
-      <div class="blue-text" id="question-comment-body"  style= padding-left:50px;>
-        <h5><%= comment.body %></h5>
-      </div>
-      <br>
-      <div id="question-comment-details" class="right card-action">
-        <p>Author: <%= link_to comment.find_user, user_path("#{comment.find_user_id}") %> Updated: <%= comment.update_date %></p><br>
-      </div>
-      <br><br>
+<div class="card white">
+  <div class="card-content black-text">
+    <div class="blue-text" id="question-comment-body"  style= padding-left:50px;>
+      <h5><%= comment.body %></h5>
     </div>
-    <div class="card-action">
-      <div style="display:inline-block; vertical-align: middle;">
-        <div id='delete-comment-button' class='left'>
-          <% if current_admin? || current_users_comment?(comment)%>
-            <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
-          <% end %>
-        </div>
+    <br>
+    <div id="question-comment-details" class="right card-action">
+      <p>Author: <%= link_to comment.find_user, user_path("#{comment.find_user_id}") %> Updated: <%= comment.update_date %></p><br>
+    </div>
+    <br><br>
+  </div>
+  <div class="card-action">
+    <div style="display:inline-block; vertical-align: middle;">
+      <div id='delete-comment-button' class='left'>
+        <% if current_admin? || current_users_comment?(comment)%>
+          <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
+        <% end %>
       </div>
     </div>
   </div>
+</div>

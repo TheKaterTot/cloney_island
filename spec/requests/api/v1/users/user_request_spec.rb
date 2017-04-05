@@ -12,12 +12,10 @@ describe "user API" do
 
     expect(user).to have_key "name"
     expect(user).to have_key "email"
-    expect(user).to have_key "phone"
     expect(user).to have_key "reputation"
 
     expect(user["name"]).to eq("Jabrony")
     expect(user["email"]).to eq("Jabron@jabron.com")
-    expect(user["phone"]).to eq("333-333-3333")
     expect(user["reputation"]).to eq(3)
     expect(user["reputation"]).to_not eq(2)
   end

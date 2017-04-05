@@ -69,4 +69,14 @@ class User < ApplicationRecord
     joins(:roles).where("roles.name != 'blocked_user'")
     .where("users.reputation <= -10")
   end
+
+  def self.banned
+    find_by_sql([
+      "select u.id, u.name, u.email, u.reputation, r.name AS status
+      from users u
+      inner join user_roles ur on u.id = ur.user_id
+      inner join roles r on ur.role_id = r.id
+      where r.name = 'blocked_user';"
+      ])
+  end
 end

@@ -20,10 +20,6 @@ class Comment < ApplicationRecord
     .order(:updated_at)
   end
 
-  def find_user
-    return user.name unless user.nil?
-  end
-
   def update_date
     return updated_at.strftime("%D at %r") unless created_at.nil?
   end
@@ -58,9 +54,5 @@ class Comment < ApplicationRecord
 
   def comment_reputation
     upvotes.count - downvotes.count
-  end
-
-  def find_user_id
-    user.id
   end
 end

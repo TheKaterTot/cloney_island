@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      UserMailer.welcome_email(@user).deliver_now
       UserRole.create(user_id:@user.id, role_id:1)
       session[:user_id] = @user.id
       redirect_to user_path(@user)

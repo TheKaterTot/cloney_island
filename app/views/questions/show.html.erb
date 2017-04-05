@@ -1,9 +1,9 @@
 <h2>Question</h2>
-<% if current_admin? && @question.user.registered_user? %>
+<% if display_block_button?(@question) %>
   <div id='deactivate-user-button' class='right card-action'>
     <%= button_to "Deactivate User", user_permission_path(@question.user), method: :put, class: "waves-effect red darken-1 waves-light btn right" %>
   </div>
-<% elsif current_admin? && @question.user.blocked_user? %>
+<% elsif display_unblock_button?(@question) %>
   <div id='reactivate-user-button' class='right card-action'>
     <%= button_to "Reactivate User", user_permission_path(@question.user), method: :put, class: "waves-effect red darken-1 waves-light btn right" %>
   </div>
@@ -76,7 +76,7 @@
 
 <div class="row">
   <div class="question-answers">
-    <% @question.answers.each do |answer| %>
+    <% @question.sort_by_best_answer.each do |answer| %>
       <% unless answer.body.nil? || !answer.persisted? %>
 
         <div class="col s12 m11 right">
@@ -85,6 +85,14 @@
 
         <div class="col s12 m1 left">
           <%= render 'votes/answer_vote_buttons', answer: answer %>
+        </div>
+
+        <div class="col s12 m1 best-answer-badge">
+          <% if best_answer?(@question, answer) %>
+            <div id="best-answer">
+              <i class="material-icons icon-green right">check</i>
+            </div>
+          <% end %>
         </div>
 
         <div class="row comment-on-answer col s12 m10 right">

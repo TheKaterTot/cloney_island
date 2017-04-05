@@ -11,3 +11,6 @@
   <%= render 'users/user-show-questions' %>
   <%= render 'users/user-show-answers' %>
   <%= render 'users/user-show-comments' %>
+  <% if current_admin? %>
+    <%= render 'admin/users-to-deactivate' %>
+  <% end %>

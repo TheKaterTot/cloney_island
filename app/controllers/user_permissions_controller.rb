@@ -2,7 +2,7 @@ class UserPermissionsController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if user.registered_user?
+    if !user.blocked_user?
       user.deactivate
     else
       user.reactivate

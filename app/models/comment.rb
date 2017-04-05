@@ -44,15 +44,15 @@ class Comment < ApplicationRecord
     end
   end
 
-  def current_user_upvote_correction(comment, creator_id)
-    if comment.upvotes.where(creator: creator_id).exists?
-      comment.upvotes.where(creator:creator_id).destroy_all
+  def current_user_upvote_correction(creator_id)
+    if upvotes.where(creator: creator_id).exists?
+      upvotes.where(creator:creator_id).destroy_all
     end
   end
 
-  def current_user_downvote_correction(comment, creator_id)
-    if comment.downvotes.where(creator: creator_id).exists?
-      comment.downvotes.where(creator:creator_id).destroy_all
+  def current_user_downvote_correction(creator_id)
+    if downvotes.where(creator: creator_id).exists?
+      downvotes.where(creator:creator_id).destroy_all
     end
   end
 

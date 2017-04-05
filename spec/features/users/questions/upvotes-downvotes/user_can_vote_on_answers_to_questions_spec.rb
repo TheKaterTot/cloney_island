@@ -24,7 +24,6 @@ feature 'user views a question' do
 
     within("#answer-upvote") do
       find("[name=button]").click
-      # click_button("Upvote")
     end
 
     expect(current_path).to eq(question_path(question))

@@ -42,6 +42,7 @@ private
     return true if controller == "passwords" && action.in?(%w(edit update))
     return true if controller == "upvotes" && action.in?(%w(create destroy))
     return true if controller == "downvotes" && action.in?(%w(create destroy))
+    return true if controller == "best_answers" && action.in?(%w(create))
     basic_permissions
   end
 
@@ -61,5 +62,8 @@ private
   def basic_permissions
     return true if controller == "sessions"
     return true if controller == "home"
+    return true if controller == "api/v1/users" && action.in?(%w(show))
+    return true if controller == "api/v1/users/users_by_reputation" && action.in?(%w(index))
+    return true if controller == "api/v1/users/users_banned" && action.in?(%w(index))
   end
 end

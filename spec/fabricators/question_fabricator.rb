@@ -3,4 +3,5 @@ Fabricator(:question) do
   body 'How do I make burgers?'
   category
   user
+  best_answer { nil }
 end

@@ -1,16 +1,19 @@
 class DownvotesController < ApplicationController
+  after_action only: [:create] do
+    update_user_reputation(params[:downvote][:user_id])
+  end
   def create
     if params[:downvote][:question_id]
       question = Question.find(params[:downvote][:question_id])
-      question.current_user_upvote_correction(question, downvote_params[:creator])
+      question.current_user_upvote_correction(downvote_params[:creator])
       downvote = question.downvotes.new(downvote_params)
     elsif params[:downvote][:answer_id]
       answer = Answer.find(params[:downvote][:answer_id])
-      answer.current_user_upvote_correction(answer, downvote_params[:creator])
+      answer.current_user_upvote_correction(downvote_params[:creator])
       downvote = answer.downvotes.new(downvote_params)
     elsif params[:downvote][:comment_id]
       comment = Comment.find(params[:downvote][:comment_id])
-      comment.current_user_upvote_correction(comment, downvote_params[:creator])
+      comment.current_user_upvote_correction(downvote_params[:creator])
       downvote = comment.downvotes.new(downvote_params)
     end
     if downvote.save

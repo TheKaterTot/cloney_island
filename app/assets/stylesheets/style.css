@@ -45,7 +45,19 @@ a.collection-item {
   text-align: center;
 }
 
+
 .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
     font-size: 3rem;
     line-height: inherit;
+}
+
+#best-answer img {
+  height: 48px;
+  width:  48px;
+  display: inline;
+}
+
+i.icon-green {
+  font-size: 2.5rem;
+  color: green;
 }

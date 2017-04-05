@@ -12,6 +12,14 @@ class Presenter
     end
   end
 
+  def show_all_questions(category)
+    if category
+      Question.where(category: Category.find(category))
+    else
+      Question.order_by_update
+    end
+  end
+
   def category_name(id)
     Category.find(id).name
   end

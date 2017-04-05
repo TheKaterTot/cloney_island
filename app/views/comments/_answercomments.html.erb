@@ -1,10 +1,10 @@
 <div class="card white black-text">
   <div class="card-content">
-    <div class="comment-body blue-text">
+    <div id="answer-comment-body" class="answer-comment-body blue-text">
       <h5><%= comment.body %><br></h5>
     </div>
     <br>
-    <div id="answer-details" class="right card-action">
+    <div id="answer-comment-details" class="right card-action">
       <p>Author: <%= link_to comment.find_user, user_path("#{comment.user_id}") %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
     </div>
       <br><br>

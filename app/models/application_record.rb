@@ -8,4 +8,8 @@ class ApplicationRecord < ActiveRecord::Base
   def find_user_id
     user.id
   end
+
+  def find_user
+    user.name unless user.nil?
+  end
 end

@@ -20,10 +20,6 @@ class Comment < ApplicationRecord
     .order(:updated_at)
   end
 
-  def find_user
-    return user.name unless user.nil?
-  end
-
   def update_date
     return updated_at.strftime("%D at %r") unless created_at.nil?
   end

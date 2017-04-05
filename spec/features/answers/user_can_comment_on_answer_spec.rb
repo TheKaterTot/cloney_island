@@ -9,7 +9,7 @@ describe 'when a user visits a question show page' do
 
     visit question_path(question)
 
-    within('.comment-on-answer') do
+    within all('.comment-on-answer')[0] do
       fill_in 'Add Comment', with: "Awesome answer comment!"
       click_on 'Add Comment'
     end
@@ -36,7 +36,7 @@ describe 'when a user visits a question show page' do
 
     visit question_path(question)
 
-    within('.comment-on-answer') do
+    within all('.comment-on-answer')[0] do
       click_on 'Add Comment'
     end
 

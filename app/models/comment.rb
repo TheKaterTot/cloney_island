@@ -55,4 +55,8 @@ class Comment < ApplicationRecord
       downvotes.where(creator:creator_id).destroy_all
     end
   end
+
+  def comment_reputation
+    upvotes.count - downvotes.count
+  end
 end

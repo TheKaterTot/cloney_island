@@ -18,7 +18,7 @@ feature "user answers question" do
     click_button("Submit")
 
     expect(current_path).to eq(question_path(question))
-    within(".question-answers .question-answer:nth-child(1)") do
+    within(".question-answers") do
       expect(page).to have_content("Dumb question")
     end
   end

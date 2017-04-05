@@ -30,4 +30,8 @@ class Answer < ApplicationRecord
       downvotes.where(creator:creator_id).destroy_all
     end
   end
+
+  def answer_reputation
+    upvotes.count - downvotes.count
+  end
 end

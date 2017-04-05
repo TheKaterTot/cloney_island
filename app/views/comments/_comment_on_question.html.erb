@@ -1,0 +1,12 @@
+<div class="col s12 m11 right">
+  <div class="row">
+    <div class="col s12 m11 right">
+      <%= form_for [@question, @comment], url: { controller: "comments", action: "create" } do |f| %>
+        <%= f.hidden_field :question, value: @question.id %>
+        <%= f.text_area :body, placeholder: "Add Comment" %>
+        <%= show_errors(@comment, :body) %>
+        <%= f.submit "Add Comment", class: "white-text waves-effect blue btn-small" %>
+      <% end %>
+    </div>
+  </div>
+</div>

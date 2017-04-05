@@ -14,31 +14,18 @@ feature 'user views a question' do
     visit question_path(question)
 
     within("#question-upvote") do
-      expect(page).to have_button("Upvote")
-    end
-
-    within("#question-downvote") do
-      expect(page).to have_button("Downvote")
-    end
-
-    within("#question-upvote") do
-      click_button("Upvote")
+      find("[name=button]").click
     end
 
     expect(current_path).to eq(question_path(question))
 
     expect(user.reputation_count).to eq(1)
 
-    expect(page).to_not have_css("#question-upvote")
-
     within("#question-downvote") do
-      expect(page).to have_button("Downvote")
-      click_button("Downvote")
+      find("[name=button]").click
     end
 
     expect(current_path).to eq(question_path(question))
-
-    expect(page).to_not have_css("#question-downvote")
 
     expect(user.reputation_count).to eq(-1)
   end

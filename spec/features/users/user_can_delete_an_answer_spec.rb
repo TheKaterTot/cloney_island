@@ -18,7 +18,7 @@ feature 'user can delete an answer' do
 
     visit question_path(question)
 
-    within(".question-answers .question-answer:nth-child(1)") do
+    within(".question-answers") do
       expect(page).to have_content("BlessUp")
     end
 
@@ -52,7 +52,7 @@ feature 'user can delete an answer' do
     visit question_path(question)
     expect(current_path).to eq(question_path(question))
 
-    within(".question-answers .question-answer:nth-child(1)") do
+    within(".question-answers") do
       expect(page).to have_content("BlessUp")
     end
 

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :user_permissions, only: [:update]
 
+  get 'authenticate_user', to: 'authentication#update'
   namespace :api do
     namespace :v1 do
       namespace :users do

@@ -59,4 +59,8 @@ class Comment < ApplicationRecord
   def comment_reputation
     upvotes.count - downvotes.count
   end
+
+  def find_user_id
+    user.id
+  end
 end

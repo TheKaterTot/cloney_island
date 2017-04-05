@@ -5,7 +5,7 @@
       </div>
       <br>
       <div id="question-comment-details" class="right card-action">
-        <p>Author: <%= comment.find_user %> Updated: <%= comment.update_date %></p><br>
+        <p>Author: <%= link_to comment.find_user, user_path("#{comment.find_user_id}") %> Updated: <%= comment.update_date %></p><br>
       </div>
       <br><br>
     </div>

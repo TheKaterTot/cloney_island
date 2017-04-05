@@ -61,3 +61,11 @@ i.icon-green {
   font-size: 2.5rem;
   color: green;
 }
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  color: #2979ff;
+  text-transform: capitalize;
+}
+.card .card-action a:hover:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  color: #82b1ff;
+}

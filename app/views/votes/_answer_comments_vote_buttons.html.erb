@@ -6,16 +6,16 @@
           <%= f.hidden_field :creator, value: current_user.id %>
           <%= f.hidden_field :user_id, value: comment.user_id %>
           <%= button_tag( class: "left black-text waves-effect btn-flat") do %>
-              <i class="material-icons center">arrow_drop_up</i>
+              <i class="material-icons">arrow_drop_up</i>
           <% end %>
         <% end %>
       </div>
     <% else %>
-      <button class="btn-flat waves-effect grey disabled center" ><i class="material-icons">arrow_drop_up</i></button>
+      <button class="btn-flat grey disabled center" ><i class="material-icons">arrow_drop_up</i></button>
     <% end %>
-
-    <h4 class="center"> <%= comment.comment_reputation %></h4>
-
+<br>
+    <div  class="right"><h4> <%= comment.comment_reputation %></h4></div>
+<br>
   <% if current_user && !comment.downvotes.where(creator: current_user.id).exists? %>
     <div id="answer-comment-downvote" >
       <%= form_for [@downvote], url: {controller: "downvotes", action: "create"} do |f| %>
@@ -23,11 +23,11 @@
         <%= f.hidden_field :creator, value: current_user.id %>
         <%= f.hidden_field :user_id, value: comment.user_id %>
         <%= button_tag( class: "black-text btn-flat") do %>
-            <i class="large material-icons center">arrow_drop_down</i>
+            <i class="material-icons center">arrow_drop_down</i>
         <% end %>
       <% end %>
     </div>
     <% else %>
-      <button class="btn-flat black disabled center" ><i class="material-icons">arrow_drop_down</i></button>
+      <button class="btn-flat grey disabled center" ><i class="material-icons">arrow_drop_down</i></button>
   <% end %>
 </div>

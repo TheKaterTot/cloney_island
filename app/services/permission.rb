@@ -62,6 +62,7 @@ private
   def basic_permissions
     return true if controller == "sessions"
     return true if controller == "home"
+    return true if controller == "authentication"
     return true if controller == "api/v1/users" && action.in?(%w(show))
     return true if controller == "api/v1/users/users_by_reputation" && action.in?(%w(index))
     return true if controller == "api/v1/users/users_banned" && action.in?(%w(index))

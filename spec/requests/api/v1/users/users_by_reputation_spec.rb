@@ -23,24 +23,20 @@ describe "by_reputation API" do
 
     expect(user).to have_key "name"
     expect(user).to have_key "email"
-    expect(user).to have_key "phone"
     expect(user).to have_key "reputation"
 
     expect(user["name"]).to eq("Jabrony")
     expect(user["email"]).to eq("Jabron@jabron.com")
-    expect(user["phone"]).to eq("333-333-3333")
     expect(user["reputation"]).to eq(10)
     expect(user["reputation"]).to_not eq(2)
 
     expect(second_user["name"]).to eq("Jimjam")
     expect(second_user["email"]).to eq("Jimjam@jabron.com")
-    expect(second_user["phone"]).to eq("444-444-4444")
     expect(second_user["reputation"]).to eq(9)
     expect(second_user["reputation"]).to_not eq(8)
 
     expect(last_user["name"]).to eq("Gobledigook")
     expect(last_user["email"]).to eq("Hambone@alabaster.io")
-    expect(last_user["phone"]).to eq("111-111-1111")
     expect(last_user["reputation"]).to eq(1)
     expect(last_user["reputation"]).to_not eq(3)
   end

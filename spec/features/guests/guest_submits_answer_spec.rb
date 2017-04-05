@@ -13,7 +13,7 @@ feature "guests cannot submit answer" do
     expect(current_path).to eq('/')
 
     within(".alert-danger") do
-      expect(page).to have_content("You are not authorized to do that. Please log in or create an account.")
+      expect(page).to have_content("You are not authorized to do that. Please log in, create an account or validate your account.")
     end
   end
 end

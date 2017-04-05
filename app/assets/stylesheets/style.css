@@ -45,7 +45,6 @@ a.collection-item {
   text-align: center;
 }
 
-
 .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
     font-size: 3rem;
     line-height: inherit;
@@ -68,4 +67,8 @@ i.icon-green {
 }
 .card .card-action a:hover:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: #82b1ff;
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+  background-color: #fff
 }

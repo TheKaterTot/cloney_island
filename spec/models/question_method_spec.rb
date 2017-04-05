@@ -17,7 +17,7 @@ describe 'questions' do
   describe 'find_user' do
     it 'finds the name of the user associated with a question' do
       user            = Fabricate(:user, name:"BurgerBob")
-      second_user            = Fabricate(:user, name:"Jabrony")
+      second_user     = Fabricate(:user, name:"Jabrony")
       category        = Fabricate(:category)
       first_question  = Fabricate(:question, user:user, category:category)
       second_question = Fabricate(:question, user:second_user, category:category)

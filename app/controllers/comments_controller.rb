@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
       flash[:success] = "Comment successfully created"
       redirect_to question_path(@question)
     else
-      flash[:danger] = "Comment failed. Please re-enter your comment."
+      flash.now[:danger] = "Comment failed. Please re-enter your comment."
       render 'questions/show'
     end
   end

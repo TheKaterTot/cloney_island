@@ -7,10 +7,6 @@ class Answer < ApplicationRecord
   has_many :downvotes, as: :downvoted, dependent: :destroy
   validates :body, presence: true
 
-  def find_user
-    user.name unless user.nil?
-  end
-
   def self.populate_answer(comment_params)
     if comment_params[:answer]
       Answer.find(comment_params[:answer])
@@ -33,9 +29,5 @@ class Answer < ApplicationRecord
 
   def answer_reputation
     upvotes.count - downvotes.count
-  end
-
-  def find_user_id
-    user.id
   end
 end

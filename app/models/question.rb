@@ -12,10 +12,6 @@ class Question < ApplicationRecord
     order(:updated_at).reverse_order
   end
 
-  def find_user
-    user.name.capitalize
-  end
-
   def find_user_object
     user
   end
@@ -70,9 +66,5 @@ class Question < ApplicationRecord
 
   def question_reputation
     upvotes.count - downvotes.count
-  end
-
-  def find_user_id
-    user.id
   end
 end

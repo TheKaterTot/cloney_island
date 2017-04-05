@@ -61,11 +61,10 @@ class User < ApplicationRecord
     answers.joins(:best_question).count
   end
 
-
   def self.by_reputation
     order(:reputation).reverse_order[0..9]
   end
-  
+
   def self.need_to_block
     joins(:roles).where("roles.name != 'blocked_user'")
     .where("users.reputation <= -10")

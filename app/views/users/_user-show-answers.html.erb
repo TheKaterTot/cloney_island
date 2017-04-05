@@ -8,7 +8,7 @@
           </tr>
         </thead>
         <tbody>
-          <% current_user.recent_answers.each do |answer|%>
+          <% @user.recent_answers.each do |answer|%>
             <tr>
               <td>
                 <%= link_to answer.question.title, question_path(answer.question) %></br>

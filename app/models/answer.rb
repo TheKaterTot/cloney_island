@@ -34,8 +34,4 @@ class Answer < ApplicationRecord
   def answer_reputation
     upvotes.count - downvotes.count
   end
-
-  def find_user_id
-    user.id
-  end
 end

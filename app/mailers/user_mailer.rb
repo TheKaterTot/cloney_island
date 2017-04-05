@@ -8,6 +8,11 @@ default from: "cloneyislandmailer@gmail.com"
 
   def blocked_email(user)
     @user = user
-    mail(to: @user.email, subject: "Ban Notice")
+    mail(to: @user.email, subject: 'Ban Notice')
+  end
+
+  def unblocked_email(user)
+    @user = user
+    mail(to: @user.email, subject: 'Welcome Back')
   end
 end

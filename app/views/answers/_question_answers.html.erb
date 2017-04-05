@@ -5,7 +5,7 @@
     </div>
     <br>
     <div id="answer-details" class="right card-action">
-      <p>Author: <%= answer.find_user %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
+      <p>Author: <%= link_to answer.find_user, user_path("#{answer.find_user_id}") %> Updated: <%= answer.updated_at.strftime("%D at %r") unless answer.updated_at.nil? %></p><br>
     </div>
       <br><br>
   </div>

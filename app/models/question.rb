@@ -13,7 +13,7 @@ class Question < ApplicationRecord
   end
 
   def find_user
-    user.name
+    user.name.capitalize
   end
 
   def find_user_object
@@ -70,5 +70,9 @@ class Question < ApplicationRecord
 
   def question_reputation
     upvotes.count - downvotes.count
+  end
+
+  def find_user_id
+    user.id
   end
 end

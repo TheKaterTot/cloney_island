@@ -21,7 +21,7 @@
           <%= @question.body %>
           <br><br>
           <div id="question-details" class="right card-action">
-            <p>Author: <%= @question.find_user %> Updated: <%= @question.updated_at.strftime("%D at %r") %></p><br>
+            <p>Author: <%= link_to @question.find_user, user_path("#{@question.find_user_id}")%> Updated: <%= @question.updated_at.strftime("%D at %r") %></p><br>
           </div>
           <br><br>
         </div>

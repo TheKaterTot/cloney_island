@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to user_path(user)
     else
-      flash[:danger] = 'Invalid Credentials'
+      flash.now[:danger] = 'Invalid Credentials'
       render :new
     end
   end

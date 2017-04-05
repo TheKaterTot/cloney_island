@@ -1,14 +1,21 @@
-  <div class="card-panel">
-    <div id="answer-comment-body" style= padding-left:50px;>
-      <h5><%= comment.body %></h5>
-      <div id='delete-comment-button' class='left card-action'>
+<div class="card white black-text">
+  <div class="card-content">
+    <div id="answer-comment-body" class="answer-comment-body blue-text">
+      <h5><%= comment.body %><br></h5>
+    </div>
+    <br>
+    <div id="answer-comment-details" class="right card-action">
+      <p>Author: <%= link_to comment.find_user, user_path("#{comment.user_id}") %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
+    </div>
+      <br><br>
+  </div>
+  <div class="card-action">
+    <div style="display:inline-block; vertical-align: middle;">
+      <div id='delete-comment-button' class='left'>
         <% if current_admin? || current_users_comment?(comment)%>
         <%= button_to "Delete Comment", comment_path(comment), method: :delete, class: "white-text waves-effect red darken-4 btn-small" %>
         <% end %>
       </div>
     </div>
-    <div id="answer-comment-details" class="right card-action">
-      <p>Author: <%= comment.find_user %> Updated: <%= comment.updated_at.strftime("%D at %r") %></p><br>
-    </div>
-    <br><br>
   </div>
+</div>

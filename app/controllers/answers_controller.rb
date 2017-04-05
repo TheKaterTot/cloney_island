@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
       flash[:success] = "You answered the question!"
       redirect_to question_path(@question)
     else
-      flash[:danger] = "Your comment was not successful."
+      flash.now[:danger] = "Your comment was not successful."
       render "questions/show"
     end
   end

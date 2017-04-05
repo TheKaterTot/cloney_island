@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
+      flash.now[:danger] = "Account creation unsuccessful"
       render :new
     end
   end
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
     if current_user.update_attributes(user_update_params)
       redirect_to user_path(current_user)
     else
+      flash.now[:danger] = "Account update unsuccessful"
       render :edit
     end
   end

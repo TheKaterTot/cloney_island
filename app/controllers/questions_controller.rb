@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
       redirect_to question_path(@question)
     else
       @categories = Category.all
-      flash[:danger] = "Failed to create question"
+      flash.now[:danger] = "Failed to create question"
       render :new
     end
   end

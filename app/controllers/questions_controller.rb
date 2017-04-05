@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    byebug
     @question = current_user.questions.new(question_params)
     if @question.save
       flash[:success] = "Question successfully created!"

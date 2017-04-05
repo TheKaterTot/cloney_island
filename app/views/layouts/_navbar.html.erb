@@ -1,6 +1,7 @@
 <nav>
   <div class="nav-wrapper">
-    <ul id="nav-mobile" class="left">
+    <a href="#" data-activates="mobile-demo" class="button-collapse blue"><i class="material-icons">menu</i></a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li><a href=<%= root_path  %>><%= image_tag("stack_logo.png", height: "45", width: "135") %></a></li>
       <li><a href=<%= questions_path %> class="black-text">Questions</a></li>
       <% if params[:category].nil? %>
@@ -9,7 +10,26 @@
         <li><a href=<%= new_question_path(:category => params[:category]) %> class="black-text">Ask Question</a></li> %>
       <% end %>
     </ul>
-    <ul id="nav-mobile" class="right">
+    <ul id="mobile-demo" class="side-nav">
+      <li><a href=<%= root_path  %>><%= image_tag("stack_logo.png", height: "45", width: "135") %></a></li>
+      <li><a href=<%= questions_path %> class="black-text">Questions</a></li>
+      <% if params[:category].nil? %>
+        <li> <a href=<%= new_question_path %> class="black-text">Ask Question</a></li>
+      <% else %>
+        <li><a href=<%= new_question_path(:category => params[:category]) %> class="black-text">Ask Question</a></li> %>
+      <% end %>
+    </ul>
+    <a href="#" data-activates="mobile-demo2" class="button-collapse blue right"><i class="material-icons">menu</i></a>
+    <ul id="nav-mobile2" class="right hide-on-med-and-down">
+        <% if current_user.nil? %>
+        <li><a href="/users/new" class="waves-effect blue darken-1 waves-light btn">Sign Up</a></li>
+        <li><a href="/login" class="black-text">Login</a></li>
+      <% else %>
+        <li><a href="/users/<%= current_user.id %>" class="waves-effect blue darken-1 waves-light btn">Profile</a></li>
+        <li><a href="/logout" data-method='delete' class="black-text">Logout</a></li>
+      <% end %>
+    </ul>
+    <ul id="mobile-demo2" class="side-nav">
       <% if current_user.nil? %>
         <li><a href="/users/new" class="waves-effect blue darken-1 waves-light btn">Sign Up</a></li>
         <li><a href="/login" class="black-text">Login</a></li>

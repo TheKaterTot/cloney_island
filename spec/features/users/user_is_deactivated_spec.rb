@@ -52,7 +52,9 @@ feature 'user is deactivated' do
 
       visit root_path
 
-      click_link 'Login'
+      within('#nav-mobile2') do
+        click_link 'Login'
+      end
 
       expect(current_path).to eq(login_path)
 

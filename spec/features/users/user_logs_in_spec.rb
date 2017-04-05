@@ -12,7 +12,9 @@ feature 'user visits root' do
 
     expect(page).to have_css('#welcome_jumbotron')
 
-    click_link 'Login'
+    within('#nav-mobile2') do
+      click_link 'Login'
+    end
 
     expect(current_path).to eq(login_path)
 
@@ -22,7 +24,7 @@ feature 'user visits root' do
     click_button "Login"
     expect(current_path).to eq(user_path(user))
 
-    within all('#nav-mobile').last do
+    within('#nav-mobile2') do
       expect(page).to have_link("Logout")
       expect(page).to have_link("Profile")
     end
@@ -35,7 +37,9 @@ feature 'user visits root' do
 
     visit '/'
 
-    click_link 'Profile'
+    within('#nav-mobile2') do
+      click_link 'Profile'
+    end
 
     expect(current_path).to eq(user_path(user))
   end
@@ -45,7 +49,9 @@ feature 'user visits root' do
 
     visit user_path(user)
 
-    click_link 'Logout'
+    within('#nav-mobile2') do
+      click_link 'Logout'
+    end
 
     expect(current_path).to eq(root_path)
     within('.alert-success') do
@@ -57,8 +63,9 @@ feature 'user visits root' do
 
     visit '/'
 
-    click_link 'Login'
-
+    within('#nav-mobile2') do
+      click_link 'Login'
+    end
     expect(current_path).to eq(login_path)
 
     fill_in "Name", with: "#{user.name}"

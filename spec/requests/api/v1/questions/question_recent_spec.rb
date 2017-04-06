@@ -28,17 +28,17 @@ describe "recent_questions API" do
     expect(question).to have_key "category_name"
     expect(question).to have_key "created_at"
 
-    expect(question["title"]).to eq("Why don't they want us to win? 1")
-    expect(question["body"]).to eq("We have the keys to success, bless up. 1")
+    expect(question["title"]).to eq("Why don't they want us to win? 6")
+    expect(question["body"]).to eq("We have the keys to success, bless up. 6")
     expect(question["category_name"]).to eq("we the best")
     expect(question["created_at"].to_date.class).to eq(Date)
 
-    expect(second_question["title"]).to eq("Why don't they want us to win? 2")
-    expect(second_question["body"]).to eq("We have the keys to success, bless up. 2")
+    expect(second_question["title"]).to eq("Why don't they want us to win? 5")
+    expect(second_question["body"]).to eq("We have the keys to success, bless up. 5")
     expect(second_question["category_name"]).to eq("we the best")
 
-    expect(last_question["title"]).to eq("Why don't they want us to win? 5")
-    expect(last_question["body"]).to eq("We have the keys to success, bless up. 5")
+    expect(last_question["title"]).to eq("Why don't they want us to win? 2")
+    expect(last_question["body"]).to eq("We have the keys to success, bless up. 2")
     expect(last_question["category_name"]).to eq("we the best")
   end
 end

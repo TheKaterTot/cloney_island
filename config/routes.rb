@@ -26,6 +26,9 @@ Rails.application.routes.draw do
         get "/by_reputation", to: "users_by_reputation#index"
         get "/banned", to: "users_banned#index"
       end
+      get :token, controller: 'base'
+
+      resources :questions, only:[:create]
 
       namespace :questions do
         get '/recent_questions', to: 'questions_recent#index'

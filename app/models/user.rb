@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   validates :name, :email, :phone, :reputation, presence: true
 
+  before_create -> { self.auth_token = SecureRandom.hex }
+
   def comments_to_recent_activity
     Comment.comments_to_user_activity(self.id)[0..4]
   end

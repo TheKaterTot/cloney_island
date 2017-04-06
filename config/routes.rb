@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :user_permissions, only: [:update]
 
+  get 'authenticate_user', to: 'authentication#update'
   namespace :api do
     namespace :v1 do
       namespace :users do
@@ -28,6 +29,10 @@ Rails.application.routes.draw do
       get :token, controller: 'base'
 
       resources :questions, only:[:create]
+
+      namespace :questions do
+        get '/recent_questions', to: 'questions_recent#index'
+      end
 
       resources :users, only: [:show, :index] do
       end

@@ -18,8 +18,10 @@ feature 'when a guest visits the root page' do
     expect { click_on "Create Account"}.to change(User, :count).by(1)
 
     user = User.last
-    
-    expect(user.roles.first.name).to eq("registered_user")
+
+    expect(user.name).to eq("Smile Warbler")
+    expect(user.email).to eq("smile@warbler.com")
+    expect(user.phone).to eq("123-456-7890")
   end
 
   scenario 'guest is on the login page and clicks on create account' do

@@ -17,7 +17,7 @@ describe 'questions' do
   describe 'find_user' do
     it 'finds the name of the user associated with a question' do
       user            = Fabricate(:user, name:"BurgerBob")
-      second_user            = Fabricate(:user, name:"Jabrony")
+      second_user     = Fabricate(:user, name:"Jabrony")
       category        = Fabricate(:category)
       first_question  = Fabricate(:question, user:user, category:category)
       second_question = Fabricate(:question, user:second_user, category:category)
@@ -25,7 +25,7 @@ describe 'questions' do
       name        = first_question.find_user
       second_name = second_question.find_user
 
-      expect(name).to eq("Burgerbob")
+      expect(name).to eq("BurgerBob")
       expect(name).to_not eq("Jabrony")
 
       expect(second_name).to eq("Jabrony")

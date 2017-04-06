@@ -28,6 +28,9 @@
       </div>
       <div class="card-action">
         <div style="display:inline-block; vertical-align: middle;">
+          <div class="category-badge">
+            <button class="btn grey disabled center" ><%= @question.find_category %></button>
+          </div>
           <div class="left" id="edit-question">
             <% if current_users_question?(@question) %>
                 <%= button_to "Edit Question", edit_question_path(@question), method: :get, class: "white-text waves-effect blue btn-small" %>

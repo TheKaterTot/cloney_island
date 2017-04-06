@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       if current_user && current_user.blocked_user?
         flash[:danger] = "Your account priveleges have been limited due to your activity"
       else
-        flash[:danger] = "You are not authorized to do that. Please log in or create an account."
+        flash[:danger] = "You are not authorized to do that. Please log in, create an account or validate your account."
       end
       redirect_to root_path
     end

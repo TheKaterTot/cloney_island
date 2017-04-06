@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404012145) do
+ActiveRecord::Schema.define(version: 20170405234542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,8 @@ ActiveRecord::Schema.define(version: 20170404012145) do
     t.integer  "reputation",      default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "auth_token"
+    t.index ["auth_token"], name: "index_users_on_auth_token", using: :btree
   end
 
   add_foreign_key "answers", "questions"

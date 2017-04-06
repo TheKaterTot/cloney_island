@@ -21,7 +21,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it 'has the link to the site in the body' do
-      expect(mail.body.raw_source.include?('https://pure-wildwood-52964.herokuapp.com')).to eq (true)
+      expect(mail.body.raw_source.include?('https://calm-crag-26774.herokuapp.com')).to eq (true)
     end
   end
   describe '#blocked_email' do

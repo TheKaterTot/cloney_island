@@ -77,7 +77,7 @@ class Question < ApplicationRecord
       "select q.id, q.title, q.body, q.created_at, q.category_id, c.name as category_name
       from questions q
       inner join categories c on q.category_id = c.id
-      order by q.created_at
+      order by q.created_at DESC
       limit 5;"])
   end
 end

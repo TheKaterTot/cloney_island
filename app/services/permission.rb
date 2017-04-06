@@ -66,5 +66,6 @@ private
     return true if controller == "api/v1/users" && action.in?(%w(show))
     return true if controller == "api/v1/users/users_by_reputation" && action.in?(%w(index))
     return true if controller == "api/v1/users/users_banned" && action.in?(%w(index))
+    return true if controller == "api/v1/questions/questions_recent" && action.in?(%w(index))
   end
 end

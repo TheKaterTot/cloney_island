@@ -27,6 +27,10 @@ Rails.application.routes.draw do
         get "/banned", to: "users_banned#index"
       end
 
+      namespace :questions do
+        get '/recent_questions', to: 'questions_recent#index'
+      end
+
       resources :users, only: [:show, :index] do
       end
 
